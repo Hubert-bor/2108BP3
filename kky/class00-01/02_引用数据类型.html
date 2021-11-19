@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var obj={
+				user:"kky",
+				age:0,
+				sex:0
+			}
+			console.log("obj.user:",obj.user);
+			console.log("obj['age']",obj["age"]);
+			var str="sex";
+			console.log("obj[str]:",obj[str]);
+			
+			console.log(obj.user);
+			console.log(obj.age);
+			console.log(obj.sex);
+			console.log("///////////////////");
+			console.log({...obj});
+			console.log(obj);
+			console.log("///////////////////");
+			var obj2=obj;//引用数据类型,共有一个地址(同一根网线)
+			obj.user="安建奇";
+			console.log("obj:",obj);
+			console.log("obj2:",obj2);
+			console.log("///////////////////");
+			var obj3={...obj};
+			obj.user="kky";
+			console.log("obj2:",obj2);
+			console.log("///////////////////");
+			console.log("obj3:",obj3);
+			
+			var user="aa";
+			var obj4={
+				user:user
+			}
+			
+			console.log("obj4:",obj4);
+			
+			
+		</script>
+	</body>
+</html>

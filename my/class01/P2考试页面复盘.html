@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>P2静态</title>
+    <style>
+        #main {
+            width: 800px;
+            margin: auto;
+            padding: 30px;
+            background-color: orange;
+        }
+
+        #grade {
+            width: 50px;
+        }
+
+        #pingJia img {
+            width: 15px;
+        }
+
+        #info {
+            width: 200px;
+            height: 200px;
+            background-color: black;
+            color: #fff;
+            line-height: 200px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            display: none;
+        }
+
+        table tr:nth-of-type(5) td button:first-child {
+            cursor: no-drop;
+        }
+
+        table tr:last-child td button:last-child {
+            cursor: no-drop;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <label for="">
+            姓名：<input type="text" id="userName">
+        </label>
+        <br>
+        <label for="">
+            手机号：<input type="text" id="tel">
+        </label>
+        <br>
+        <label for="">
+            评价：<input type="number" id="grade">
+        </label>
+        <span>(0--5分)</span>
+        <br>
+        <button id="add">添加</button>
+        <div id="tab">
+            <table id="table">
+                <!-- <tr>
+                    <td>姓名：张三</td>
+                </tr>
+                <tr>
+                    <td>手机号：13356494339</td>
+                </tr>
+                <tr>
+                    <td id="pingJia">评价：
+                        <img src="img/0.png" alt="">
+                        <img src="img/0.png" alt="">
+                        <img src="img/0.png" alt="">
+                        <img src="img/0.png" alt="">
+                        <img src="img/0.png" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>上传时间：</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button disabled>上移</button>
+                        <button>删除</button>
+                        <button>下移</button>
+                    </td>
+                </tr> -->
+            </table>
+        </div>
+    </div>
+    <div id="info">请输入姓名！</div>
+
+    <script>
+        //添加
+        var userName = document.getElementById("userName");
+        var tel = document.getElementById("tel");
+        var grade = document.getElementById("grade");
+        var add = document.getElementById("add");
+        var info = document.getElementById("info");
+
+        window.onload = function () {
+            var arr = getLocalData();
+            showPage(arr);
+        }
+        add.onclick = function () {
+            if (!userName.value) {
+                info.style.display = "block";
+                setTimeout(function () {
+                    info.style.display = "none";
+                }, 3000);
+                return;
+            }
+            var arr = getLocalData();
+
+            var obj = {
+                name: userName.value,
+                tel: tel.value,
+                grade: grade.value,
+                id: +new Date()
+            }
+            arr.push(obj);
+            updateLocalData(arr);
+            showPage(arr);
+            userName.value = tel.value = grade.value = "";
+        }
+
+
+        //获取本地数据
+        function getLocalData() {
+            if (!localStorage.P21) {
+                localStorage.P21 = "[]";
+            }
+            return JSON.parse(localStorage.P21);
+        }
+
+        //上传到本地
+        function updateLocalData(arr) {
+            localStorage.P21 = JSON.stringify(arr);
+        }
+
+        //删除
+        function del(id) {
+            var f = confirm("确定要删除吗？");
+            if (f) {
+                info.innerText = "删除成功！";
+                info.style.display = "block";
+                setTimeout(function () {
+                    info.style.display = "none";
+                }, 3000);
+            } else {
+                return;
+            }
+            var arr = getLocalData();
+            for (var i = 0; i < arr.length; i++) {
+                if (id == arr[i].id) {
+                    arr.splice(i, 1);
+                    break;
+                }
+
+            }
+            updateLocalData(arr);
+            showPage(arr);
+        }
+
+        //渲染
+        /* 
+            拼接行内字符串需要注意：
+                <button type="button" ${i==0?'disabled':'onclick=moveDown('+arr[i].id+')'}>上移</button>
+                动态变量要用拼接的方式
+                
+        */
+        function showPage(arr) {
+            var table = document.getElementById("table");
+            var str = "";
+            for (var i = 0; i < arr.length; i++) {
+                str += `
+                <tr>
+                    <td>姓名：${arr[i].name}</td>
+                </tr>
+                <tr>
+                    <td>手机号：${arr[i].tel}</td>
+                </tr>
+                <tr>
+                    <td id="pingJia">评价：
+                        ${aiXin(arr[i].grade)}
+                    </td>
+                </tr>
+                <tr>
+                    <td>上传时间：${timer(arr[i].id)}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" ${i == 0 ? 'disabled' : 'onclick=moveDown(' + arr[i].id + ')'}>上移</button>
+                        <button type="button" onclick = del(${arr[i].id})>删除</button>
+                        <button type="button" ${i == arr.length - 1 ? 'disabled' : 'onclick=moveUp(' + arr[i].id + ')'}>下移</button>
+                    </td>
+                </tr>
+                `;
+            }
+            table.innerHTML = str;
+        }
+
+        //上下移动
+        function moveUp(id) {
+            var arr = getLocalData();
+            var a = null;
+            for (var i = 0; i < arr.length; i++) {
+                if (id == arr[i].id) {
+                    a = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = a;
+                    break;
+                }
+            }
+            showPage(arr);
+            updateLocalData(arr);
+        }
+
+        function moveDown(id) {
+            var arr = getLocalData();
+            var a = null;
+            for (var i = 0; i < arr.length; i++) {
+                if (id == arr[i].id) {
+                    a = arr[i];
+                    arr[i] = arr[i - 1];
+                    arr[i - 1] = a;
+                    break;
+                }
+            }
+            showPage(arr);
+            updateLocalData(arr);
+        }
+
+        //小爱心
+
+        /* 
+            爱心函数
+            接收到的实参进行合法判断，大于5就等于5，小于0就等于0
+            在0与5之间的数则直接用循环获取出空心和实心的数量
+            用加等的方式来组成一个根据用户评分的爱心评分
+            最后返回这个存储爱心的DOM对象到渲染函数中，渲染到页面
+        */
+        function aiXin(grade) {
+            if (grade > 5) {
+                grade = 5;
+            } else if (grade < 0) {
+                grade = 0;
+            }
+            var str = '';
+            for (var i = 0; i < grade; i++) {
+                str += `
+                    <img src="img/1.png" alt="">
+                `;
+            }
+            for (var j = 0; j < 5 - grade; j++) {
+                str += `
+                    <img src="img/0.png" alt="">
+                `;
+            }
+            return str;
+        }
+
+        //时间函数
+        function timer(time) {
+            var d = new Date(time);
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            var seconds = d.getSeconds();
+            return year + "-" + buLing(month) + "-" + buLing(day) + "  " + buLing(hours) + ":" + buLing(minutes) + ":" + buLing(seconds);
+        }
+
+        //格式化时间函数
+        function buLing(time) {
+            return time < 10 ? "0" + time : time;
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		//1.字面量创建方式1
+		var dog1={
+			name:"小黑",
+			color:"白"
+		}
+		console.log('dog1:',dog1);
+		
+		var obj0=new Object();
+		var arr=new Array();
+		
+		
+			
+		//2.工厂模式
+		function gongChangMoShi(name,color){
+			return {
+				name:name,
+				color:color
+			}
+		}
+		function gongChangMoShi1(name,color){
+			var obj={
+				name:name,
+				color:color
+			}
+			return obj;
+		}
+		
+		var dog2=gongChangMoShi1("小白","黑");
+		console.log('dog2:',dog2);
+		
+		//3.构造函数
+		function Dog(name,color){
+			this.name=name;
+			this.color=color;
+		}
+		var dog3=new Dog("旺财","金");
+		console.log("dog3:",dog3);
+		
+		</script>
+	</body>
+</html>
