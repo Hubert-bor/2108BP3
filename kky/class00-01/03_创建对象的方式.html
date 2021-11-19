@@ -9,26 +9,50 @@
 		//1.字面量创建方式1
 		var dog1={
 			name:"小黑",
-			color:"白"
+			color:"白",
+			say:function(){
+				console.log("1我是",this.name,"是一条",this.color,"色的狗");
+			}
 		}
 		console.log('dog1:',dog1);
 		
 		var obj0=new Object();
 		var arr=new Array();
 		
+		dog1.say();//调用dog1的say这个方法
+		dog1["say"]();
+		var str="say";
+		dog1[str]();
+		
+		console.log("////////////////////////////////////");
+		for(var o in dog1){
+			// console.log("o:",o,"dog1."+o+":",dog1[o],typeof dog1[o]);
+			// console.log("o:",o,"dog1['"+o+"']:",dog1[o]);
+			if(typeof dog1[o] == "function"){
+				console.log("dog1[o]",dog1[o]);
+				dog1[o]();
+			}
+		}
+		
+		console.log("////////////////////////////////////");
+		
 		
 			
 		//2.工厂模式
-		function gongChangMoShi(name,color){
+		function gongChangMoShi(name,color,say){
 			return {
 				name:name,
-				color:color
+				color:color,
+				say:say
 			}
 		}
 		function gongChangMoShi1(name,color){
 			var obj={
 				name:name,
-				color:color
+				color:color,
+				say:function(){
+					console.log("我是",this.name,"是一条",this.color,"色的狗");
+				}
 			}
 			return obj;
 		}
@@ -36,14 +60,201 @@
 		var dog2=gongChangMoShi1("小白","黑");
 		console.log('dog2:',dog2);
 		
+	/* 
+		1.构造函数
+	1.构造函数的函数名首字母大写    与一般函数进行区别；   
+	2.构造函数的调用方法与普通函数调用时有所区别  构造函数在调用时需通过new关键字进行调用
+	3.通过关键字this向实例中添加属性及方法；
+	4.构造函数中不可以出现return语句；
+	5.在new关键字调用时  后台自动返回出一个对象   不需要我们书写    从而实例为一个对象；
+	6.通过构造函数创建对象时   避免重复代码冗余；传递参数不同创建的对象也就有所不同； 
+	 
+	 */	
 		//3.构造函数
-		function Dog(name,color){
-			this.name=name;
+		function Dog(name1,color){
+			this.name1=name1;
 			this.color=color;
+			this.say=function(){
+				console.log("我是",this.name1,"是一条",this.color,"色的狗");
+			}
 		}
+		
+		//给Dog原型上添加name2=狗狗这个属性
+		//给Dog创建的所有实例(对象)共享/添加 name2=狗狗这个属性
+		Dog.prototype.name2="狗狗";
+		Object.prototype.name3="狗东西";
+		
+		
+		
 		var dog3=new Dog("旺财","金");
 		console.log("dog3:",dog3);
 		
+		//给dog3的构造函数Dog的原型上添加name4="小狗"的属性,之后通过Dog创建的所有的实例/对象都找到name4这个属性
+		dog3.__proto__.name4="小狗";
+		
+		var dog4=new Dog("富贵","土豪金");
+		console.log("dog4:",dog4);
+		
+		/* 
+		instanceof 判断 对象 是否是某个 构造函数 创建的 
+		 
+		 */
+		
+		var f=dog3 instanceof Dog;
+		console.log("f:",f);
+		// dog3.say();
+		
+		
+		console.log('//////////////////////');
+		
+		/* 
+		 
+		 dog1 ===>Object
+		 dog2 ===>Object
+		 dog3 ===>Dog===>Object
+		 
+		 arr==>Array==>Object
+		 
+		 
+		 
+		 */
+		var arr=["a","b","a"];
+		function noRepeat(arr){
+			var arr2=[];
+			for(var i=0;i<arr.length;i++){
+				if(!arr2.includes(arr[i])){
+					arr2.push(arr[i])
+				}
+			}
+			return arr2;
+		}
+		//等号右侧意思:使用(全局window的)noRepeat方法,对arr进行去重
+		var r1=noRepeat(arr);
+		console.log("r1:",r1);
+		
+		/* 
+		Dog.prototype.name2="狗狗";
+		Object.prototype.name3="狗东西"; 
+		 */
+		
+		Array.prototype.name5="数组";
+		
+		Array.prototype.noRepeat2=function(){
+			// console.log("this:",this);
+			var arr2=[];
+			for(var i=0;i<this.length;i++){
+				if(!arr2.includes(this[i])){
+					arr2.push(this[i])
+				}
+			}
+			return arr2;
+		}
+		// console.log("arr:",arr);
+		//等号右侧意思:arr使用(Array的原型上的)noRepeat2方法对arr去自身去重
+		var r2=arr.noRepeat2();
+		console.log("r2:",r2);
+		
+		/* 
+		prototype 给这个 构造函数 创建的所有 对象(实例) 共享 属性和方法的
+		__proto__  对象__proto__可以找到 他的 构造函数 的原型(指向他的构造函数的原型)
+		
+		constructor 指向所关联的构造函数,dog3.constructor指的Dog,可以判断是否是对象还是数组
+		
+		new 
+		
+		静态方法 isArray
+		
+		构造函数有两种方法 	
+			ES5 function Dog(){}
+			ES6 class Mao{}
+			
+		构造函数的静态方法,只能构造函数本身调用,不能被他创建的实例/对象 调用
+		 
+		 */
+		
+		console.log("Dog.prototype",Dog.prototype);//Dog的原型(共享给 他Dog创建的所有实例(对象) 所有属性和方法)
+		
+		console.log("dog3.__proto__",dog3.__proto__);//dog3的__proto__,dog3的构造函数Dog的原型
+		console.log("dog4.__proto__",dog4.__proto__);
+		
+		
+		console.log("Dog.prototype===dog3.__proto__:",Dog.prototype===dog3.__proto__);
+		console.log("Dog.prototype===dog4.__proto__:",Dog.prototype===dog4.__proto__);
+		console.log("////////////////////");
+		console.log("Array.prototype===arr.__proto__:",Array.prototype===arr.__proto__);
+		console.log("////////////////////");
+		console.log("dog3.prototype:",dog3.prototype);
+		console.log("dog3.constructor:",dog3.constructor);
+		
+		console.log("///////////////////////////");
+		var arr100=[];
+		var obj100={};
+		console.log("arr100:",arr100,arr100.constructor,arr100,arr100.constructor.toString().indexOf("Array"));
+		console.log("obj100:",obj100,obj100.constructor,(obj100,obj100.constructor+"").indexOf("Array"));
+		console.log("///////////////////////////");
+		//调用Array的isArray这个方法对arr100判断是否是数组
+		console.log("Array.isArray(arr100):",Array.isArray(arr100));
+		fgx();
+		Dog.jingTaiFangFa=function(str){
+			console.log("这是Dog有的静态方法,只能Dog调用,不是Dog原型上的方法",str);
+		}
+		Dog.isDog=function(str){
+			console.log(str,"是一条狗");
+		}
+		
+		fgx();
+		
+		fgx("打印Array");
+		console.dir(Array);
+		fgx();
+		console.dir(Object);
+		fgx();
+		console.dir(Dog);
+		fgx();
+		Dog.isDog("小黑");
+		fgx();
+		//构造函数ES6 中写法
+		/* 
+		 
+		 
+		 */
+		//创建一个构造函数
+		function Dog2(name1,color){
+			this.name1=name1;
+			this.color=color;
+			this.say=function(){
+				console.log("我是",this.name1,"是一条",this.color,"色的狗");
+			}
+		}
+		//给构造函数Dog2添加一个静态方法
+		Dog2.isDog=function(str){
+			console.log(str,"是一条狗");
+		}
+		
+		
+		//创建一个构造函数
+		class Mao{
+			constructor(name,color) {
+			    this.name=name;
+				this.color=color;
+			}
+			//他的静态方法
+			static isMao(str){
+				console.log(str,"是一只猫");
+			}
+		}
+		
+		console.dir(Mao);
+		Mao.isMao("小黄");
+		var mao1=new Mao("小橘","橘");
+		console.log("mao1:",mao1);
+		
+		function fgx(str){
+			if(str==undefined){
+				str="";
+			}
+			console.log(str+"-=-=-=-=-=-=-=-=-=-=-=-=");
+		}
 		</script>
 	</body>
 </html>
