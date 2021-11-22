@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>instance</title>
+    <script src="../jQuery3.6.0/jQuery3.6.0.js"></script>
+    <style>
+        #fadeIn1,
+        #fadeIn2,
+        #fadeIn3 {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            margin-left: 30px;
+            display: none;
+        }
+
+        #fadeIn1 {
+            background-color: #0eb0c9;
+        }
+
+        #fadeIn2 {
+            background-color: #0eb0c9;
+        }
+
+        #fadeIn3 {
+            background-color: #51c4d3;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="show">点击div淡出</button>
+    <button class="move">点击div消失</button>
+    <div id="fadeIn1"></div>
+    <div id="fadeIn2"></div>
+    <div id="fadeIn3"></div>
+
+    <script>
+        $(document).ready(function () {
+            $(".show").click(function () {
+                $("#fadeIn1").fadeIn();
+                $("#fadeIn2").fadeIn("slow");
+                $("#fadeIn3").fadeIn(1000);
+            });
+
+            $(".move").click(function () {
+                $("#fadeIn1").hide();
+                $("#fadeIn2").hide();
+                $("#fadeIn3").hide();
+            });
+        });
+    </script>
+</body>
+
+</html>

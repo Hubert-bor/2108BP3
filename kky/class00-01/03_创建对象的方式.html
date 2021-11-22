@@ -255,6 +255,32 @@
 			}
 			console.log(str+"-=-=-=-=-=-=-=-=-=-=-=-=");
 		}
+
+		/* 
+			Object.prototype.hasOwnProperty();
+			hasOwnProperty()方法会返回一个布尔值，指定对象自身属性中是否具有指定的属性
+			（也就是，是否有指定的建）
+
+			JavaScript Demo:Object.prototype.hasOwnProperty()
+
+		*/
+
+		//const 定义一个常量 常量是块级范围的，非常类似let语句定义的变量，但常量的值是无法（通过重新赋值）
+		//改变的，也不能被重新声明。
+
+		const object1 = {};
+		object1.property1  = 42;
+
+		console.log(object1.hasOwnProperty('property1'));
+		//expected output : true
+
+		console.log(object1.hasOwnProperty('toString'));
+		//expected output : false
+
+		console.log(object1.hasOwnProperty('hasOwnProperty'));
+		//expected output : false
+
+		//hasOwnProperty 方法用来寻找构造函数是否含有输入的属性，有返回true没有则返回false
 		</script>
 	</body>
 </html>

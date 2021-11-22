@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>选择排序</title>
+</head>
+
+<body>
+    <script>
+        /*
+        转自：https://www.cnblogs.com/yinhao-jack/p/10838401.html
+            选择排序须知：
+            在时间复杂度上表现最稳定的排序算法之一，
+            因为无论什么数据进去都是O(n²)的时间复杂度。。。
+            所以用到它的时候，数据规模越小越好。
+            唯一的好处可能就是不占用额外的内存空间了吧。
+        */
+       
+        /* 
+            实现原理：
+                获取到出传入数组的长度赋值给len
+                声明变量minIndex与temp用来存放最小数的下标和交换变量
+                第一层for循环拿到每一个元素的下标
+                每一次循环把每一个i（每个数的下标给minIndex）
+                内层循环获取i后面的的一个数的下标
+                if判断 ：
+                    arr[j]为最小下标后面的一位数字
+                    arr[minIndex]为当前下标为i的数组中的数字，默认为最小
+                    如果arr[j]<arr[minIndex]
+                    则把j(j也是下标)的值赋值给minIndex
+                内层循环结束之后交换两个数字的位置
+                最后返回排序之后的数组
+                
+        */
+
+        function selectionSort(arr) {
+            var len = arr.length;
+            var minIndex,temp;
+            for(var i=0;i<len-1;i++){
+                minIndex = i;
+                for(var j = i+1;j<len;j++){
+                    if(arr[j]<arr[minIndex]){ //寻找最小的数
+                        minIndex = j;//将最小数的索引保存
+                    }
+                }
+                temp =  arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+            return arr;
+        }
+
+        var arr=  [10,5,7,9,3,4,6,1,2];
+        var re = selectionSort(arr);
+        console.log(re);
+
+    </script>
+</body>
+
+</html>

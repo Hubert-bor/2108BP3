@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡排序</title>
+</head>
+<body>
+    <script>
+
+        /*
+            实现原理：
+                把接收到的数组的长度赋值给len
+                外层拿到每一个数据这个数据是每一个数据用来和后面的j来作比较
+                （j<len-1是小于长度，-i是减去前面的元素。得到的就是后面的一个元素）
+                之后用变量交换法交换两个数据的位置
+                最后把排过序的数组返回
+        */
+
+        function bubbleSort(arr) {
+            var len = arr.length;//数组长度
+            for(var i= 0;i<len;i++){
+                for(var j= 0; j<len -1 -i;j++){
+                    if(arr[j]> arr[j+1]){  //相邻元素两两比较
+                        var temp = arr[j+1]; //元素互换，
+                        arr[j+1]=arr[j];
+                        arr[j]=temp;
+                    } 
+                }
+            }
+            return arr;
+        }
+        var arr = [2,45,65,47,10,89,22,100,1];
+        var  re  = bubbleSort(arr);
+        console.log(re);
+    </script>
+</body>
+</html>
