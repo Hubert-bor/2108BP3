@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>插入排序</title>
+</head>
+
+<body>
+    <script>
+        function insertionSort(arr) {
+            var len = arr.length;
+            var preIndex, current;
+            for (var i = 1; i < len; i++) {
+                preIndex = i - 1;
+                current = arr[i];
+                while (preIndex >= 0 && arr[preIndex] > current) {
+                    arr[preIndex + 1] = arr[preIndex];
+                    preIndex--;
+                }
+                arr[preIndex + 1] = current;
+            }
+            return arr;
+        }
+        var arr = [100, 1, 35, 3, 66, 7, 6, 88];
+        var re = insertionSort(arr);
+        console.log(re);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>归并排序</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            转自：https://www.cnblogs.com/yinhao-jack/p/10838401.html
+
+            归并排序（Merge Sort）
+            作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：
+
+            自上而下的递归（所有递归的方法都可以用迭代重写，所以就有了第2种方法）
+            自下而上的迭代
+            在《数据结构与算法JavaScript描述》中，作者给出了自下而上的迭代方法。但是对于递归法，作者却认为：
+
+            However, it is not possible to do so in JavaScript, as the recursion goes too deep
+            for the language to handle.
+            然而,在 JavaScript 中这种方式不太可行,因为这个算法的递归深度对它来讲太深了。
+
+            说实话，我不太理解这句话。意思是JavaScript编译器内存太小，递归太深容易造成内存溢出吗？还望有大神能够指教。
+            更新：
+            在《JavaScript语言精粹》的第四章里提到了递归问题。对我之前的疑问进行了解答：
+
+            Some languages offer the tail recursion optimization.
+            This means that if a function returns the result of invoking itself recursively, 
+            then the invocation is replaced with a loop, which can significantly speed things up. 
+            Unfortunately, JavaScript does not currently provide tail recursion optimization. 
+            Functions that recurse very deeply can fail by exhausting the return stack.
+            一些语言提供了尾递归优化。这意味着如果一个函数返回自身递归调用的结果，那么调用的过程会被替换为一个循环，
+            它可以显著提高速度。遗憾的是，JavaScript当前并没有提供尾递归优化。深度递归的函数可能会因为堆栈溢出而运行失败。
+
+            简而言之，就是JavaScript没有对递归进行优化。运用递归函数不仅没有运行速度上的优势，还可能造成程序运行失败。因此不建议使用递归。
+
+            和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是O(n log n）的时间复杂度。
+            代价是需要额外的内存空间。
+        */
+
+        function mergeSort(arr) {  //采用自上而下的递归方法
+            var len = arr.length;
+            if (len < 2) {
+                return arr;
+            }
+            var middle = Math.floor(len / 2),
+                left = arr.slice(0, middle),
+                right = arr.slice(middle);
+            return merge(mergeSort(left), mergeSort(right));
+        }
+
+        function merge(left, right) {
+            var result = [];
+
+            while (left.length > 0 && right.length > 0) {
+                if (left[0] <= right[0]) {
+                    result.push(left.shift());
+                } else {
+                    result.push(right.shift());
+                }
+            }
+
+            while (left.length)
+                result.push(left.shift());
+
+            while (right.length)
+                result.push(right.shift());
+
+            return result;
+        }
+
+        var arr = [10,9,3,4,6,8,2,1];
+        var re = mergeSort(arr);
+        console.log(arr);
+    </script>
+</body>
+
+</html>
