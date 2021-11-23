@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>duplicate Arrary</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            understand:
+            
+                获取传入数组的长度赋值给len
+                直接从数组的最大值开始循环
+
+                关键点：假设数组最大长度为5，那么i=5,下标为5时，为复制的第一个元素
+                eg:
+                    下标：0,1,2,3,4     长度为5
+                    为5时：0,1,2,3,4,5  恰好为开始复制的第一个元素
+
+                list[i] = list[i - len];
+
+                list[i]： 随着i的自增，下标从5开始向后自增
+                list[i - len]：len为固定值，所以当i自增时，减去固定值，即为6-5，7-5，8-5....相等于把本身用push()添加到数组末尾
+        */
+
+        function duplicate(list) {
+            const len = list.length;
+            for (var i = len; i < len * 2; i++) {
+                list[i] = list[i - len];
+            }
+            return list;
+        }
+         var arr = [1,2,3,4,5];
+         var re = duplicate(arr);
+         console.log(re);
+         
+    </script>
+</body>
+
+</html>

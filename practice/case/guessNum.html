@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Guess Num</title>
+    <style>
+        #main {
+            width: 500px;
+            height: 500px;
+            /* background-color: rgb(1, 168, 240); */
+            margin: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 40px;
+        }
+
+        #show {
+            width: 100%;
+            height: 300px;
+            line-height: 300px;
+            font-size: 100px;
+            text-align: center;
+        }
+
+        #btn {
+            text-align: center;
+        }
+
+        #btn>a {
+            background-color: rgb(8, 8, 8);
+            border-radius: 20px;
+            padding: 20px;
+            color: #fff;
+        }
+
+        #result {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 300px;
+            height: 300px;
+            line-height: 300px;
+            font-size: 80px;
+            text-align: center;
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="show"></div>
+        <p id="btn">
+            <a href="#">开始</a>
+        </p>
+    </div>
+    <div id="result"></div>
+
+
+    <script>
+
+        /* 
+            实现思路：
+                获取需要的DOM
+                给按钮绑定点击事件
+                生成一个1-6之间的随机数
+                点击按钮之后，调用生成随机数的函数，输出的想要的位置即可
+                样式自行添加
+        */
+
+        var btn = document.querySelector("#btn>a");
+        var show = document.getElementById("show");
+        var result = document.getElementById("result");
+        btn.onclick = function () {
+            var re = randomNum();
+            show.innerText = re;
+            if (re >= 3) {
+                result.innerText = "大";
+                result.style.display = "block";
+                setTimeout(function () {
+                    result.style.display = "none";
+                    show.innerText = "";
+                }, 1500);
+            } else {
+                result.innerText = "小";
+                result.style.display = "block";
+                setTimeout(function () {
+                    result.style.display = "none";
+                    show.innerText = "";
+                }, 1500);
+            }
+        }
+
+        //生成随机数  1-6
+        function randomNum() {
+            var min = 1;
+            var max = 6;
+            //生成一个1-6之间的随机数
+            return Math.ceil(Math.random(max - min) * max);
+        }
+
+    </script>
+</body>
+
+</html>

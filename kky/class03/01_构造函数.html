@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+	/* 
+		1.hasOwnProperty 
+			
+			判断某个属性是否是这个对象 私有的 
+		
+	如何判断属性是在构造函数实例里，还是在原型里？可以使用hasOwnProperty()函数来验证
+		2.in
+			判断某个属性在这个对象 是否存在
+	“in” 操作符会在通过对象能够访问给定属性时返回true,无论该属性存在于实例中还是原型中。 
+	 
+	 */	
+		
+		//原型链
+			function Dog1(name1,color){
+				this.name1=name1;
+				this.color=color;
+			}
+			Dog1.isDog=function(){
+				console.log("是否是狗");
+			}
+			
+			Dog1.prototype.name2="狗狗";
+			
+			Object.prototype.name3="狗东西";
+			
+			var d1=new Dog1("小黑","白");
+			var d2=new Dog1("小白","黑");
+			
+			console.log("d1:",d1);
+			console.log("d2:",d2);
+			
+			console.log("11111 hasOwnProperty ////////////////////////");
+			var f1=d1.hasOwnProperty("name1");
+			var f2=d1.hasOwnProperty("name2");
+			console.log("f1:",f1);
+			console.log("f2:",f2);
+			console.log("2222 in ////////////////////////");
+			var f3="name1" in d1;
+			console.log("f3:",f3);
+			var f4="name2" in d1;
+			console.log("f4:",f4);
+			var f5="name3" in d1;
+			console.log("f5:",f5);
+			console.log("333 ////////////////////////");
+			//作用域链
+			/* 
+作用域链：在试图访问一个变量时，先从变量所处作用域内查找是否存在此变量，若不存在，
+跳出当前作用域，到外部作用域去查找，直到找到全局作用域为止
+			 
+			 */
+			
+			var a=1;
+			var b=2;
+			var c=3;
+			fn(c,c);
+			function fn(b,c2){
+				var a=2;
+				console.log("a:",a,b,c,c2);
+			}
+			console.log("////////////////////////");
+			//闭包
+			function wai(){
+				var n=1;
+				function nei(){
+					n++;
+					console.log("n:",n);
+				}
+				return nei;
+			}
+			
+			function wai2(){
+				var n=1;
+				return function(){
+					n++;
+					console.log("n:",n);
+				}
+			}
+			
+			var biBaoFun=wai();
+			console.log("biBaoFun:",biBaoFun);
+			biBaoFun();
+			biBaoFun();
+			biBaoFun();
+			
+			console.log("////////////////////////");
+			biBaoFun=null;//清除闭包
+			var biBaoFun=wai();
+			biBaoFun();
+			
+			
+			console.log("////////////////////////");
+			function Dog2(name1,color){
+				this.name1=name1;
+				this.color=color;
+			}
+			var d2=new Dog2("小白","黑");
+			
+			// Dog1.prototype.name2="狗狗";//添加一个属性属性
+			Dog2.prototype={
+				name4:"安阳大狗",
+				constructor:Dog1//改变原型指向
+			}
+			console.log("1111d2.constructor:",Dog2.prototype.constructor);
+			
+			
+			console.log("d2:",d2);
+			
+			console.log("//////////////////////////////////");
+			var obj={
+				user:"kky",
+				age:18,
+				sex:0
+			}
+			console.log("'user' in obj:","user" in obj);
+			
+			obj.job="teacher";
+			
+			obj={
+				work:"IT"
+			}
+			console.log("//////////////////////////////////");
+			
+			
+		</script>
+	</body>
+</html>
