@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+<pre>
+	一.git和gitee,github
+	电脑上安装的工具 百度云盘是用来 上传下载 文件,
+	浏览器中百度网盘存放文件的
+	
+	git 分布式 版本控制 工具   
+	
+	gitee 存放代码网站
+	
+	github 存放代码网站
+	
+	二.注册gitee
+		用户名用英文
+		
+	三.配置git(若没有配置,仅需配置一次)
+	3.1配置git用户名 最好是英文字母
+	git config --global user.name "kky"
+	
+	3.2配置git邮箱
+	git config --global user.email "1948318768@qq.com"
+	
+	3.3查看git配置信息
+	git config --list
+	
+	3.4本地生成git秘钥和公钥(.ssh文件夹中id_rsa.pub这个文件)
+	ssh-keygen -t rsa -C "1948318768@qq.com"
+	
+	4.4将本地公钥添加到gitee中
+	
+	https://gitee.com/zwc2021/P32108B.git
+	
+	四.git常用命令与流程
+	4.1 流程两个类
+		4.1.1 从远程仓库下载到本地
+			1.建立远程仓库 gitee P32108B,复制该仓库的地址 ,https://gitee.com/zwc2021/P32108B.git
+			2.在本地电脑合适的位置 E:\code下打开git bash
+			3.在git bash中 git clone https://gitee.com/zwc2021/P32108B.git即可下载代码,生成P32108B文件夹,并包含.git文件
+				做文件操作,添加,删除,修改文件
+			4.git status
+				git add .
+				git status
+				git commit -m "注释"
+			6.git remote -v
+			7.git push origin master
+			
+			
+			
+		4.1.2从本地添加远程仓库
+			1.先建立本地仓库
+			2.通过git init初始化本地仓库
+			3.建立远程仓库,地址https://gitee.com/kky365/P32108BP3.git
+			4.查看远程仓库地址
+			git remote -v
+			5.添加远程仓库
+			git remote add 地址名(origin/gitee/github) 仓库地址
+			6.git status
+				git add .
+				git status
+				git commit -m "注释"
+				
+			7.可以允许不相关历史提，强制合并
+			git pull origin master --allow-unrelated-histories
+			8.推送
+			git push origin master
+			
+			
+		
+		
+		
+		
+			
+	4.2
+		当本地仓库建立完毕后,可以使用git命令
+		git clone 
+		git status 
+		git add . 
+		git status
+		git commit -m "注释"
+		
+		git  remote -v (可以省略)
+		
+		
+		git push origin master /git push
+		
+		
+		
+		
+		
+		
+	
+	4.3 常见命令
+		git clone 仓库地址 下载/克隆 这个远程仓库的代码
+		git窗口中cd 
+		cd 文件夹 进入文件夹
+		cd ../ 返回到上一级
+	
+		git status 查看本地仓库代码是否有变动(添加,修改,删除)
+		
+		git add .
+		git add *
+		git add 文件名
+		将变动过的文件放入暂存区
+		
+		git commit -m "注释可以写汉字"  增加/记录 版本
+		
+		-----------------------------
+		将代码推送到gitee
+		-----------------------------
+		
+		git remote -v 查看远程仓库(地址)
+		
+		git pull origin mater 拉取最新的代码
+		
+		git push origin master 将代码推送到指定仓库
+		origin(一般是origin/也可以改)  
+		
+		
+		分支
+		git branch 查看分支
+		
+		git branch 分支名 创建分支
+		
+		git checkout 分支名 切换分支
+		
+		操作数据
+		
+		git checkout -b 分支名  创建分支,并切换到该分支
+		
+		git branch -d 分支名 删除分支
+		
+		-----------------
+		git merge 所有合并
+		git merge 分支名 指定分支合并 常用 
+		
+		
+		查看提交历史
+		
+		git log 查看该仓库的git日志,每一个版本
+		git log --oneline 日志简写
+		git log --reverse --oneline 日志倒序简写
+		git log --author=用户 --oneline -5
+		
+		git blame 文件名  查看文件修改记录
+		
+		按q退出
+		
+		git pull origin kky 拉取分支kky 最新的代码
+		
+		版本回退
+		git reset --hard HEAD
+		HEAD 表示当前版
+		HEAD^ 上一个版本
+		HEAD^^ 上上一个版本
+		HEAD^^^ 上上上一个版本
+		git reset id
+		
+		HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+		git log
+		穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+		
+		git reflog
+		要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+		
+		
+	
+	
+	
+	
+</pre>
+		
+	</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			/* div#app{
+				position: relative;
+			}
+			div#app>div{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				border-radius: 100%;
+				display: inline-block;
+				position: absolute;
+			} */
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			div#app{
+				position: relative;
+				height: 100%;
+				overflow: hidden;
+			}
+			div#app>div.ball{
+				border-radius: 100%;
+				position: absolute;
+				z-index: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <div></div>
+			<div></div> -->
+		</div>
+		<script>
+			/* 
+				对象的创建方式
+				1.字面量
+				2.工厂函数/模式
+				3.构造函数
+				
+				prototype 原型 
+				
+				__proto__
+				
+				原型链: 
+				找某个属性/方法,先从自身找,
+				然后找自身.__proto__上.
+				若找不到,则找上一层的__proto__
+				一直找到Object.prototype的上,
+				最后找不到则为null
+				
+				
+				
+				dog3.__proto__===Dog.prototype
+				
+				constructor
+				
+				构造函数的静态方法
+				
+				isArray
+				
+			 
+			 */
+			
+			function Ball(color,top,left,width){
+				//通过构造函数创建的所有的小球私有的属性
+				this.color=color;
+				this.top=top;
+				this.left=left;
+				this.width=width;
+			}
+			
+			var t1;
+			Ball.prototype.create=function(){
+				//通过构造函数创建的所有的小球共有的属性
+				// console.log("1this:",this);
+				var app=document.getElementById("app");
+				
+				var div=document.createElement("div");
+				// div.className="ball";
+				
+				div.style.width=div.style.height=this.width+"px";
+				div.style.backgroundColor=this.color;
+				
+				div.style.top=this.top+"px";
+				div.style.left=this.left+"px";
+				
+				app.appendChild(div);
+				
+				t1=setTimeout(function(){
+					app.removeChild(div);
+				},2000);
+				
+			}
+			
+			// var b1=new Ball("red",100,200,50);
+			// console.log("b1:",b1);
+			// b1.create();
+			//创建一个小球
+			function myBall(){
+				var color=getColor();
+				var top=getMax(500);
+				var left=getMax(1100);
+				var width=getMax(100);
+				width>=30?width:(width=30);
+				
+				var b=new Ball(color,top,left,width);
+				
+				b.create();
+				// console.log("4b",b);
+			}
+			
+			
+			// var r2=getColor();
+			// console.log("3r2:",r2);
+			// var app=document.getElementById("app");
+			// app.style.backgroundColor=r2;
+			//生成一个颜色
+			function getColor(){
+				// var color1="rgb()";
+				var color2=`rgb(${getMax(256)},${getMax(256)},${getMax(256)})`;
+				return color2;
+			}
+			
+			// var r1=getMax(3);
+			// console.log("2r1:",r1);
+			//生成一个指定范围的随机数
+			function getMax(n){
+				return parseInt(Math.random()*n);
+			}
+			
+			// myBall();
+			var t2=setInterval(function(){
+				myBall();
+			},100);
+			
+			
+		</script>
+	</body>
+</html>

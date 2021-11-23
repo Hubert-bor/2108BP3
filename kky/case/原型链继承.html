@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			pre{
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+<pre>
+1.原型链继承
+	fgx("1.原型链继承");
+	function Father(){
+			this.car="劳斯莱斯";
+		}
+		function Son(){
+			this.phone="小米Max";
+		}
+		
+		Son.prototype=new Father();//通过原型链继承
+		var s=new Son();
+		console.log("desk:",s.car,s.phone);
+	}());
+	(function(){
+		fgx("2.原型链继承");
+		function Father(car){
+			this.car=car;
+		}
+		function Son(phone){
+			this.phone=phone;
+		}
+		
+		Son.prototype=new Father("劳斯莱斯幻影");//通过原型链继承
+		var s=new Son("小米超级Max");
+		console.log("desk:",s.car,s.phone);
+	}());
+2.冒充继承(可解决传参问题)
+		(function(){
+			fgx("2.冒充继承");
+			function Box(age){
+				this.name="张三";
+				this.age=age;
+			}
+			function Desk(age){
+				this.speak=function(){
+					console.log("听我说说",this);
+				}
+				Box.call(this,age);//对象冒充
+			}
+			
+			Desk.prototype=new Box();//通过原型链继承
+			var desk=new Desk(25);
+			console.log("desk:",desk,desk.name,desk.age);
+			desk.speak();
+		}());
+		
+		(function(){
+			fgx("2.冒充继承");
+			function Father(monkey,car){
+				this.monkey=monkey;
+				this.car=car;
+				this.speak=function(){
+					console.log(this.monkey+" "+this.car);
+				}
+			}
+			function Son(monkey,car){
+				Father.call(this,monkey,car);//对象冒充
+				this.say=function(){
+					console.log("我有",this);
+				}
+			}
+			Son.prototype=new Father();//原型链继承
+			var s=new Son(1000000,"劳斯莱斯幻影");
+			console.log("s",s,s.car);
+			s.say();
+			s.speak();
+		}());
+3.组合继承  原型继承+冒充继承
+	fgx("3.组合继承");
+	(function(){
+		function Box(age){
+			this.age=age;
+			this.name=["zhang","wang","li"];
+		}
+		Box.prototype.run=function(){
+			console.log(this.name+" "+this.age);
+		}
+		function Desk(age){
+			this.speak=function(){
+				console.log("我说说");
+			}
+			Box.call(this,age);//对象冒充
+		}
+		Desk.prototype=new Box();//原型链继承
+		var desk=new Desk(100);
+		console.log("desk:",desk);
+		desk.speak();
+		desk.run();
+	}());
+	(function(){
+		function Father(money,car){
+			this.money=money;
+			this.car=car;
+		}
+		Father.prototype.speak=function(){
+			console.log(this.money+" "+this.car);
+		}
+		function Son(money,car){
+			this.say=function(){
+				console.log("我说说",this);
+			}
+			Father.call(this,money,car);//对象冒充
+		}
+		Son.prototype=new Father();//原型链继承
+		var s=new Son(1000000,"劳斯莱斯幻影");
+		console.log("s:",s);
+		s.speak();
+		s.say();
+	}());
+
+</pre>
+	<script>
+	fgx("3.组合继承");
+	(function(){
+		function Box(age){
+			this.age=age;
+			this.name=["zhang","wang","li"];
+		}
+		Box.prototype.run=function(){
+			console.log(this.name+" "+this.age);
+		}
+		function Desk(age){
+			this.speak=function(){
+				console.log("我说说");
+			}
+			Box.call(this,age);//对象冒充
+		}
+		Desk.prototype=new Box();//原型链继承
+		var desk=new Desk(100);
+		console.log("desk:",desk);
+		desk.speak();
+		desk.run();
+	}());
+	(function(){
+		function Father(money,car){
+			this.money=money;
+			this.car=car;
+		}
+		Father.prototype.speak=function(){
+			console.log(this.money+" "+this.car);
+		}
+		function Son(money,car){
+			this.say=function(){
+				console.log("我说说",this);
+			}
+			//Father.call(this,money,car);//对象冒充
+			Father.apply(this,[money,car]);//对象冒充
+		}
+		Son.prototype=new Father();//原型链继承
+		var s=new Son(1000000,"劳斯莱斯幻影");
+		console.log("s:",s);
+		s.speak();
+		s.say();
+	}());
+	function fgx(str){
+		str==undefined?str="":str;
+		console.log(str+"-----------------------");
+	}
+	
+
+	</script>
+	</body>
+</html>
