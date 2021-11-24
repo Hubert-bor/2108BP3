@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+1.HTML结构
+	&lt;div id="box">
+		&lt;img src="ba.png"  /> 
+	&lt;/div>
+2.jquery.big.css
+	div#box{
+		overflow: hidden;
+	}
+	div#box img{
+		cursor: pointer;
+	}
+3.jquery部分
+	var box={},img={};
+	$("#box").big(box,img);
+	例如:
+	$("#box").big(box,img);
+4.参数说明
+	box对象div#box的样式
+	例如:
+	box={
+		样式名:样式值
+	}
+	默认
+	box={
+		width: "300px",
+		height: "300px"
+	}
+	img={
+		speed:过度时间,数字
+		scale:放大倍数,数字
+	}
+	默认
+	img={
+		speed: 2,
+		scale: 1.5
+	}
+5.jquery.big.js
+;
+(function($) {
+	$.fn.big = function(box, img) {
+		var boxObj = {
+			width: "300px",
+			height: "300px",
+		}
+		var imgObj = {
+			speed: 2,
+			scale: 1.5
+		}
+		boxObj = $.extend({}, boxObj, box);
+		imgObj = $.extend({}, imgObj, img);
+		console.log("boxObj:", boxObj);
+		console.log("imgObj:", imgObj);
+		this.css(boxObj).children("img").css({
+			"transition": imgObj.speed + "s"
+		});
+		this.hover(function() {
+			$(this).children("img").css("transform", "scale(" + imgObj.scale + ")")
+		}, function() {
+			$(this).children("img").css("transform", "scale(1)");
+		})
+		return this;
+	}
+}(jQuery));
+		</pre>
+		<script>
+			;(function(){
+				
+			}());
+			
+			function fgx(str){
+				str?str:str=""
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=");
+			}
+		</script>
+	</body>
+</html>

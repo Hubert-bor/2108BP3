@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="jquery.big.css"  />
+	</head>
+	<body>
+		<div id="box">
+			<img src="ba.png"  /> 
+		</div>
+		<script src="../jquery/jquery-1.11.3.min.js"></script>
+		<script src="jquery.big.js"></script>
+		<script>
+			var box={
+				width:"500px",
+				height:"500px",
+				border:"1px solid red",
+				borderRadius:"100%"
+			};
+			var img={
+				speed:2,
+				scale:1.8
+			};
+			$("#box").big(box,img);
+			//console.log($("#box").big(box,img).css("border"));
+		</script>
+	</body>
+</html>

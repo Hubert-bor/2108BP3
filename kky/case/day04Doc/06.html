@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#test{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1选择器
+$(this) 					选取当前HTML元素
+$("p.info") 				选取class为info的元素
+$("p:first") 				选取第一个p元素
+$("[href]") 				选取带有href属性的元素
+$("a[target='_blank']") 	选择所有带target属性的值等于"_blank"的a元素
+$(":button") 				选取所有type="button"的input元素和button元素
+$("tr:even") 				选取偶数位置的tr元素
+$("tr:odd") 				选取奇数位置的tr元素
+
+$(selector).find() 			find() 方法返回被选元素的后代元素，一路向下直到最后一个后代。*所有
+$(selector).find("p") 		find("p") 方法返回被选元素的后代P元素，一路向下直到最后一个后代。
+
+$(selector).children() 		children() 方法返回被选元素的所有直接子元素。
+$(selector).children("p.c") 	面的例子返回类名为 "c" 的所有&lt;p&gt; 元素，并且它们是 &lt;div&gt; 的直接子元素：
+
+$(selector).parent() 			parent() 方法返回被选元素的直接父元素。
+$(selector).parents() 		parents() 方法返回被选元素的所有祖先元素。
+							祖先是父、祖父、曾祖父，依此类推。
+$(selector).parentsUntil() 	parentsUntil()方法返回介于 selector 与 stop 之间的所有祖先元素。
+							祖先是父、祖父、曾祖父，依此类推。
+$(selector).closest() 		方法返回被选元素的第一个祖先元素。祖先是父、祖父、曾祖父，依此类推。必需。
+							规定缩小搜索祖先元素范围的选择器表达式、元素或 jQuery 对象。
+
+
+$(selector).siblings() 		方法返回被选元素的所有同胞元素
+$(selector).siblings("p") 	方法返回被选元素的所有同胞p元素
+
+$(selector).next(); 			next() 方法返回被选元素的下一个同胞元素。该方法只返回一个元素。
+$(selector).next("p"); 		next() 方法返回被选元素的下一个同胞p元素。该方法只返回一个元素。
+$(selector).nextAll();	 	nextAll() 方法返回被选元素的所有跟随的同胞元素。	
+$(selector).nextAll("p"); 	nextAll() 方法返回被选元素的所有跟随的同胞p元素。
+$(selector).nextUntil() 		方法返回介于两个给定参数之间的所有跟随的同胞元素。
+								下面的例子返回介于 &lt;h2&gt; 与 &lt;h6&gt; 元素之间的所有同胞元素：
+
+$(selector).prev(); 			next() 方法返回被选元素的上一个同胞元素。该方法只返回一个元素。
+$(selector).prev("p"); 		next() 方法返回被选元素的上一个同胞p元素。该方法只返回一个元素。
+$(selector).prevAll();	 	nextAll() 方法返回被选元素的所有上面的同胞元素。	
+$(selector).prevAll("p"); 	nextAll() 方法返回被选元素的所有上面的同胞p元素。
+$(selector).prevUntil() 		方法返回介于两个给定参数之间的所有上面的同胞元素。
+								下面的例子返回介于 &lt;h2&gt; 与 &lt;h6&gt; 元素之间的所有同胞元素：
+
+$(selector).has() 				//选择子元素包含有selector的元素 	//元素集合
+								var dHas=$("#box>div:has(.ipt)");
+$(selector).is()
+
+$(selector).hasClass(class)
+
+$(selector).slice(start,end)
+///
+			//
+			fgx("1.$(this)");
+			$("#d1")[0].onclick=function(){//会覆盖添加在行内的js
+				console.log("0",this);
+			}
+			$("#d1").click(function(){
+				console.log("2",$(this));
+			});
+			fgx("2.find();find('p')");
+			var findR1=$(".box1").find("*");
+			console.log("findR1:",findR1);
+			var findR2=$(".box1").find("p");
+			console.log("findR2:",findR2);
+			
+			fgx("2.children();children('p.p2')");
+			var childrenR1=$(".box2").children();
+			console.log("childrenR1:",childrenR1);
+			var childrenR2=$(".box2").children("p.p2");
+			console.log("childrenR2:",childrenR2);
+			
+			fgx("3.parent();parents();parentsUntil()");
+			var parentR1=$(".box2>.p3").parent();
+			console.log("parentR1:",parentR1);
+			var parentsR2=$(".box2>.p3").parents();
+			console.log("parentsR2:",parentsR2);
+			var parentsR3=$(".box2>.p3").parentsUntil(".box1");
+			console.log("parentsR3:",parentsR3);
+			
+			fgx("4.closest()");//closest() 方法返回被选元素的第一个祖先元素。必需。
+			//规定缩小搜索祖先元素范围的选择器表达式、元素或 jQuery 对象。
+			var myCloseSt=$(".p1").closest(".box3");
+			console.log("myCloseSt:",myCloseSt);
+			
+			fgx("5.siblings() siblings('p')");
+			var sliblingsR1=$("p.p2").siblings();
+			console.log("sliblingsR1:",sliblingsR1);
+			var sliblingsR2=$("p.p2").siblings("p.p3");
+			console.log("sliblingsR2:",sliblingsR2);
+			
+			fgx("6.next() next('p') nextAll() nextUntil() nextUntil('.p3')");
+			var nextR1=$("p.p2").next();
+			console.log("nextR1:",nextR1);
+			var nextR2=$("p.p2").next("div");
+			console.log("nextR2:",nextR2);
+			var nextAllR3=$("p.p2").nextAll();
+			console.log("nextAllR3:",nextAllR3);
+			var nextAllR4=$("p.p2").nextAll("p.p3");
+			console.log("nextAllR4:",nextAllR4);
+			var nextUntilR5=$("p.p2").nextUntil();
+			console.log("nextUntilR5:",nextUntilR5);
+			var nextUntilR6=$("p.p2").nextUntil(".p3");
+			console.log("nextUntilR6:",nextUntilR6);
+			
+			fgx("7.prev() prev('p') prevAll() prevUntil() prevUntil('.p2')");
+			
+			fgx("8.has()");
+			var eHas=$(".box2").has(".box4");
+			console.log("eHas:",eHas);
+			
+			fgx("9.is()");
+			var isR1=$(".box2>p").is(".p3");//true
+			console.log("isR1:",isR1);
+			var isR2=$(".box2>p").is(".p4");
+			console.log("isR2:",isR2);
+			
+			fgx("10.hasClass(class)<==>is('.'+class)");//
+			var hasClassR1=$(".box2>p").hasClass("p3");//true
+			console.log("hasClassR1:",hasClassR1);
+			
+			fgx("11.slice(start,end)");//
+			var sliceR1=$(".box2>*").slice(0,2);
+			console.log("sliceR1:",sliceR1);
+			var sliceR2=$(".box2>*").slice(2,3);
+			console.log("sliceR2:",sliceR2);
+			var sliceR3=$(".box2>*").slice(0,-1);
+			console.log("sliceR3:",sliceR3);
+			
+////
+	2.find();next();nextAll();children()
+	
+在 find()、next()、nextAll()和 children()这四个方法中，如果不传递参数，
+就相当于传递 了“*”，层次选择器对节点的层次都是有要求的，比如子选择器，
+只有子节点才可以被选择到，孙子节点和重孙子节点都无法选择到。
+next和nextAll选择器，必须是同一个层次的后一个和后N个，不在同一个层次就无法选取到了。
+理论上来讲，jQuery 提供的方法 find()、next()、nextAll()和 children()运行速度要快于使用高级选择器。
+因为他们实现的算法有所不同，高级选择器是通过解析字符串来获取节点对象，
+而 jQuery 提供的方法一般都是单个选择器，是可以直接获取的。但这种快慢的差异，
+ 对于客户端脚本来说没有太大的实用性，并且速度的差异还要取决了浏览器和选择的元素内容。
+	3.jQuery 还提供了更加丰富的方法来选择元素： 
+$('#box').prev('p').css('color','red'); //同级上一个元素 
+$('#box').prevAll('p').css('color', 'red'); //同级所有上面的元素
+nextUntil()和 prevUnitl()方法是选定同级的下面或上面的所有节点，选定非指定的所有 元素，一旦遇到指定的元素就停止选定。 
+$('#box').prevUntil('p').css('color','red'); //同级上非指定元素选定，遇到则停止 
+$('#box').nextUntil('p').css('color','red'); //同级下非指定元素选定，遇到则停止
+siblings()方法正好集成了 prevAll()和 nextAll()两个功能的效果，及上下相邻的所有元素 进行选定： 
+$('#box').siblings('p').css('color','red'); //同级上下所有元素选定 
+//等价于下面： 
+$('#box').prevAll('p').css('color','red'); //同级上所有元素选定 
+$('#box').nextAll('p').css('color','red'); //同级下所有元素选定
+		</pre>
+		<div id="test">
+			 <div id="d1" onclick="console.log('1',$(this));">
+			 	$(this)
+			 </div>
+			 <div class="box1">
+			 	<div class="box2">
+			 		<div class="box3">
+			 			<p class="p1">
+			 				
+			 			</p>
+			 		</div>
+			 		<p class="p2">
+			 			
+			 		</p>
+			 		<div class="box4">
+			 			
+			 		</div>
+			 		<p class="p3">
+			 			
+			 		</p>
+			 	</div>
+			 </div>
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//
+			fgx("1.$(this)");
+			$("#d1")[0].onclick=function(){//会覆盖添加在行内的js
+				console.log("0",this);
+			}
+			$("#d1").click(function(){
+				console.log("2",$(this));
+			});
+			fgx("2.find();find('p')");
+			var findR1=$(".box1").find("*");
+			console.log("findR1:",findR1);
+			var findR2=$(".box1").find("p");
+			console.log("findR2:",findR2);
+			
+			fgx("2.children();children('p.p2')");
+			var childrenR1=$(".box2").children();
+			console.log("childrenR1:",childrenR1);
+			var childrenR2=$(".box2").children("p.p2");
+			console.log("childrenR2:",childrenR2);
+			
+			fgx("3.parent();parents();parentsUntil()");
+			var parentR1=$(".box2>.p3").parent();
+			console.log("parentR1:",parentR1);
+			var parentsR2=$(".box2>.p3").parents();
+			console.log("parentsR2:",parentsR2);
+			var parentsR3=$(".box2>.p3").parentsUntil(".box1");
+			console.log("parentsR3:",parentsR3);
+			
+			fgx("4.closest()");//closest() 方法返回被选元素的第一个祖先元素。必需。
+			//规定缩小搜索祖先元素范围的选择器表达式、元素或 jQuery 对象。
+			var myCloseSt=$(".p1").closest(".box3");
+			console.log("myCloseSt:",myCloseSt);
+			
+			fgx("5.siblings() siblings('p')");
+			var sliblingsR1=$("p.p2").siblings();
+			console.log("sliblingsR1:",sliblingsR1);
+			var sliblingsR2=$("p.p2").siblings("p.p3");
+			console.log("sliblingsR2:",sliblingsR2);
+			
+			fgx("6.next() next('p') nextAll() nextUntil() nextUntil('.p3')");
+			var nextR1=$("p.p2").next();
+			console.log("nextR1:",nextR1);
+			var nextR2=$("p.p2").next("div");
+			console.log("nextR2:",nextR2);
+			var nextAllR3=$("p.p2").nextAll();
+			console.log("nextAllR3:",nextAllR3);
+			var nextAllR4=$("p.p2").nextAll("p.p3");
+			console.log("nextAllR4:",nextAllR4);
+			var nextUntilR5=$("p.p2").nextUntil();
+			console.log("nextUntilR5:",nextUntilR5);
+			var nextUntilR6=$("p.p2").nextUntil(".p3");
+			console.log("nextUntilR6:",nextUntilR6);
+			
+			fgx("7.prev() prev('p') prevAll() prevUntil() prevUntil('.p2')");
+			
+			fgx("8.has()");
+			var eHas=$(".box2").has(".box4");
+			console.log("eHas:",eHas);
+			
+			fgx("9.is()");
+			var isR1=$(".box2>p").is(".p3");//true
+			console.log("isR1:",isR1);
+			var isR2=$(".box2>p").is(".p4");
+			console.log("isR2:",isR2);
+			
+			fgx("10.hasClass(class)<==>is('.'+class)");//
+			var hasClassR1=$(".box2>p").hasClass("p3");//true
+			console.log("hasClassR1:",hasClassR1);
+			
+			fgx("11.slice(start,end)");//
+			var sliceR1=$(".box2>*").slice(0,2);
+			console.log("sliceR1:",sliceR1);
+			var sliceR2=$(".box2>*").slice(2,3);
+			console.log("sliceR2:",sliceR2);
+			var sliceR3=$(".box2>*").slice(0,-1);
+			console.log("sliceR3:",sliceR3);
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

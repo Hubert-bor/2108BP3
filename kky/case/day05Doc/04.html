@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#d1,
+			#d2,
+			#d3,
+			#d4
+			{
+				border: 1px solid red;
+				margin: 10px;
+			}
+			.myWrap{
+				color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	3.包裹节点
+	wrap 方法使用指定的 HTML 元素来包裹每个被选元素。
+$(selector).wrap(wrappingElement,function(index))
+	wrappingElement	必需。规定包裹每个被选元素的 HTML 元素。
+				可能的值：
+				HTML 元素
+				jQuery 对象
+				DOM 元素
+	function(index)	可选。规定返回包裹元素的函数。
+				index - 返回集合中元素的 index 位置。
+
+	unwrap() 	unwrap() 方法移除被选元素的父元素。
+			$(selector).unwrap()
+	wrapAll() 	wrapAll() 方法使用指定的 HTML 元素来包裹所有被选元素。
+			$(selector).wrapAll(wrappingElement)
+			wrappingElement	必需。规定包裹被选元素的 HTML 元素。
+				可能的值：
+				HTML 元素
+				jQuery 对象
+				DOM 元素
+	wrapInner(html) 方法使用指定的 HTML 元素来包裹每个被选元素中的所有内容（innerHTML）。
+		$(selector).wrapInner(wrappingElement,function(index))
+		wrappingElement	必需。规定包围在每个被选元素的内容周围的 HTML 元素。
+			可能的值：
+			HTML 元素
+			jQuery 对象
+			DOM 元素
+		function(index)	可选。规定返回包裹元素的函数。
+			index - 返回集合中元素的 index 位置。
+fgx("3.wrap");
+			var d1Btn=$("#d1>button#btn1");
+			var d1Btn2=$("#d1>button#btn2");
+			var d1Btn3=$("#d1>button#btn3");
+			var d1Btn4=$("#d1>button#btn4");
+			var d1Btn5=$("#d1>button#btn5");
+			var d1Btn6=$("#d1>button#btn6");
+			d1Btn.click(function(){
+				$("#d1>p.p1").wrap("&lt;div class='myWrap'>&lt;/div>");
+				$("#d1>p.p2").wrap($("&lt;div class='myWrap'>&lt;/div>"));
+				var div=document.createElement("div");
+				div.className="myWrap";
+				$("#d1>p.p3").wrap(div);
+			});
+			d1Btn2.click(function(){
+				$("#d1>p.p4").wrap(function(){
+					return "&lt;div class='myWrap'>&lt;/div>"
+				})
+			});
+			d1Btn3.click(function(){
+				$("#d1 p").unwrap();
+			});
+			d1Btn4.click(function(){
+				$("#d1 p").wrapAll("&lt;div class='myWrap'>&lt;/div>");
+			});
+			d1Btn5.click(function(){
+				$("#d1>p.p1").wrapInner("&lt;div class='myWrap'>&lt;/div>");
+				$("#d1>p.p2").wrapInner($("&lt;div class='myWrap'>&lt;/div>"));
+				var div=document.createElement("div");
+				div.className="myWrap";
+				$("#d1>p.p3").wrapInner(div);
+			});
+			d1Btn6.click(function(){
+				$("#d1>p.p4").wrapInner(function(){
+					return "&lt;div class='myWrap'>&lt;/div>"
+				})
+			});
+		</pre>
+		<div id="d1">
+			<p class="p1">HTML</p>
+			<p class="p2">jQuery</p>
+			<p class="p3">Dom</p>
+			<p class="p4"><span>wrap(function(){})</span></p>
+			<button type="button" id="btn1">wrap()</button>
+			<button type="button" id="btn2">wrap(function(){})</button>
+			<button type="button" id="btn3">unwrap()</button>
+			<button type="button" id="btn4">wrapAll()</button>
+			<button type="button" id="btn5">wrapInner()</button>
+			<button type="button" id="btn6">wrapInner(function(){})</button>
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			fgx("3.wrap");
+			var d1Btn=$("#d1>button#btn1");
+			var d1Btn2=$("#d1>button#btn2");
+			var d1Btn3=$("#d1>button#btn3");
+			var d1Btn4=$("#d1>button#btn4");
+			var d1Btn5=$("#d1>button#btn5");
+			var d1Btn6=$("#d1>button#btn6");
+			d1Btn.click(function(){
+				$("#d1>p.p1").wrap("<div class='myWrap'></div>");
+				$("#d1>p.p2").wrap($("<div class='myWrap'></div>"));
+				var div=document.createElement("div");
+				div.className="myWrap";
+				$("#d1>p.p3").wrap(div);
+			});
+			d1Btn2.click(function(){
+				$("#d1>p.p4").wrap(function(){
+					return "<div class='myWrap'></div>"
+				})
+			});
+			d1Btn3.click(function(){
+				$("#d1 p").unwrap();
+			});
+			d1Btn4.click(function(){
+				$("#d1 p").wrapAll("<div class='myWrap'></div>");
+			});
+			d1Btn5.click(function(){
+				$("#d1>p.p1").wrapInner("<div class='myWrap'></div>");
+				$("#d1>p.p2").wrapInner($("<div class='myWrap'></div>"));
+				var div=document.createElement("div");
+				div.className="myWrap";
+				$("#d1>p.p3").wrapInner(div);
+			});
+			d1Btn6.click(function(){
+				$("#d1>p.p4").wrapInner(function(){
+					return "<div class='myWrap'></div>"
+				})
+			});
+			
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

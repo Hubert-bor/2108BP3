@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.命名空间
+有时，我们想对事件进行移除。
+但对于同名同元素绑定的事件移除往往比较麻烦，
+这个时候，可以使用事件的命名空间解决。 
+		</pre>
+		<div id="d1" class="d">
+			点我看控制台!
+		</div>
+		<pre>
+			//1.命名空间
+			$("#d1").on("click.a",function(){
+				console.log("该click事件命名为a");
+			});
+			$("#d1").on("click.b",function(){
+				console.log("该click事件命名为b");
+			});
+			$("#d1").on("click.c",function(){
+				console.log("该click事件命名为c");
+			});
+			$("#d1").on("click.d",function(){
+				console.log("该click事件命名为d");
+			});
+			$("#d1").off("click.d");
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//1.命名空间
+			$("#d1").on("click.a",function(){
+				console.log("该click事件命名为a");
+			});
+			$("#d1").on("click.b",function(){
+				console.log("该click事件命名为b");
+			});
+			$("#d1").on("click.c",function(){
+				console.log("该click事件命名为c");
+			});
+			$("#d1").on("click.d",function(){
+				console.log("该click事件命名为d");
+			});
+			$("#d1").off("click.d");
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

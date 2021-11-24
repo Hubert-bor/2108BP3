@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#d1,
+			#d2,
+			#d3,
+			#d4
+			{
+				border: 1px solid red;
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	4.节点操作	
+clone() 方法生成被选元素的副本，包含子节点、文本和属性。
+	$(selector).clone(true|false) 	
+	true	规定需复制事件处理程序。
+	false	默认。规定不复制事件处理程序。
+	
+//1.clone();
+			var d1ClsD1=$("#d1>.d1");
+			var d1ClsD2=$("#d1>.d2");
+			var d1btn=$("#d1btn");
+			d1ClsD1.click(function(){
+				$(this).css("font-size",function(i,v){
+					return parseInt(v)+1;
+				})
+			})
+			var flag=false;
+			d1btn.click(function(){
+				var r=d1ClsD1.clone(flag);
+				$(this).html("clone("+!flag+")");
+				d1ClsD2.append(r);
+				if(flag){
+					flag=false;
+				}else{
+					flag=true;
+				}
+
+			})	
+	
+remove() 方法移除被选元素，包括所有的文本和子节点。
+该方法也会移除被选元素的数据和事件。
+	$(selector).remove();
+	
+//2.remove();
+	var d2ClsD2=$("#d2>.d1");
+	console.log("d2ClsD2:",d2ClsD2);
+	var d2btn=$("#d2btn");
+	d2btn.click(function(){
+		var r=d2ClsD2.remove();
+	console.log("r:",r);
+});	
+	
+detach() 方法移除被选元素，包括所有的文本和子节点。然后它会保留数据和事件。
+该方法会保留移除元素的副本，允许它们在以后被重新插入。
+	$(selector).detach();
+	
+			//2.detach();
+			var d2ClsD1=$("#d2>.d1");
+			console.log("d2ClsD2:",d2ClsD2);
+			var d2btn2=$("#d2btn2");
+			var d2btn3=$("#d2btn3");
+			var r;
+			d2btn2.click(function(){
+				r=d2ClsD2.detach();
+				console.log("r:",r);
+			});
+			d2btn3.click(function(){
+				$("#d2").prepend(r);
+			});	
+	
+				//2.detach() remove()
+			var d2ClsD2=$("#d2>.d1>.d2");
+			var d2ClsD1=$("#d2>.d1");
+			d2ClsD2.click(function(){
+				$(this).css("font-size",function(i,v){
+					return parseInt(v)+1;
+				})
+			})
+			var d2btn4=$("#d2btn4");
+			var d2btn5=$("#d2btn5");
+			d2btn4.click(function(){
+				var tmp=d2ClsD1.detach();
+				$("#d2").append(tmp);
+			});
+			d2btn5.click(function(){
+				var tmp=d2ClsD1.remove();
+				$("#d2").append(tmp);
+			});
+	
+	
+	empty() 方法从被选元素所有子节点和内容。
+注意：该方法不会移除元素本身，或它的属性。
+	$(selector).empty()
+	
+		//2.empty
+			var d2btn6=$("#d2btn6");
+			var d2ClsD1=$("#d2>.d1");
+			d2btn6.click(function(){
+				d2ClsD1.empty();
+			});
+	
+	replaceWith() 方法把被选元素替换为新的内容。
+$(selector).replaceWith(content,function(index))
+	content	必需。规定要插入的内容（可包含 HTML 标签）。
+			可能的值：
+			HTML 元素
+			jQuery 对象
+			DOM 元素
+	function(index)	可选。规定返回替换内容的函数。
+			index - 返回集合中元素的 index 位置。
+		</pre>
+		<div id="d1">
+			<div class="d1">
+				点我(就这几个字)会变大
+			</div>
+			<button type='button' id="d1btn">clone(flase)</button>
+			<div class="d2"></div>
+		</div>
+		<div id="d2">
+			<div class="d1" style="padding: 10px;border: 2px dotted pink;">
+				通过remvoe()<span>删除</span>
+				<div>我会不会被删除</div>
+				<div class="d2">
+					点我(就这几个字)会变大
+				</div>
+			</div>
+			<button type='button' id="d2btn">remvoe()移除</button>
+			<button type='button' id="d2btn2">detach()移除</button>
+			<button type='button' id="d2btn3">detach()恢复</button>
+			<br />
+			<br />
+			<button type='button' id="d2btn4">detach()移除并插入</button>
+			<button type='button' id="d2btn5">remvoe()移除并插入</button>
+			<br />
+			<button type="button" id="d2btn6">empty()</button>
+			<br />
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//2.empty
+			var d2btn6=$("#d2btn6");
+			var d2ClsD1=$("#d2>.d1");
+			d2btn6.click(function(){
+				d2ClsD1.empty();
+			});
+			
+			//2.detach() remove()
+			var d2ClsD2=$("#d2>.d1>.d2");
+			var d2ClsD1=$("#d2>.d1");
+			d2ClsD2.click(function(){
+				$(this).css("font-size",function(i,v){
+					return parseInt(v)+1;
+				})
+			})
+			var d2btn4=$("#d2btn4");
+			var d2btn5=$("#d2btn5");
+			d2btn4.click(function(){
+				var tmp=d2ClsD1.detach();
+				$("#d2").append(tmp);
+			});
+			d2btn5.click(function(){
+				var tmp=d2ClsD1.remove();
+				$("#d2").append(tmp);
+			});
+			
+			
+			//2.detach();
+			var d2ClsD1=$("#d2>.d1");
+			console.log("d2ClsD2:",d2ClsD2);
+			var d2btn2=$("#d2btn2");
+			var d2btn3=$("#d2btn3");
+			var r;
+			d2btn2.click(function(){
+				r=d2ClsD2.detach();
+				console.log("r:",r);
+			});
+			d2btn3.click(function(){
+				$("#d2").prepend(r);
+			});
+			//2.remove();
+			var d2ClsD2=$("#d2>.d1");
+			console.log("d2ClsD2:",d2ClsD2);
+			var d2btn=$("#d2btn");
+			d2btn.click(function(){
+				var r=d2ClsD2.remove();
+				console.log("r:",r);
+			});
+			
+			
+			//1.clone();
+			var d1ClsD1=$("#d1>.d1");
+			var d1ClsD2=$("#d1>.d2");
+			var d1btn=$("#d1btn");
+			d1ClsD1.click(function(){
+				$(this).css("font-size",function(i,v){
+					return parseInt(v)+1;
+				})
+			})
+			var flag=false;
+			d1btn.click(function(){
+				var r=d1ClsD1.clone(flag);
+				$(this).html("clone("+!flag+")");
+				d1ClsD2.append(r);
+				if(flag){
+					flag=false;
+				}else{
+					flag=true;
+				}
+
+			})
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

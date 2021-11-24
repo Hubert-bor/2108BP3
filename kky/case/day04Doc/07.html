@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#box{
+				padding: 10px;
+			}
+			#box>div{
+				height: 50px;
+				border: 1px solid pink;
+				margin: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	2.过滤选择器
+	过滤器主要通过特定的过滤规则来筛选所需的DOM元素，
+	和CSS中伪类的语法类似：使用冒号（：）开头。
+	<img src="img/01.png" alt="" style="width: 600px;"/> 
+	<img src="img/2.png" alt="" style="width: 600px;"/> 
+	注意：:focus 过滤器，必须是网页初始状态的已经被激活焦点的元素才能实现元素获取。
+	 而不是鼠标点击或者 Tab 键盘敲击激活的。 $('input').get(0).focus(); 
+	 //先初始化激活一个元素焦点 $(':focus').css('background','red'); //被焦点的元素
+jQuery 为最常用的过滤器提供了专用的方法，已达到提到性能和效率的作用
+	<img src="img/03.png" alt="" style="width: 600px;"/> 
+	<img src="img/04.png" alt="" style="width: 600px;"/> 
+	<img src="img/05.png" alt="" style="width: 600px;"/> 
+	<img src="img/06.png" alt="" style="width: 600px;"/> 
+	<img src="img/07.png" alt="" style="width: 600px;"/> 
+	<img src="img/08.png" alt="" style="width: 600px;"/> 
+	<img src="img/09.png" alt="" style="width: 600px;"/>
+	注意：这个参数有多种传法和 JavaScript 的 slice 方法是一样的比如：slice(2)，
+	从第三个 开始到最后选定；slice(2,4)，第三和第四被选定；slice(0,-2)，
+	从倒数第三个位置，向前选定 所有；slice(2,-2)，前两个和末尾两个未选定。
+
+		</pre>
+		<div id="box">
+			<div class="d0">0</div>
+			<div class="d1">1</div>
+			<div class="d2">2</div>
+			<div class="d3">3</div>
+			<div class="d4">4</div>
+			<div class="d5">5</div>
+			<div class="d6">6</div>
+			<div class="d7">7</div>
+			<div class="d8">
+				8
+				<input type="text" class="ipt"/>
+			</div>
+			<div class="d9">
+				9
+				<h1>1</h1>
+				<h2>2</h2>
+				<h3>3</h3>
+				<h4>4</h4>
+				<h5>5</h5>
+				<h6>6</h6>
+			</div>
+			<div></div>
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			fgx("1.过滤选择器");
+			//:first 选取第一个元素 单个元素
+			var dFirst=$("#box>div:first");
+			console.log("dFirst:",dFirst);
+			//:last		选取最后一个元素 单个元素
+			var dLast=$("#box>div:last");
+			console.log("dLast:",dLast);
+			//:not   选择class不是d5的div元素 集合元素
+			var dNot=$("#box>div:not(.d5)");
+			console.log("dNot:",dNot);
+			//:even 选择索引号(0开始)是偶数的所有元素 集合元素
+			var dEvent=$("#box>div:even");
+			console.log("dEvent:",dEvent);
+			//:odd 选择索引号(0开始)是奇数的所有元素 集合元素
+			var dOdd=$("#box>div:Odd");
+			console.log("dOdd:",dOdd);
+			//:eq 选择索引(0开始)等于index的元素单个元素
+			var dEq=$("#box>div:eq(2)");
+			console.log("dEq:",dEq);
+			//:gt 选择索引(0开始)大于index的元素 集合元素
+			var dGt=$("#box>div:gt(2)");
+			console.log("dGt:",dGt);
+			//:lt 选择索引(0开始)小于index的元素 集合元素
+			var dLt=$("#box>div:lt(2)");
+			console.log("dLt:",dLt);
+			//:header 选择标题元素,h1-h6 集合元素
+			var h1_6=$("#box>.d9>:header");
+			console.log("h1_6:",h1_6);
+			//:focus 选择当前被焦点的元素 集合元素
+			var input8=$("#box>.d8>input");
+			console.log("input8:",input8);
+			input8.focus(function(){
+				var inputFocus=$("#box>.d8>input:focus");
+				console.log("inputFocus:",inputFocus);
+			});
+			//:empty	//选取不包含子元素或空文本的元素 集合元素
+			var divEmpty=$("#box>div:empty");
+			console.log("divEmpty:",divEmpty);
+			
+			//:has(selector) //选择子元素包含有selector的元素 	//元素集合
+			var dHas=$("#box>div:has(.ipt)");
+			console.log("dHas:",dHas);
+			
+			//:parent 选取含有子元素或文本的元素 		//元素集合
+			var dParent=$("#box>div:parent");
+			console.log("dParent:",dParent);
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"----------------------");
+			}
+		</script>
+	</body>
+</html>

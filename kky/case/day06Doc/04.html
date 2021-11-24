@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	7.动画全局属性
+jQuery.fx.interval 属性用于改变以毫秒计的动画运行速率。
+默认值是 13 毫秒。该属性常用于修改动画运行的每秒帧数。
+降低这个值能够使动画在更快的浏览器中运行得更流畅，但这么做会影响性能 和 CPU。
+注意：由于 jQuery 使用一个全局的间隔时间，
+为了使该属性生效，动画应该不在运行或者首先停止所有动画。
+
+语法
+jQuery.fx.interval = milliseconds;
+
+参数		描述
+milliseconds	必需。规定以毫秒计的动画运行速率。默认是 13 毫秒。
+
+jQuery.fx.off 属性用于对所有动画进行全局禁用或启用。
+默认值是 false，它允许动画正常运行。当设置为 true 时，将禁用所有动画方法，这样会把元素设置为其最后的状态，而不是显示效果。
+提示：如需简化代码，可以使用 $.fx.off 来代替 jQuery.fx.off。
+语法
+jQuery.fx.off = true|false;
+
+参数	描述
+true	规定应该禁用动画。
+false	默认。规定应该启用动画。
+		</pre>
+		<div id="d1" class="d">
+			<p>
+				“div切换”按钮被按下时,我们在隐藏和显示div之间切换(默认是13毫秒)。
+				每次“减少运行动画帧”按钮被按下,我们添加500毫秒的属性,
+				这将导致以更少的帧运行动画(根据不同的浏览器,这可能导致动画运行流畅度低于期望)。
+			</p>
+			<p>
+				<b>注意:</b> 
+				由于jQuery使用一个全局间隔,任何更改此属性生效,
+				没有动画运行或者说动画都应该先停止运行(按“切换div”，
+				然后当" div "完成动画时按“运行动画帧更少”。
+				当动画已经停止,再次按“切换div”注意效果)。
+			</p>
+			<button id="toggle1">div切换</button>
+			<button id="interval1">减少运行动画帧</button>
+			<div style="background:#98bf21;height:100px;width:100px;margin:50px;">
+			</div>
+		</div>
+		<pre>
+			$(function(){
+				$("#toggle1").on("click",function(){
+					$("#d1>div").toggle(5000);
+				});
+				$("#interval1").on("click",function(){
+					jQuery.fx.interval = 500;
+					$("#toggle1").triggerHandler("click");
+				});
+			});
+		</pre>
+		<div id="d2" class="d">
+			<p>
+				当“切换动画”开关按钮被按下时,我们伴着缓慢的动画在隐藏和显示div之间切换。
+				按“启用”或“禁用”来打开和关闭动画。
+			</p>
+			<button id="disable2">jQuery.fx.off = true ( 禁用 )</button>
+			<button id="enable2">jQuery.fx.off = false ( 启用 )</button>
+			<br><br>
+			<button id="toggle2">切换动画</button>
+			<div style="background:#98bf21;height:100px;width:100px;margin:50px;">
+			</div>
+		</div>
+		<pre>
+			$(function(){
+				$("#disable2").click(function(){
+					jQuery.fx.off = true;
+				});
+				$("#enable2").click(function(){
+					jQuery.fx.off = false;
+				});
+				$("#toggle2").click(function(){
+					$("#d2>div").toggle("slow");
+				});
+			});
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			
+			$(function(){
+				$("#disable2").click(function(){
+					jQuery.fx.off = true;
+				});
+				$("#enable2").click(function(){
+					jQuery.fx.off = false;
+				});
+				$("#toggle2").click(function(){
+					$("#d2>div").toggle("slow");
+				});
+			});
+			
+			$(function(){
+				$("#toggle1").on("click",function(){
+					$("#d1>div").toggle(5000);
+				});
+				$("#interval1").on("click",function(){
+					jQuery.fx.interval = 500;
+					$("#toggle1").triggerHandler("click");
+				});
+			});
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

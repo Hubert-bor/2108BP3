@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	0.jq的特点
+1.强大的选择器与丰富的dom操作相关的api
+2.出色的浏览器兼容性(jquery2.X以上不兼容IE6/7/8)
+3.丰富的插件支持
+	1.语法
+通过 jQuery，您可以选取（查询，query） HTML 元素，并对它们执行"操作"（actions）。
+jQuery 语法是通过选取 HTML 元素，并对选取的元素执行某些操作。
+基础语法： $(selector).action()
+美元符号定义 jQuery
+选择符（selector）"查询"和"查找" HTML 元素
+jQuery 的 action() 执行对元素的操作
+实例:
+$(this).hide() - 隐藏当前元素
+$("p").hide() - 隐藏所有 &lt;p&gt; 元素
+$("p.test").hide() - 隐藏所有 class="test" 的 &lt;p&gt; 元素
+$("#test").hide() - 隐藏所有 id="test" 的元素
+	文档就绪事件
+您也许已经注意到在我们的实例中的所有 jQuery 函数位于一个 document ready 函数中：
+$(document).ready(function(){
+   // 开始写 jQuery 代码...
+});
+这是为了防止文档在完全加载（就绪）之前运行 jQuery 代码，即在 DOM 加载完成后才可以对 DOM 进行操作。
+如果在文档没有完全加载之前就运行函数，操作可能失败。下面是两个具体的例子：
+试图隐藏一个不存在的元素
+获得未完全加载的图像的大小
+提示：简洁写法（与以上写法效果相同）:
+$(function(){
+   // 开始写 jQuery 代码...
+});
+	2.jQuery版本
+jQuery.fn中包含
+jQuery.fn["jquery"],
+jQuery.fn.jquery
+	3.对象转换	jQuery核心自带的一个属性length或size()方法来查看返回的元素个数。
+			var jsDom1=document.querySelector("#box");
+			var jsDom2=document.getElementById("box");
+			console.log("jsDom1:",jsDom1);
+			console.log("jsDom2:",jsDom2);
+			
+			var jqDom=$("#box");
+			console.log("jqDom:",jqDom);
+			fgx("通过jqDom查看jQuery版本号");
+			console.log("jqDom:",jqDom.__proto__.jquery);
+		
+			//Js==>Jq
+			var jsDom1Jq=$(jsDom1);
+			var jsDom2Jq=$(jsDom2);
+			console.log("jsDom1Jq:",jsDom1Jq);
+			console.log("jsDom2Jq:",jsDom2Jq);
+			//Jq==>Js
+			var jqDomJs1=jqDom[0];
+			var jqDomJs2=jqDom.get(0);
+			console.log("jqDomJs1:",jqDomJs1);
+			console.log("jqDomJs2:",jqDomJs2);
+			fgx("size,length");
+			var n=jsDom1Jq.size();
+			var le=jsDom1Jq.length;
+			console.log("n:",n);
+			console.log("le:",le);
+	4.加载模式
+	winow.onload
+		执行时机:必须等待页面全部加载完毕(包括图片等),然后再执行包裹代码
+		执行次数:只能执行一次,若有多次,最后一次的覆盖前者.
+		简写:无
+	$(document).ready();	==>	$(function(){});
+		执行时机:只需要等待网页中的DOM结构加载完毕,就能执行包裹的代码
+		执行次数:可以执行多次,各不影响
+		简写:$(function(){});
+	5.选择器
+	
+		</pre>
+		<div id="box" class="box">
+			
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			var div1=$("#box");
+			var div2=$(".box");
+			console.log("div1:",div1);
+			console.log("div2:",div2);
+			console.log("-----------------------------------");
+			//
+			fgx("2.版本号");
+			console.log("jQuery.fn",jQuery.fn,jQuery.fn["jquery"],jQuery.fn.jquery);
+			fgx();
+			console.log("$().jQuery:",$().jquery);
+			fgx();
+			console.log("$:",$);
+			fgx();
+			console.log("jQuery:",jQuery);
+			fgx();
+			console.log("jQuery():",jQuery());
+			fgx();
+			console.log("typeof(jQuery):",typeof(jQuery));
+			fgx("3.对象转换");
+			
+			var jsDom1=document.querySelector("#box");
+			var jsDom2=document.getElementById("box");
+			console.log("jsDom1:",jsDom1);
+			console.log("jsDom2:",jsDom2);
+			
+			var jqDom=$("#box");
+			console.log("jqDom:",jqDom);
+			fgx("通过jqDom查看jQuery版本号");
+			console.log("jqDom:",jqDom.__proto__.jquery);
+			
+			
+			//Js==>Jq
+			var jsDom1Jq=$(jsDom1);
+			var jsDom2Jq=$(jsDom2);
+			console.log("jsDom1Jq:",jsDom1Jq);
+			console.log("jsDom2Jq:",jsDom2Jq);
+			//Jq==>Js
+			var jqDomJs1=jqDom[0];
+			var jqDomJs2=jqDom.get(0);
+			console.log("jqDomJs1:",jqDomJs1);
+			console.log("jqDomJs2:",jqDomJs2);
+			fgx("size和length");
+			var n=jsDom1Jq.size();//size()在1.8以后废弃
+			var le=jsDom1Jq.length;
+			console.log("n:",n);
+			console.log("le:",le);
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"----------------------");
+			}
+		</script>
+	</body>
+</html>

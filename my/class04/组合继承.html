@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组合继承</title>
+</head>
+<body>
+    <script>
+        function Father(money,car){
+            this.money = money;
+            this.car =car;
+        }
+
+        function Son(money,car){
+            Father.apply(this,[money,car]);
+        }
+
+        Father.prototype.jiNeng = "开车";
+        Son.prototype = new Father(10000000,"红旗");
+        var s1 = new Son(100,"五菱宏光");
+        console.log("s1",s1);
+    </script>
+</body>
+</html>

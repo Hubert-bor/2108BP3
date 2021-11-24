@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				height: 1500px;
+			}
+			pre{
+				font-size: 20px;
+			}
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.jQuery事件
+jQuery 是为事件处理特别设计的。
+什么是事件？
+页面对不同访问者的响应叫做事件。
+事件处理程序指的是当 HTML 中发生某些事件时所调用的方法。
+鼠标事件			键盘事件		表单事件		文档/窗口事件
+click			keypress	submit		load
+dblclick		keydown		change		resize
+mouseenter		keyup		focus		scroll
+mouseleave	 				blur
+		</pre>
+		<div id="box" class="box">
+			
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			var box=$("#box");
+			box.dblclick(function(){
+				console.log(this);
+			})
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"----------------------");
+			}
+			$(window).scroll(function(){
+				alert("scroll");
+			})
+		</script>
+	</body>
+</html>

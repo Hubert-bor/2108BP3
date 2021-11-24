@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			pre{
+				font-size: 16px;
+			}
+		</style>
+		<script src="js/jquery-1.11.3.js"></script>
+	</head>
+	<body>
+<pre>
+	1. jQuery 简介
+jQuery是一个JavaScript库，它通过封装原生JavaScript函数得到一整套定义好的方法。
+它是John Resig 于2006年创建的一个开源项目，随着越来越多开发者的加入，
+jQuery已经集成了JavaScript、CSS、DOM、和Ajax于一体的强大功能，
+它可以用最少的代码，完成更多复杂而困难的功能，从而得到了开发者的青睐。
+主指：以更少的代码、实现更多的功能。（write less,do more)
+	2.学习jQuery条件
+html,css,javascript
+	3.关于版本的学习问题
+版本的版本号升级主要有三种：
+第一种是大版本升级，比如1.x.x升级到2.x.x，这种升级规模是最大的，改动的地方是最多的，
+周期也是最长的，jQuery从1.x.x到2.x.x用了7年。
+第二种是小版本更新，比如1.7升级到1.8，改动适中，增加或减少了一些功能，一般周期半年到一年左右。
+第三种是微版本更新，比如1.8.1升级到1.8.2，修复一些bug或错误之类。
+    版本的内容升级主要也有三种：
+第一种是核心库的升级，比如优化选择符、优化DOM或者AJAX等；这种升级不影响开发者的使用。
+第二种是功能性的升级，比如剔除一些过时的方法、新增或增强一些方法等等；这种升级需要了解和学习。
+第三种就是BUG修复之类的升级，对开发者使用没有影响。
+    
+学习者有一种担忧，比如学了1.3版本的jQuery，那么以后升级新版本是不是还需要重学？
+没必要，因为并不是每次升级一个版本都会增加或剔除功能的，一半左右都是内部优化，
+升级到新版本并不需要任何学习成本。就算在新的版本增加了一些功能，
+只需要几分钟了解一下即可使用，无需清零之前的知识，只需后续累加。
+当然，在早期的jQuery版本都创建了最常用的功能，而新版本中增加的功能，
+也不是最常用的，无需立即学习，立马用起。
+    3.jQuery功能
+jQuery作为JavaScript封装的库，他的目的就是为了简化开发者使用JavaScript。主要功能有以下几点：
+1.像CSS那样访问和操作DOM
+2.修改CSS控制页面外观
+3.简化JavaScript代码操作
+4.事件处理更加容易
+5.各种动画效果使用方便
+6.让Ajax技术更加完美
+7.基于jQuery大量插件
+8.自行扩展功能插件
+	4.jQuery优势
+jQuery最大的优势，就是特别的方便。比如模仿CSS获取DOM，比原生的JavaScript要方便太多。
+并且在多个CSS设置上的集中处理非常舒服，而最常用的CSS功能又封装到单独的方法，感觉非常有心。
+最重要的是jQuery的代码兼容性非常好，你不需要总是头疼着考虑不同浏览器的兼容问题。
+	5.下载 jQuery 及配置
+jQuery官网：http://www.jQuery.com
+jQuery官网下载：http://jquery.com/download/
+获取jQuery最新版本
+进入jQuery官网，下载最新jQuery库文件。
+1.x代表的是兼容ie6-8
+2.x代表的是不兼容ie6-8
+在页面中引入Jquery，格式如下：
+&lt;script type="text/javascript" src="../script/jquery.js"&gt;&lt;/script&gt;
+
+http://code.jquery.com/
+
+	6.代码风格
+在jQuery程序中，不管是页面元素的选择、内置的功能函数，
+都是美元符号“$”来起始的。而这个“$”就是jQuery当中最重要且独有的对象：
+jQuery对象，所以我们在页面元素选择或执行功能函数的时候可以这么写：
+
+ $(function(){});//执行一个匿名函数
+$(‘#box’);//选择ID元素
+$(‘#box’).css(‘color’,‘red’);//改变ID元素的样式
+由于$本身就是jQuery对象的缩写形式，那么也就是说上面的三段代码也可以写成如下形式：
+jQuery(function(){});
+jQuery(‘#box’); 
+jQuery(‘#box’).css(‘color’,‘red’);
+
+jQuery的代码模式是采用的连缀方式，可以不停的连续调用功能函数。
+ $('#box').css('color','red').css('font-size','50px');//连缀
+   jQuery中代码注释和JavaScript是保持一致的，
+   有两种最常用的注释：单行使用“//...”，多行使用“/*...*/”
+//$('#box').css('color','red');
+
+	7.加载模式
+	等待所有的DOM元素加载后，延迟DOM操作，方法如下：
+window.onload=function(){};//JavaScript等待加载
+$(document).ready(function(){});//jQuery等待加载
+<img src="img/1.png" alt="" style="width:700px;"/> 
+
+</pre>
+<div style="width: 200px;height: 200px;background-color: blue;">
+	
+</div>
+<script>
+	//1.
+	console.log($);
+	
+</script>
+	</body>
+</html>

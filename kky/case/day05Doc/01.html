@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#d1,
+			#d2{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+			#d5{
+				height: 100px;
+				border: 1px solid red;
+			}
+			
+			.dd{
+				width: 100px;
+				height: 100px;
+				margin: 10px;
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.基础DOM 和 CSS操作
+1.DOM
+文档对象模型（Document Object Model，简称DOM），
+是W3C组织推荐的处理可扩展标志语言的标准编程接口。
+在网页上，组织页面（或文档）的对象被组织在一个树形结构中，
+用来表示文档中对象的标准模型就称为DOM。
+2.设置元素及内容
+	html() 			获取元素中HTML内容
+	html(value) 	设置元素中HTML内容
+	text() 			获取元素中文本内容
+	text(value) 	设置元素中文本内容
+	val() 			获取表单中的文本内容
+	val(value) 		设置表单中的文本内容
+3.元素属性操作
+	attr(key) 				获取某个元素key属性的属性值
+	attr(key,value)				设置某个元素key属性的属性值
+	attr({key1:value2,key2:value2}) 	设置某个元素多个key属性的属性值
+	attr(key,function(index,value){}) 	设置某个元素key通过fn来设置
+	
+	removeAttr("title") 			//删除指定的属性
+4.元素样式操作
+	css(name) 				获取某个元素CSS样式属性
+	css([name,name2,name3]) 		获取某个元素多个CSS样式
+	css(name,value) 			设置某个元素的CSS样式
+	css(name,function(index,value)) 	设置某个元素的CSS样式
+	css({name1:value1,name2:value2}) 	设置某个元素多个样式
+	addClass(class) 			给某个元素添加一个CSS类
+	addClass(class1 class2 class3) 		给某个元素添加多个CSS类
+	removeClass(class) 			删除某个元素的一个CSS类
+	removeClass(class1 class2 class3) 	删除某个元素的多个CSS类
+	toggleClass(class) 			来回切换默认样式和指定样式
+	toggleClass(class1 class2 class3) 	来回切换默认样式和指定样式
+	toggleClass(class,switch) 		来回切换样式的时候,switch可选
+				布尔值，规定是否仅仅添加（true）或移除（false）类。
+	toggleClass(function(){}) 		通过匿名函数设置时也可以设置频率
+	toggleClass(function(){},switch) 	在匿名函数设置时也可以设置频率
+	toggleClass(function(i,c,s){},switch) 	在匿名函数时传递三个参数
+5.jquery 尺寸
+<img src="img/jQ.png" alt="jQuery尺寸"/> 
+	width() 			方法设置或返回元素的宽度（不包括内边距、边框或外边距）							
+	width(value)
+	width(function(index,width){});
+	height()
+	height(value)
+	height(function(index,height){}) 
+	innerWidth() 			获取元素宽度,包含内边距padding
+	innerHeight() 			获取元素高度,包含内边距padding
+	outerWidth() 			获取元素宽度,包含边框border和内边距padding
+	outerHeight() 			获取元素高度,包含边框border和内边距padding
+	outerWidth(true) 		获取元素高度,包含边框border和内边距padding,外边框margin
+	outerHeight(true) 		获取元素高度,包含边框border和内边距padding,外边框margin
+6.CSS方法
+	$(selector).offset() 			方法设置或返回被选元素相对于<stong>文档</stong>的偏移坐标。
+	$(selector).offset({top:value,left:value})
+	$(selector).offset(function(n,c){
+		newPos=new Object();
+		newPos.left=c.left+100;
+		newPos.top=c.top+100;
+		return newPos;
+	})
+	$(selector).offset(function(){
+		var newPos=new Object();
+		newPos.left="0";
+		newPos.top="100";
+		$(selector).offset(newPos);
+	})
+	$(selector).offset($(selector2).offset());
+	$(selector).position 		position() 方法返回第一个匹配元素的位置（相对于它的<strong>父元素</strong>）。
+				该方法返回一个带有两个属性（以像素为单位的 top 和 left 位置）的对象。
+	$(selector).scrollTop 		scrollTop() 方法设置或返回被选元素的垂直滚动条位置。
+	$(selector).scrollTop(value)
+	$(selector).scrollLeft() 		scrollLeft() 方法设置或返回被选元素的水平滚动条位置。
+	$(selector).scrollLeft(value)
+	$(selector).scrollTop(function(i,n){
+		return n+50;
+	});
+		</pre>
+		<div id="d1">
+			<div id="d1_1">
+				<span>获取/设置元素</span>
+			</div>
+			<div id="d1_2">
+				<span>获取/设置元素</span>
+			</div>
+			<div id="d1_3">
+				用户名:<input type="text"  value="姓名"/>
+			</div>
+		</div>
+		<div id="d2">
+			<div id="d2_1" class="d2_1" name="myName" myName4="500" myName5="test" style="border:1px solid #f90;">
+				元素属性操作<button type="button">点击试试看</button>
+			</div>
+		</div>
+		<div id="d3" class="d3">
+			<div class="d3_1" style="color:rgb(255,200,100);font-size: 16px;font-weight: bold;border:1px solid #f90;">
+				通过CSS改变样式
+			</div>
+			<button type="button" id="d3_1">css(name)</button>
+			<button type="button" id="d3_2">css([name,name2,name3])</button>
+			<button type="button" id="d3_3">css(name,value)</button>
+			<button type="button" id="d3_4">css(name,function(index,value))</button>
+			<button type="button" id="d3_5">addClass(class)</button>
+			<button type="button" id="d3_6">addClass(class1,class2,class3)</button>
+			<button type="button" id="d3_7">removeClass(class)</button>
+			<button type="button" id="d3_8">removeClass(class1,class2,class3)</button>
+			<button type="button" id="d3_8_1">removeClass()</button>
+			<button type="button" id="d3_9">toggleClass(class)</button>
+			<button type="button" id="d3_10">toggleClass(class1,class2,calss3)</button>
+			<button type="button" id="d3_11">toggleClass(class,switch)</button>
+			<button type="button" id="d3_12">toggleClass(function(){})</button>
+			<button type="button" id="d3_13">toggleClass(function(){},switch)</button>
+			<button type="button" id="d3_14">toggleClass(function(i,c,s){},switch)</button>
+		</div>
+		<div id="d4">
+			<div id="d4_0" style="width: 100px;height: 100px;padding: 6px; border: 2px solid red;margin: 5px;">
+			</div>
+			<button type="button" id="d4Btn">获取div的尺寸</button>
+			<button type="button" id="d4Btn2">设置div的尺寸</button>
+			<button type="button" id="d4Btn3">设置div的尺寸3</button>
+		</div>
+		<div id="d5_0" style="position: relative;">
+			<div id="d5">
+				<button type="button" id="offset">offset({top:value,left:value})</button>			
+				<button type="button" id="offset2">offset(function(n,c){})</button>			
+				<button type="button" id="offset3">offset(function(){})</button>			
+				<button type="button" id="offset4">offset($(selector).offset())</button>			
+				<button type="button" id="position">position()</button>			
+			</div>
+		</div>
+		<div id="d6" style="width: 400px;height: 200px;
+			border: 1px solid #FF0000;margin: 20px;overflow: scroll;white-space:pre-line;">
+				冰心诀
+			心若冰清,天塌不惊;
+			万变犹定,神怡气静;
+			忘我守一,六根大定;
+			戒点养气,无私无为;
+			上下相顾,神色相依;
+			蓄意玄关,降伏思虑;
+			内外无物,若浊冰清;
+			尘垢不沾,俗相不染;
+			虚空甯宓,浑然无物;
+			无有相生,难易相成;
+			份与物忘,同乎浑涅;
+			天地无涯,万物齐一;
+			飞花落叶,虚怀若谷;
+			千般烦忧,才下心头;
+			即展眉头,灵台清幽;
+			心无罣碍,意无所执;
+			解心释神,莫然无魂;
+			灵净归一,气协魄消;
+			水流心不惊,云在意俱迟 ;
+			一心不赘物,古今自逍遥 !
+		</div>
+		<button type="button" id="btn">更改滚动条(nowrap)</button>
+		<button type="button" id="scroll1">获取此时scrollTop()和scrollLeft()</button>
+		<button type="button" id="scroll2">设置scrollTop()和scrollLeft()</button>
+		<button type="button" id="scroll3">设置scrollTop()和scrollLeft()2</button>
+		<br />
+			<button type="button" id="myCss">css("width",function(){})</button>
+		<br />
+		<div class="dd">
+			
+		</div>
+		<div class="dd">
+			
+		</div>
+		<div class="dd">
+			
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//CSS
+			var myCss=$("#myCss");
+			var dds=$(".dd");
+			myCss.click(function(){
+				dds.css("width",function(i,n){
+					console.log("i:",i,"n:",n);
+					return parseInt(n)+10;
+				})
+			});
+			
+			
+			////////////////////
+			var d6=$("#d6");
+			var btn=$("#btn");
+			var n=0;
+			btn.click(function(){
+				if(n==0){
+					n=1;
+					d6.css("white-space","nowrap");
+					btn.html("更改滚动条(pre-line)");
+				}else{
+					n=0;
+					d6.css("white-space","pre-line");
+					btn.html("更改滚动条(nowrap)");
+				}
+			})
+			var scroll1=$("#scroll1");
+			scroll1.click(function(){
+				var t=d6.scrollTop();
+				var l=d6.scrollLeft();
+				console.log("top:",t,"left:",l);
+			})
+			var scroll2=$("#scroll2");
+			scroll2.click(function(){
+				d6.scrollTop(100);
+				d6.scrollLeft(100);
+			});
+			var scroll3=$("#scroll3");
+			scroll3.click(function(){
+				d6.scrollTop(function(i,n){
+					return n+50;
+				});
+				d6.scrollLeft(function(i,n){
+					return n+50;
+				});
+			})
+			d6.scroll(function(){
+				var myTop=$(this).scrollTop();
+				//console.log("myTop:",myTop);
+			})
+			////////////////////
+			//2.设置元素及内容
+			fgx("2.设置元素及内容");
+			var d1_1=$("#d1_1");
+			var myHtml=d1_1.html();//获取
+			console.log("myHtml:",myHtml);
+			d1_1.html("新<span>设置元素及内容</span>");
+			myHtml=d1_1.html();//获取
+			console.log("myHtml:",myHtml);
+			
+			var d1_2=$("#d1_2");
+			var myText=d1_2.text();//获取
+			console.log("myText:",myText);
+			d1_2.text("新<span>设置元素及内容</span>");
+			myText=d1_2.text();//获取
+			console.log("myText:",myText);
+			
+			var d1_3=$("#d1_3>input");
+			var myVal=d1_3.val();
+			console.log("myVal:",myVal);
+			d1_3.val("新名字");
+			myVal=d1_3.val();
+			console.log("myVal:",myVal);
+			
+			/////////////////
+			fgx("3.元素属性操作");
+			var d2_1=$("#d2_1");
+			var myName=d2_1.attr("name");//获取
+			console.log("myName:",myName);
+			d2_1.attr("myName","myName");
+			d2_1.attr({"myName2":"myName2","myName3":"myName3"});
+			var d2_1But=$("#d2_1>button");
+			/*
+			规定要返回属性值到集合的函数
+			index - 接受集合中元素的 index 位置。
+			currentvalue - 接受被选元素的当前属性值。
+			 */
+			d2_1But.click(function(){
+				d2_1.attr("myName4",function(n,v){
+					console.log("n:",n,"v:",v);
+					return v-50;
+				})
+			})
+			
+			d2_1.removeAttr("myName5");
+			
+			//////////////////////////
+			fgx("4.元素样式操作");
+			var Div=$("#d3>.d3_1");
+
+			/////////////////
+			var d3_1=$("#d3_1");
+			d3_1.click(function(){
+				var r1=Div.css("color");
+				console.log("r1:",r1);
+			});
+			/////////////////
+			var d3_2=$("#d3_2");
+			d3_2.click(function(){
+				var r2=Div.css(["color","font-size","font-weight"]);
+				console.log("r2:",r2);
+			});
+			/////////////////
+			var d3_3=$("#d3_3");
+			d3_3.click(function(){
+				Div.css("border","1px solid red");
+				var r=Div.css("border");
+				console.log("r:",r);
+			});
+			/////////////////
+			var d3_4=$("#d3_4");
+			d3_4.click(function(){
+				//Div.css("width",500);
+				Div.css("border-width",function(i){
+					console.log("css(name,function(i){})",i);
+					return i+2;
+				});
+				var r=Div.css("border");
+				console.log("r:",r);
+			});
+			/////////////////
+			var d3_5=$("#d3_5");
+			d3_5.click(function(){
+				Div.addClass("d3_5");
+			});
+			/////////////////
+			var d3_6=$("#d3_6");
+			d3_6.click(function(){
+				Div.addClass("d3_5_1 d3_5_2 d3_5_3");
+			});
+			/////////////////
+			var d3_7=$("#d3_7");
+			d3_7.click(function(){
+				Div.removeClass("d3_5");
+			});
+			/////////////////
+			var d3_8=$("#d3_8");
+			d3_8.click(function(){
+				Div.removeClass("d3_5_1 d3_5_2 d3_5_3");
+			});
+			/////////////////
+			var d3_8_1=$("#d3_8_1");
+			d3_8_1.click(function(){
+				Div.removeClass();
+			});
+			/////////////////
+			var d3_9=$("#d3_9");
+			d3_9.click(function(){
+				Div.toggleClass("d3_6");
+			});
+			/////////////////
+			var d3_10=$("#d3_10");
+			d3_10.click(function(){
+				Div.toggleClass("d3_10_1 d3_10_2 d3_10_3");
+			});
+			/////////////////
+			var d3_11=$("#d3_11");
+			d3_11.click(function(){
+				var n=Math.random()*2;
+				if(n>1){
+					var f=true;
+				}else{
+					f=false;
+				}
+				console.log("#d3_11 n,f",n,f);
+				Div.toggleClass("d3_11_1 d3_11_2 d3_11_3",f);
+			});
+			/////////////////
+			var d3_12=$("#d3_12");
+			d3_12.click(function(){
+				Div.toggleClass(function(n){
+					console.log("n:",n);
+					return "d3_12_"+n;
+				});
+			});
+			/////////////////
+			var d3_13=$("#d3_13");
+			d3_13.click(function(){
+				var n=Math.random()*2;
+				if(n>1){
+					var f=true;
+				}else{
+					f=false;
+				}
+				console.log("#d3_13 n,f",n,f);
+				Div.toggleClass(function(n){
+					console.log("n:",n);
+					return "d3_12_"+n;
+				},f);
+			});
+			/////////////////
+			var d3_14=$("#d3_14");
+			d3_14.click(function(){
+				var n=Math.random()*2;
+				if(n>1){
+					var f=true;
+				}else{
+					f=false;
+				}
+				console.log("#d3_13 n,f",n,f);
+				Div.toggleClass(function(i,c,s){
+					console.log("i:",i,"c:",c,"s:",s);
+					return "d3_12_"+i;
+				},f);
+			});
+			////////////////////
+			var d4Btn=$("#d4>#d4Btn");
+			var d4Btn2=$("#d4>#d4Btn2");
+			var d4Btn3=$("#d4>#d4Btn3");
+			var d4_0=$("#d4_0");
+			d4Btn.click(function(){
+				var w=d4_0.width();
+				var h=d4_0.height();
+				var inerW=d4_0.innerWidth();
+				var inerH=d4_0.innerHeight();
+				var outW=d4_0.outerWidth();
+				var outH=d4_0.outerHeight();
+				var outWT=d4_0.outerWidth(true);
+				var outHT=d4_0.outerHeight(true);
+				console.log("w:",w,"h:",h);
+				console.log("inerW:",inerW,"inerH:",inerH);
+				console.log("outW:",outW,"outH:",outH);
+				console.log("outWT:",outWT,"outHT:",outHT);
+			});
+			d4Btn2.click(function(){
+				d4_0.width("200px");
+				d4_0.height("200px");
+			});
+			d4Btn3.click(function(){
+				d4_0.width(function(i,w){
+					return w-10;
+				});
+				d4_0.height(function(i,h){
+					return h-15;
+				});
+			});
+			/////////////////
+			fgx("5.offset()");
+			var d5=$("#d5");
+			var x=d5.offset();
+			console.log("x:",x,"x.left:",x.left,"x.top:",x.top);
+			var offset=$("#offset");
+			offset.click(function(){
+				d5.offset({top:x.top+100,left:x.left+100});
+			});
+			var offset2=$("#offset2");
+			offset2.click(function(){
+				d5.offset(function(n,c){
+					var newPos=new Object();
+					newPos.left=c.left+50;
+					newPos.top=c.top+50;
+					return newPos;
+				});
+			});
+			var offset3=$("#offset3");
+			offset3.click(function(){
+				d5.offset(function(){
+					var newPos=new Object();
+					newPos.left=10;
+					newPos.top=2600;
+					return newPos;
+				});
+			});
+			var offset4=$("#offset4");
+			offset4.click(function(){
+				//console.log($(this).offset());
+				d5.offset($(this).offset());
+			});
+			var position=$("#position");
+			position.click(function(){
+				console.log("+++++++++++++++++++++=");
+				var x=d5.position();
+				console.log("position():","x.left:",x.left,"x.top:",x.top);
+			});
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"----------------------");
+			}
+		</script>
+	</body>
+</html>
+

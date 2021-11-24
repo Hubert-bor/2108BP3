@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+			.intro
+			{
+				font-size:150%;
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.绑定事件
+JavaScript 有一个非常重要的功能，就是事件驱动。当页面完全加载后，
+用户通过鼠标 或键盘触发页面中绑定事件的元素即可触发。
+jQuery 为开发者更有效率的编写事件行为，封 装了大量有益的事件方法供我们使用。
+在 JavaScript 课程的学习中，我们掌握了很多使用的事件，
+常用的事件有：click、dblclick、 mousedown、mouseup、mousemove、
+mouseover、mouseout、change、select、submit、keydown、 
+keypress、keyup、blur、focus、load、resize、scroll。
+那么，还有更多的事件可以参考 手册中的事件部分。
+
+jQuery 通过on(),bind(),live(),delegate()方法来为元素绑定这些事件
+
+自 jQuery 版本 1.7 起，on() 方法是 bind()、live() 和 delegate() 方法的新的替代品。
+该方法给 API 带来很多便利，我们推荐使用该方法，它简化了 jQuery 代码库。
+	主要讲解on()
+on() 方法在被选元素及子元素上添加一个或多个事件处理程序。
+自 jQuery 版本 1.7 起，on() 方法是 bind()、live() 和 delegate() 方法的新的替代品。
+该方法给 API 带来很多便利，我们推荐使用该方法，它简化了 jQuery 代码库。
+注意：使用 on() 方法添加的事件处理程序适用于当前及未来的元素（比如由脚本创建的新元素）。
+提示：如需移除事件处理程序，请使用 off() 方法。
+提示：如需添加只运行一次的事件然后移除，请使用 one() 方法。
+$(selector).on(event,childSelector,data,function)
+	
+参数			描述
+event			必需。规定要从被选元素移除的一个或多个事件或命名空间。
+			由空格分隔多个事件值，也可以是数组。必须是有效的事件。
+childSelector		可选。规定只能添加到指定的子元素上的事件处理程序（且不是选择器本身，比如已废弃的 delegate() 方法）。
+data			可选。规定传递到函数的额外数据。
+function		可选。规定当事件发生时运行的函数。
+		</pre>
+		<div id="d1" class="d">
+			<div>
+				1.on()添加多个事件,将鼠标移动到该段落上.
+			</div>
+		</div>
+		<pre>
+		//1.1同时添加多个事件 $(selector).on(event,function)	如何向元素添加多个事件。
+			$(function(){
+				$("#d1>div").on("mouseover mouseout",function(){
+					$(this).toggleClass("intro");
+				})
+			});
+		</pre>
+		<div id="d2" class="d">
+			<div>
+				2.on()使用事件映射,将鼠标移动到该段落上.
+			</div>
+			<button type="button">点我上滑/下滑</button>
+		</div>
+		<pre>
+			//1.2使用事件映射$(selector).on(event,data,function,map) 	使用事件映射来向被选元素添加一些事件/函数。
+			/*
+			 map	规定事件映射 ({event:function, event:function, ...})，包含要添加到元素的一个或多个事件，以及当事件发生时运行的函数。
+			 * */
+			$(function(){
+				$("#d2>button").on({
+					click:function(){
+						$("#d2>div").slideToggle();
+						/*
+jQuery slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。
+如果元素向下滑动，则 slideToggle() 可向上滑动它们。
+如果元素向上滑动，则 slideToggle() 可向下滑动它们。 
+						 */
+					},
+					mouseover:function(){
+						$("#d2").css("background-color","#e9e9e4");
+					},
+					mouseout:function(){
+						$("#d2").css("background-color","#fff");
+					}
+				})
+			});
+		</pre>
+		<div id="d3" class="d">
+			<div>
+				3.on()向函数传递数据.(点我试试看嘛!);
+			</div>
+			<div style="color:#f90;">
+				暂未通过函数获取数据
+			</div>
+		</div>
+		<pre>		
+			//1.3向函数传递数据 		$(selector).on(event,data,function,map) 向一个自定义命名的事件处理程序传递数据。
+			$(function(){
+				$("#d3>div:nth-child(1)").on("click",
+					{msg:"我是你刚刚点击函数传递的数据"},
+					myFun);
+				function myFun(e){
+					var r=e.data.msg;
+					$("#d3>div:last-child").html(r);
+				}
+			});
+		</pre>
+		<div id="d4" class="d">
+			<div>
+				4.on()在元素上添加自定义事件.(点我试试看嘛!);在元素上添加自定义命名空间事件。
+			</div>
+		</div>
+		<pre>
+			//1.4在元素上添加自定义事件 		//在元素上添加自定义命名空间事件。
+			$("#d4>div").on("myEvent",function(event,showName){
+				console.log("event:",event,"showName:",showName);
+				$(this).css("background-color","#FF9900");
+			});
+			$("#d4>div").click(function(){
+				$(this).trigger("myEvent",["kky"]);
+			});
+			
+		</pre>
+		<div id="d5" class="d">
+			5.on()向未来元素添加处理程序()事件委托
+			<div style="border: 1px dotted #f90;">
+				<ul id="d5ul">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+				<button type="button" id="d5Btn">添加一个li</button>
+			</div>
+			<div style="border: 1px dotted #f90;">
+				<ul id="d5ul2">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+				<button type="button" id="d5Btn2">添加一个li</button>
+			</div>
+		</div>
+				<pre>	
+			//1.5事件委托 	向未来元素添加处理程序		适用于尚未创建的元素。
+			$(function(){
+				//添加hover事件
+				$("#d5ul>li").mouseenter(function(){
+					$(this).css("background-color","red");
+				}).mouseleave(function(){
+					$(this).css("background-color","");
+				});
+				
+				//添加li  
+				$("#d5Btn,#d5Btn2").click(function(){//注意此处的选择器部分
+					var lis=$(this).prev().children();
+					var i=$(lis[lis.length-1]).html()-0+1;
+					var li="&lt;li>"+i+++"&lt;/li>";
+					$(this).prev().append(li);
+				});
+				
+				//通过on向未来元素添加处理程序
+				$("#d5ul2").on("mouseenter","li",function(){
+					//console.log(this);
+					$(this).css("background-color","red");
+				}).on("mouseleave","li",function(){
+					//console.log(this);
+					$(this).css("background-color","");
+				});
+				
+			});
+		</pre>
+		<div id="d6" class="d">
+			<div>6.off()	移除事件处理程序 点我看看背景颜色</div>
+			<button type="button" id="d6Btn1">通过on添加的事件</button>
+			<button type="button" id="d6Btn2">off移除通过on添加的事件</button>
+		</div>
+		<pre>
+			//1.6
+			$(function(){
+				
+				$("#d6Btn1").click(function(){
+					$("#d6>div").on("click",function(){
+						$(this).css('background-color',"red");
+					});
+				});
+				$("#d6Btn2").click(function(){
+					$("#d6>div").off("click");
+				});
+			});
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//1.6
+			$(function(){
+				
+				$("#d6Btn1").click(function(){
+					$("#d6>div").on("click",function(){
+						$(this).css('background-color',"red");
+					});
+				});
+				$("#d6Btn2").click(function(){
+					$("#d6>div").off("click");
+				});
+			});
+			
+			//1.5事件委托 	向未来元素添加处理程序		适用于尚未创建的元素。
+			$(function(){
+				//添加hover事件
+				$("#d5ul>li").mouseenter(function(){
+					$(this).css("background-color","red");
+				}).mouseleave(function(){
+					$(this).css("background-color","");
+				});
+				
+				//添加li  
+				$("#d5Btn,#d5Btn2").click(function(){//注意此处的选择器部分
+					var lis=$(this).prev().children();
+					var i=$(lis[lis.length-1]).html()-0+1;
+					var li="<li>"+i+++"</li>";
+					$(this).prev().append(li);
+				});
+				
+				//通过on向未来元素添加处理程序
+				$("#d5ul2").on("mouseenter","li",function(){
+					//console.log(this);
+					$(this).css("background-color","red");
+				}).on("mouseleave","li",function(){
+					//console.log(this);
+					$(this).css("background-color","");
+				});
+				
+			});
+			
+			//1.4在元素上添加自定义事件 		//在元素上添加自定义命名空间事件。
+			$("#d4>div").on("myEvent",function(event,showName){
+				console.log("event:",event,"showName:",showName);
+				$(this).css("background-color","#FF9900");
+			});
+			$("#d4>div").click(function(){
+				$(this).trigger("myEvent",["kky"]);
+			});
+			
+			//1.3向函数传递数据 		$(selector).on(event,data,function,map) 向一个自定义命名的事件处理程序传递数据。
+			$(function(){
+				$("#d3>div:nth-child(1)").on("click",
+					{msg:"我是你刚刚点击函数传递的数据"},
+					myFun);
+				function myFun(e){
+					console.log("e:",e);
+					var r=e.data.msg;
+					$("#d3>div:last-child").html(r);
+				}
+			});
+			
+			//1.2使用事件映射$(selector).on(event,data,function,map) 	使用事件映射来向被选元素添加一些事件/函数。
+			/*
+			 map	规定事件映射 ({event:function, event:function, ...})，包含要添加到元素的一个或多个事件，以及当事件发生时运行的函数。
+			 * */
+			$(function(){
+				$("#d2>button").on({
+					click:function(){
+						$("#d2>div").slideToggle();
+						/*
+jQuery slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。
+如果元素向下滑动，则 slideToggle() 可向上滑动它们。
+如果元素向上滑动，则 slideToggle() 可向下滑动它们。 
+						 */
+					},
+					mouseover:function(){
+						$("#d2").css("background-color","#e9e9e4");
+					},
+					mouseout:function(){
+						$("#d2").css("background-color","#fff");
+					}
+				})
+			});
+			//1.1同时添加多个事件 $(selector).on(event,function)	如何向元素添加多个事件。
+			$(function(){
+				$("#d1>div").on("mouseover mouseout",function(){
+					$(this).toggleClass("intro");
+				})
+			});
+
+			
+			
+			
+			//
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

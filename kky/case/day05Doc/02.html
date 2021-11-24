@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+1.attr() 
+	attr() 方法设置或返回被选元素的属性和值。
+	当该方法用于返回属性值，则返回第一个匹配元素的值。
+	当该方法用于设置属性值，则为匹配元素设置一个或多个属性/值对。
+	返回属性的值：
+	$(selector).attr(attribute)
+	设置属性和值：
+	$(selector).attr(attribute,value)
+	使用函数设置属性和值：
+	$(selector).attr(attribute,function(index,currentvalue))
+	设置多个属性和值：
+	$(selector).attr({attribute:value, attribute:value,...})
+	attribute			规定属性的名称。
+	value				规定属性的值。
+	function(index,currentvalue)	规定要返回属性值到集合的函数
+					index - 接受集合中元素的 index 位置。
+					currentvalue - 接受被选元素的当前属性值。
+2.removeAttr() 方法从被选元素移除一个或多个属性
+	$(selector).removeAttr(attribute)
+	attribute	必需。规定要移除的一个或多个属性。如需移除若干个属性，请使用空格分隔属性名称。
+3.prop
+	prop() 方法设置或返回被选元素的属性和值。
+	当该方法用于返回属性值时，则返回第一个匹配元素的值。
+	当该方法用于设置属性值时，则为匹配元素集合设置一个或多个属性/值对。
+	注意：prop() 方法应该用于检索属性值，
+	返回属性的值：
+	$(selector).prop(property)
+	设置属性和值：
+	$(selector).prop(property,value)
+	使用函数设置属性和值：
+	$(selector).prop(property,function(index,currentvalue))
+	设置多个属性和值：
+	$(selector).prop({property:value, property:value,...})
+	property			规定属性的名称。
+	value				规定属性的值。
+	function(index,currentvalue)	规定返回要设置的属性值的函数。
+					index - 检索集合中元素的 index 位置。
+					currentvalue - 检索被选元素的当前属性值。
+4.removeProp() 方法移除由 prop() 方法设置的属性。
+	注意：不要使用该方法来移除诸如 style、id 或 checked 之类的 HTML 属性。请使用 removeAttr() 方法代替。
+	$(selector).removeProp(property)
+	property	规定要移除的属性的名称。
+5.prop() 和 attr() 之间的不同
+	prop() 和 attr() 可能返回不同的值。本实例演示了当用于返回复选框的 "checked" 状态时的不同。
+	<b>注意:</b>确认或取消选中该复选框,然后单击按钮刷新内容。
+		</pre>
+		<div id="d5">
+			<label for="check">点我查看
+			</label>
+				<input id="check" type="checkbox" checked/>
+			<div>
+				attr("checked"):<span id="attrInfo"></span>
+			</div>
+			<div>
+				prop("checked"):<span id="propInfo"></span>
+			</div>
+			<button type="button" id="btn">查看attr()和prop()的值</button>
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			var attrInfo=$("#attrInfo");
+			var propInfo=$("#propInfo");
+			var btn=$("#btn");
+			btn.click(function(){
+				var attrV=$("#check").attr("checked")+"";
+				var propV=$("#check").prop("checked")+"";
+				//console.log(attrV,propV);
+				attrInfo.html(attrV);
+				propInfo.html(propV);
+			});
+		</script>
+	</body>
+</html>

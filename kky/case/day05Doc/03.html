@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			#d1,
+			#d2,
+			#d3,
+			#d4
+			{
+				border: 1px solid red;
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.创建节点
+append() 方法在被选元素的结尾插入指定内容。
+	$(selector).append(content,function(index,html))
+		content	必需。规定要插入的内容（可包含 HTML 标签）。
+			可能的值：
+			HTML 元素
+			jQuery 对象
+			DOM 元素
+	function(index,html)	可选。规定返回待插入内容的函数。
+			index - 返回集合中元素的 index 位置。
+			html - 返回被选元素的当前 HTML
+////
+			//append
+			var d1Btn1=$("#d1>button:nth-child(2)");
+			var d1Btn2=$("#d1>button:nth-child(3)");
+			console.log(d1Btn1,d1Btn2);
+			var d1Div=$("#d1>div");
+			d1Btn1.click(function(){
+				var txt1="append追加文本1";//字符串
+				var txt2="&lt;div>append追加文本2&lt;/div>";//HTML标签文本
+				var txt3=$("&lt;div>&lt;/div>").text("追加文本3");//使用jQuery
+				var txt4=document.createElement("p");
+				txt4.innerHTML="&lt;div>追加文本4&lt;/div>";//使用DOM
+				d1Div.append(txt1,txt2,txt3,txt4);
+			});
+			d1Btn2.click(function(){
+				d1Div.append(function(i,n){
+					console.log("i:",i,"n:",n);
+					return "&lt;span>append(function(){})&lt;/span>"+i+" "+n;
+				});
+			});
+////
+prepend() 方法在被选元素的开头插入指定内容。
+	$(selector).prepend(content,function(index,html))
+		content	必需。规定要插入的内容（可包含 HTML 标签）。
+			可能的值：
+			HTML 元素
+			jQuery 对象
+			DOM 元素
+		function(index,html)	可选。规定返回待插入内容的函数。
+			index - 返回集合中元素的 index 位置。
+			html - 返回被选元素的当前 HTML。
+	2.插入节点
+appendTo() 方法在被选元素的结尾插入 HTML 元素
+	$(content).appendTo(selector)
+	content		必需。规定要插入的内容（必须包含 HTML 标签）。
+			注意：如果 content 是已存在的元素，它将从当前位置被移除，并在被选元素的结尾被插入。
+	selector	必需。规定把内容追加到哪个元素上。
+////
+			//appendTo
+			var d2=$("#d2");
+			var d2Btn=$("#d2>button:nth-child(2)");
+			d2Btn.click(function(){
+				$("&lt;div>appendTo&lt;/div>").appendTo("#d2>div:nth-child(1)");
+			});
+////
+prependTo() 方法在被选元素的开头插入 HTML 元素。
+	$(content).prependTo(selector)
+	content	必需。规定要插入的内容（必须包含 HTML 标签）。
+	注意：如果 content 是已存在的元素，它将从当前位置被移除，并在被选元素的开头被插入。
+	selector	必需。规定把内容预加到哪个元素上。
+	
+after() 方法在被选元素后插入指定的内容
+	$(selector).after(content,function(index))
+		content	必需。规定要插入的内容（可包含 HTML 标签）。
+			可能的值：
+			HTML 元素
+			jQuery 对象
+			DOM 元素
+	function(index)	规定返回待插入内容的函数。
+		index - 返回集合中元素的 index 位置。
+////
+			//after
+			var d3Div=$("#d3>div:nth-child(1)");
+			var d3Btn=$("#d3>button:nth-child(2)");
+			var d3Btn2=$("#d3>button:nth-child(3)");
+			d3Btn.click(function(){
+				var txt1="after文本1";
+				var txt2="&lt;div>after文本2&lt;/div>";
+				var txt3=$("&lt;div>&lt;/div>").text("after文本3");
+				var txt4=document.createElement("p");
+				txt4.innerHTML="after文本4";
+				d3Div.after(txt1,txt2,txt3,txt4);
+			});
+			d3Btn2.click(function(){
+				d3Div.after(function(i,n){
+					console.log("i:",i,"n:",n);
+					return "&lt;div>after文本&lt;/div>"+i+" "+ n;
+				});
+			});
+////
+before() 方法在被选元素之前插入指定的内容。
+	$(selector).before(content,function(index))
+		content	规定要插入的内容（可包含 HTML 标签）。
+			可能的值：
+			HTML 元素
+			jQuery 对象
+			DOM 元素
+	function(index)	可选。规定返回待插入内容的函数。
+		index - 返回集合中元素的 index 位置。
+insertAfter() 方法在被选元素后插入 HTML 元素。
+	$(content).insertAfter(selector)
+		content	必需。规定要插入的内容（必须包含 HTML 标签）。
+		注意：如果 content 是已存在的元素，它将从它的当前位置被移除，并被插入在被选元素之后。
+		selector	必需。规定在何处插入内容。
+////
+			//insertAfter
+			var d4Div=$("#d4>div:nth-child(1)");
+			var d4Btn=$("#d4>button:nth-child(2)");
+			var d4Div2=$("#d4>div:nth-child(3)");
+			d4Btn.click(function(){
+				$("&lt;div>insertAfter文本&lt;/div>").insertAfter(d4Div);
+				$(d4Div2).insertAfter(d4Div);//类似与剪切
+			})
+////
+insertBefore() 方法在被选元素前插入 HTML 元素。
+	$(content).insertBefore(selector)
+		content	必需。规定要插入的内容（必须包含 HTML 标签）。
+		注意：如果 content 是已存在的元素，它将从它的当前位置被移除，并被插入在被选元素之前。
+		selector	必需。规定在何处插入内容。	
+	3.包裹节点
+	4.节点操作
+
+		</pre>
+		<div id="d1">
+			<div></div>
+			<button type="button">append(txt1,txt2)追加文本</button>
+			<button type="button">append(function(){})追加文本</button>
+		</div>
+		<div id="d2">
+			<div>appendTo(已存在)</div>
+			<button type="button">appendTo</button>
+		</div>
+		<div id="d3">
+			<div>after(已存在)</div>
+			<button type="button">after(txt1,txt2,txt3)</button>
+			<button type="button">after(function(){})</button>
+		</div>
+		<div id="d4">
+			<div>insertAfter(已存在)</div>
+			<button type="button">insertAfter()</button>
+			<div>类似剪切功能</div>
+		</div>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//insertAfter
+			var d4Div=$("#d4>div:nth-child(1)");
+			var d4Btn=$("#d4>button:nth-child(2)");
+			var d4Div2=$("#d4>div:nth-child(3)");
+			d4Btn.click(function(){
+				$("<div>insertAfter文本</div>").insertAfter(d4Div);
+				$(d4Div2).insertAfter(d4Div);//类似与剪切
+			})
+			
+			
+			//after
+			var d3Div=$("#d3>div:nth-child(1)");
+			var d3Btn=$("#d3>button:nth-child(2)");
+			var d3Btn2=$("#d3>button:nth-child(3)");
+			d3Btn.click(function(){
+				var txt1="after文本1";
+				var txt2="<div>after文本2</div>";
+				var txt3=$("<div></div>").text("after文本3");
+				var txt4=document.createElement("p");
+				txt4.innerHTML="after文本4";
+				d3Div.after(txt1,txt2,txt3,txt4);
+			});
+			d3Btn2.click(function(){
+				d3Div.after(function(i,n){
+					console.log("i:",i,"n:",n);
+					return "<div>after文本</div>"+i+" "+ n;
+				});
+			});
+			
+			
+			//appendTo
+			var d2=$("#d2");
+			var d2Btn=$("#d2>button:nth-child(2)");
+			d2Btn.click(function(){
+				$("<div>appendTo</div>").appendTo("#d2>div:nth-child(1)");
+			});
+			
+			//append
+			var d1Btn1=$("#d1>button:nth-child(2)");
+			var d1Btn2=$("#d1>button:nth-child(3)");
+			console.log(d1Btn1,d1Btn2);
+			var d1Div=$("#d1>div");
+			d1Btn1.click(function(){
+				var txt1="append追加文本1";//字符串
+				var txt2="<div>append追加文本2</div>";//HTML标签文本
+				var txt3=$("<div></div>").text("追加文本3");//使用jQuery
+				var txt4=document.createElement("p");
+				txt4.innerHTML="<div>追加文本4</div>";//使用DOM
+				d1Div.append(txt1,txt2,txt3,txt4);
+			});
+			d1Btn2.click(function(){
+				d1Div.append(function(i,n){
+					console.log("i:",i,"n:",n);
+					return "<span>append(function(){})</span>"+i+" "+n;
+				});
+			});
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

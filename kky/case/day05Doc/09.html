@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.绑定事件
+	jQuery off()
+off() 方法通常用于移除通过 on() 方法添加的事件处理程序。
+自 jQuery 版本 1.7 起，off() 方法是 unbind()、die() 和 undelegate() 方法的新的替代品。
+该方法给 API 带来很多便利，我们推荐使用该方法，它简化了 jQuery 代码库。
+注意：如需移除指定的事件处理程序，当事件处理程序被添加时，
+选择器字符串必须匹配 on() 方法传递的参数。
+提示：如需添加只运行一次的事件然后移除，请使用 one() 方法。
+
+$(selector).off(event,selector,function(eventObj),map)
+
+
+参数			描述
+event			必需。规定要从被选元素移除的一个或多个事件或命名空间。
+			由空格分隔多个事件值。必须是有效的事件。
+selector		可选。规定添加事件处理程序时最初传递给 on() 方法的选择器。
+function(eventObj)	可选。规定当事件发生时运行的函数。
+map			规定事件映射 ({event:function, event:function, ...})，
+			包含要添加到元素的一个或多个事件，以及当事件发生时运行的函数。
+		</pre>
+		<div id="d1" class="d">
+			<div style="border: 1xp solid pink;">
+				通过on添加click事件,通过off移除通过on添加的事件
+			</div>
+			<p style="border: 1xp solid pink;">
+				通过on添加click事件,通过off移除通过on添加的事件
+			</p>
+			<button type="button" id="btn1">off移除div通过on添加的指定事件函数(myFunC)</button>
+			<button type="button" id="btn2">off移除div通过on添加的click事件</button>
+			<button type="button" id="btn3">off移除div通过on添加的所有事件</button>
+			<button type="button" id="btn4">off移除p通过on添加的指定事件函数(myFunC)</button>
+			<button type="button" id="btn5">off移除p通过on添加的click事件</button>
+		</div>
+		<pre>
+			//1.on;off
+			$("#d1>div,#d1>p").on("click",function(){
+				$(this).css({fontSize:"+=1px"});
+			});
+			$("#d1>div,#d1>p").on("click",myFunC);
+			$("#d1>div,#d1>p").on("mouseenter",myFunB1);
+			$("#d1>div,#d1>p").on("mouseleave",myFunB2);
+			
+			$("#btn1").click(function(){
+				$("#d1>div").off("click",myFunC);
+			});
+			$("#btn2").click(function(){
+				$("#d1>div").off("click");
+			});
+			$("#btn3").click(function(){
+				$("#d1>div").off();
+			});
+			$("#btn4").click(function(){
+				$("#d1>p").off("click",myFunC);
+			});
+			$("#btn5").click(function(){
+				$("#d1>p").off("click");
+			});
+			
+			
+			function myFunC(){
+				$(this).css("color","red");
+			}
+			function myFunB1(){
+				$(this).css("background-color","#aaa");
+			}
+			function myFunB2(){
+				$(this).css("background-color","");
+			}
+		</pre>
+		<div id="d2" class="d">
+			点击这段文字放大字体,但只允许放大两次!
+		</div>
+		<pre>
+			var x=0;
+			$("#d2").click(function(event){
+				$(this).css({fontSize:"+=2px"});
+				x++;
+				if(x>=2){
+					//$(this).off();//两个都可以
+					$(this).off(event);
+				}
+			});
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//2.
+			var x=0;
+			$("#d2").click(function(event){
+				$(this).css({fontSize:"+=2px"});
+				x++;
+				if(x>=2){
+					//$(this).off();//两个都可以
+					$(this).off(event);
+				}
+			});
+			
+			
+			//1.on;off
+			$("#d1>div,#d1>p").on("click",function(){
+				$(this).css({fontSize:"+=1px"});
+			});
+			$("#d1>div,#d1>p").on("click",myFunC);
+			$("#d1>div,#d1>p").on("mouseenter",myFunB1);
+			$("#d1>div,#d1>p").on("mouseleave",myFunB2);
+			
+			$("#btn1").click(function(){
+				$("#d1>div").off("click",myFunC);
+			});
+			$("#btn2").click(function(){
+				$("#d1>div").off("click");
+			});
+			$("#btn3").click(function(){
+				$("#d1>div").off();
+			});
+			$("#btn4").click(function(){
+				$("#d1>p").off("click",myFunC);
+			});
+			$("#btn5").click(function(){
+				$("#d1>p").off("click");
+			});
+			
+			
+			function myFunC(){
+				$(this).css("color","red");
+			}
+			function myFunB1(){
+				$(this).css("background-color","#aaa");
+			}
+			function myFunB2(){
+				$(this).css("background-color","");
+			}
+			
+
+			
+			
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

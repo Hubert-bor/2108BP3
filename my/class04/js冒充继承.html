@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒充继承</title>
+</head>
+<body>
+    <script>
+        /* 
+            冒充继承
+        */
+
+        function Father(money,car){
+            this.money = money;
+            this.car= car;
+            this.say = function(){
+                console.log("我有",this.money,"还有车",this.car);
+            }
+        }
+
+        function Son(money,car){
+            Father.call(this,money,car);//冒充继承
+        }
+
+        //var f1 = new Father(100000,"红旗");
+        //console.log("f1",f1);
+
+        var s1= new Son(100,"五菱宏光");
+        console.log("s1",s1);
+    </script>
+</body>
+</html>

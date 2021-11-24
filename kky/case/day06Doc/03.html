@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	6.动画相关方法
+很多时候需要停止正在运行中的动画，jQuery 为此提供了一个.stop()方法。
+stop() 方法为被选元素停止当前正在运行的动画。
+$(selector).stop(stopAll,goToEnd)
+
+参数		描述
+stopAll		可选。布尔值，规定是否停止被选元素的所有加入队列的动画。默认是 false。
+goToEnd		可选。布尔值，规定是否立即完成当前的动画。默认是 false。
+
+注意：第一个参数表示是否取消列队动画，默认为 false。
+如果参数为 true，当有列队动 画的时候，会取消后面的列队动画。
+第二参数表示是否到达当前动画结尾，默认为 false。 
+如果参数为 true，则停止后立即到达末尾处
+
+有时在执行动画或列队动画时，需要在运动之前有延迟执行，
+jQuery 为此提供了.delay() 方法。
+这个方法可以在动画之前设置延迟，也可以在列队动画中间加
+
+delay() 方法对队列中的下一项的执行设置延迟。
+语法
+$(selector).delay(speed,queueName)
+
+参数		描述
+speed		可选。规定延迟的速度。
+		可能的值：
+		毫秒
+		"slow"
+		"fast"
+queueName	可选。规定队列的名称。
+默认是 "fx"，标准效果队列。
+
+过滤器:animated，这个过滤器可以判断出当前 运动的动画是哪个元素
+:animated 选择器选取当前的所有动画元素。
+语法
+$(":animated")
+	7.动画全局属性
+		</pre>
+		<div id="d1" class="d">
+			<button type="button" id="d1Btn1">开始动画</button>
+			<button type="button" id="d1Btn2">停止全部队列动画(false,false)</button>
+			<button type="button" id="d1Btn3">停止全部队列动画(true,false)</button>
+			<button type="button" id="d1Btn4">停止前立即完成全部动画(true,true)</button>
+			<button type="button" id="d1Btn5">停止前立即完成全部动画(false,true)</button>
+			<div style="width:100px;height: 100px;background-color: darkgreen;position: relative;">	
+			</div>
+		</div>
+		<pre>
+				$(function(){
+				var div=$("#d1>div");
+				$("#d1Btn1").click(function(){
+					div.animate({height:300},"slow",function(){
+						console.log("1");
+					});
+					div.animate({width:300},"slow",function(){
+						console.log("2");
+					});
+					div.animate({height:100},"slow",function(){
+						console.log("3");
+					});
+					div.animate({width:100},"slow",function(){
+						console.log("4");
+					});
+				});
+				$("#d1Btn2").click(function(){
+					div.stop(false,false);
+				});
+				$("#d1Btn3").click(function(){
+					div.stop(true,false);
+				});
+				$("#d1Btn4").click(function(){
+					div.stop(true,true);
+				});
+				$("#d1Btn5").click(function(){
+					div.stop(true,false);
+				});
+			});
+		</pre>
+		<div id="d2" class="d">
+			<button type="button" id="d2Btn1"> delay()方法来设置不同的速度值</button>
+			<div id="div1" style="width:50px;height:50px;display:none;background-color:pink;">1</div>
+			<div id="div2" style="width:50px;height:50px;display:none;background-color:green;">2</div>
+			<div id="div3" style="width:50px;height:50px;display:none;background-color:blue;">3</div>
+			<div id="div4" style="width:50px;height:50px;display:none;background-color:red;">4</div>
+			<div id="div5" style="width:50px;height:50px;display:none;background-color:purple;">5</div>
+		</div>
+		<pre>
+			$(function(){
+				$("#d2Btn1").click(function(){
+					$("#div1").delay("slow").fadeIn();
+					$("#div2").delay("fast").fadeIn();
+					$("#div3").delay(800).fadeIn();//delay() 来设置 800 毫秒延迟。
+					$("#div4").delay(2000).fadeIn();//delay() 来设置 2000 毫秒延迟。
+					$("#div5").delay(4000).fadeIn();//delay() 来设置 4000 毫秒延迟。
+				})
+			});
+		</pre>
+		<div id="d3" class="d">
+			<button type="button" id="d3Btn1">delay() 和 animate()</button>
+			<div style="background:purple;height:100px;width:100px;margin:6px;">
+			</div>
+		</div>
+		<pre>
+			$(function(){
+				$("#d3Btn1").click(function(){
+					$("#d3>div").animate({height:"200px"});
+					$("#d3>div").animate({width:"200px"});
+					$("#d3>div").delay(1000).animate({height:"400px"});//delay() 来设置 1000 毫秒延迟。
+					$("#d3>div").delay(1500).animate({height:"100px"});//delay() 来设置 1500 毫秒延迟。
+					$("#d3>div").delay(2000).animate({width:"100px"});//delay() 来设置 2000 毫秒延迟。
+				});
+			});
+		</pre>
+		<div id="d4" class="d">
+			<button type="button" id="d4Btn">修改动画元素颜色</button>
+			<div style="background:blue;margin: 10px;">Div 1</div>
+			<div style="background:green;margin: 10px;">Div 2</div>
+			<div style="background:yellow;margin: 10px;">Div 3</div>
+		</div>
+		<pre>
+			$(function(){
+				function adiDiv(){
+					$("#d4>div:eq(0)").animate({width:"50%"},"slow");
+					$("#d4>div:eq(0)").animate({width:"100%"},"slow",adiDiv);
+				}
+				adiDiv();
+				$("#d4Btn").click(function(){
+					console.log("+++++++++++++");
+					$("#d4>div:animated").css("background-color","red");
+				})
+			});
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			
+			$(function(){
+				function adiDiv(){
+					$("#d4>div:eq(0)").animate({width:"50%"},"slow");
+					$("#d4>div:eq(0)").animate({width:"100%"},"slow",adiDiv);
+				}
+				adiDiv();
+				$("#d4Btn").click(function(){
+					console.log("+++++++++++++");
+					$("#d4>div:animated").css("background-color","red");
+				})
+			});
+			
+			$(function(){
+				$("#d3Btn1").click(function(){
+					$("#d3>div").animate({height:"200px"});
+					$("#d3>div").animate({width:"200px"});
+					$("#d3>div").delay(1000).animate({height:"400px"});//delay() 来设置 1000 毫秒延迟。
+					$("#d3>div").delay(1500).animate({height:"100px"});//delay() 来设置 1500 毫秒延迟。
+					$("#d3>div").delay(2000).animate({width:"100px"});//delay() 来设置 2000 毫秒延迟。
+				});
+			});
+			
+			$(function(){
+				$("#d2Btn1").click(function(){
+					$("#div1").delay("slow").fadeIn();
+					$("#div2").delay("fast").fadeIn();
+					$("#div3").delay(800).fadeIn();//delay() 来设置 800 毫秒延迟。
+					$("#div4").delay(2000).fadeIn();//delay() 来设置 2000 毫秒延迟。
+					$("#div5").delay(4000).fadeIn();//delay() 来设置 4000 毫秒延迟。
+				})
+			});
+			
+			$(function(){
+				var div=$("#d1>div");
+				$("#d1Btn1").click(function(){
+					div.animate({height:300},3000,function(){
+						console.log("1");
+					});
+					div.animate({width:300},3000,function(){
+						console.log("2");
+					});
+					div.animate({height:100},3000,function(){
+						console.log("3");
+					});
+					div.animate({width:100},3000,function(){
+						console.log("4");
+					});
+				});
+				$("#d1Btn2").click(function(){
+					div.stop(false,false);
+				});
+				$("#d1Btn3").click(function(){
+					div.stop(true,false);
+				});
+				$("#d1Btn4").click(function(){
+					div.stop(true,true);
+				});
+				$("#d1Btn5").click(function(){
+					div.stop(false,true);
+				});
+			});
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

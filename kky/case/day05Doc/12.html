@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+			#d1.d{
+				cursor: pointer;
+				height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.简写事件
+方法			描述
+blur()				添加/触发失去焦点事件
+change()			添加/触发 change 事件
+click()				添加/触发 click 事件
+dblclick()			添加/触发 double click 事件
+focus()				添加/触发 focus 事件
+hover()				添加两个事件处理程序到 hover 事件
+keydown()			添加/触发 keydown 事件
+keypress()			添加/触发 keypress 事件
+keyup()				添加/触发 keyup 事件
+mousedown()			添加/触发 mousedown 事件
+mouseenter()			添加/触发 mouseenter 事件
+mouseleave()			添加/触发 mouseleave 事件
+mousemove()			添加/触发 mousemove 事件
+mouseout()			添加/触发 mouseout 事件
+mouseover()			添加/触发 mouseover 事件
+mouseup()			添加/触发 mouseup 事件
+off()				移除通过 on() 方法添加的事件处理程序
+on()				向元素添加事件处理程序
+one()				向被选元素添加一个或多个事件处理程序。
+				该处理程序只能被每个元素触发一次
+ready()				规定当 DOM 完全加载时要执行的函数
+resize()			添加/触发 resize 事件
+scroll()			添加/触发 scroll 事件
+select()			添加/触发 select 事件
+submit()			添加/触发 submit 事件
+trigger()			触发绑定到被选元素的所有事件
+triggerHandler()		触发绑定到被选元素的指定事件上的所有函数
+
+bind()				向元素添加事件处理程序
+contextmenu()			添加事件处理程序到 contextmenu 事件
+delegate()			向匹配元素的当前或未来的子元素添加处理程序
+unbind()			从被选元素上移除添加的事件处理程序
+undelegate()			从现在或未来的被选元素上移除事件处理程序
+
+
+	常用jQuery event对象
+event.currentTarget 		属性是在事件冒泡阶段内的当前 DOM 元素，通常等于 this。
+event.data			包含当前执行的处理程序被绑定时传递到事件方法的可选数据
+event.pageX			返回相对于文档左边缘的鼠标位置
+event.pageY			返回相对于文档上边缘的鼠标位置
+event.target			返回哪个 DOM 元素触发事件
+event.type			返回哪种事件类型被触发
+event.which			返回指定事件上哪个键盘键或鼠标按钮被按下
+	阻止冒泡行为 和 阻止默认行为
+event.isDefaultPrevented() 	方法检查指定的事件上是否调用了 preventDefault() 方法。
+event.isPropagationStopped() 	方法检查指定的事件上是否调用了 event.stopPropagation()。
+event.preventDefault()		阻止事件的默认行为
+event.stopPropagation()		阻止事件向上冒泡到 DOM 树，阻止任何父处理程序被事件通知
+注意：如果想让上面的超链接同时阻止默认行为且禁止冒泡行为，可以把
+两个方法同时 写上：event.stopPropagation()和event.preventDefault()。
+这两个方法如果需要同时启用的时候， 还有一种简写方案代替，就是直接 return false。 
+$('button').click(function(e){ 
+	return false; 
+});
+
+
+		</pre>
+		<div id="d1" class="d">
+			鼠标指针在:<span></span>
+		</div>
+		<pre>
+			//1.event.pageX/event.pageY
+			//返回相对于文档左边缘的鼠标位置
+			//返回相对于文档上边缘的鼠标位置
+			$("#d1").mousemove(function(event){
+				$("#d1>span").text("X:"+event.pageX+"Y:"+event.pageY);
+			});
+		</pre>
+		<div id="d2" class="d">
+			链接<a href="http://www.baidu.com" target="_blank">百度</a>
+		</div>
+		<pre>
+						
+			//2.event.preventDefault()		阻止事件的默认行为
+			$("#d2>a").click(function(event){
+				event.preventDefault();//阻止默认事件
+				console.log("检查preventDefault()是否被调用:",event.isDefaultPrevented());
+			});
+			
+			//1.event.pageX/event.pageY
+			//返回相对于文档左边缘的鼠标位置
+			//返回相对于文档上边缘的鼠标位置
+			$("#d1").mousemove(function(event){
+				$("#d1>span").text("X:"+event.pageX+"Y:"+event.pageY);
+			});
+		</pre>
+		<div id="d3" class="d">
+			<button type="button">点击我</button>
+		</div>
+		<pre>
+			//3.event.stopPropagation()		阻止事件向上冒泡到 DOM 树，阻止任何父处理程序被事件通知
+			//event.currentTarget 		属性是在事件冒泡阶段内的当前 DOM 元素，通常等于 this。
+			//event.target			返回哪个 DOM 元素触发事件
+			//event.type			返回哪种事件类型被触发
+			//event.which			返回指定事件上哪个键盘键或鼠标按钮被按下
+			$("#d3").click(function(event){
+				console.log(event.currentTarget===this);
+				console.log("target:",event.target);
+				console.log("type:",event.type);
+				console.log("which:",event.which);
+				console.log("event:",event);
+				alert("这是d3的点击事件");
+			});
+			$("#d3>button").click(function(event){
+				event.stopPropagation();
+				alert("这是d3>button的点击事件");
+				console.log("检查stopPropagation()是否被调用:",event.isPropagationStopped());
+			})
+		</pre>
+		<div id="d4" class="d">
+			<div>
+				点击我1
+			</div>
+			<div>
+				点击我2
+			</div>
+			<div>
+				点击我3
+			</div>
+		</div>
+		<pre>
+			//4.event.data	包含当前执行的处理程序被绑定时传递到事件方法的可选数据
+			$("#d4>div").each(function(i){
+				$(this).on("click",{x:i},function(event){
+					console.log("event:",event);
+					console.log("序号:",$(this).index(),"数据为:",event.data.x,"data:",event.data);
+				})
+			});
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>
+			//4.event.data	包含当前执行的处理程序被绑定时传递到事件方法的可选数据
+			$("#d4>div").each(function(i){
+				$(this).on("click",{x:i},function(event){
+					console.log("event:",event);
+					console.log("序号:",$(this).index(),"数据为:",event.data.x,"data:",event.data);
+				})
+			});
+			//3.event.stopPropagation()		阻止事件向上冒泡到 DOM 树，阻止任何父处理程序被事件通知
+			//event.currentTarget 		属性是在事件冒泡阶段内的当前 DOM 元素，通常等于 this。
+			//event.target			返回哪个 DOM 元素触发事件
+			//event.type			返回哪种事件类型被触发
+			//event.which			返回指定事件上哪个键盘键或鼠标按钮被按下
+			$("#d3").click(function(event){
+				console.log(event.currentTarget===this);
+				console.log("target:",event.target);
+				console.log("type:",event.type);
+				console.log("which:",event.which);
+				console.log("event:",event);
+				alert("这是d3的点击事件");
+			});
+			$("#d3>button").click(function(event){
+				event.stopPropagation();
+				alert("这是d3>button的点击事件");
+				console.log("检查stopPropagation()是否被调用:",event.isPropagationStopped());
+			})
+			
+			//2.event.preventDefault()		阻止事件的默认行为
+			$("#d2>a").click(function(event){
+				event.preventDefault();//阻止默认事件
+				console.log("检查preventDefault()是否被调用:",event.isDefaultPrevented());
+			});
+			
+			//1.event.pageX/event.pageY
+			//返回相对于文档左边缘的鼠标位置
+			//返回相对于文档上边缘的鼠标位置
+			$("#d1").mousemove(function(event){
+				$("#d1>span").text("X:"+event.pageX+"Y:"+event.pageY);
+			});
+			
+			
+			
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

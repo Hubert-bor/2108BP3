@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+			.myColor{
+				color: #f90;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	1.hover
+hover() 方法规定当鼠标指针悬停在被选元素上时要运行的两个函数。
+方法触发 mouseenter 和 mouseleave 事件。
+注意: 如果只指定一个函数，则 mouseenter 和 mouseleave 都执行它。
+语法
+$(selector).hover(inFunction,outFunction)
+调用:
+$( selector ).hover( handlerIn, handlerOut )
+等同以下方式：
+$( selector ).mouseover( handlerIn ).mouseout( handlerOut );
+注意：如果只规定了一个函数，则它将会在 mouseover 和 mouseout 事件上运行。
+调用:
+$(selector).hover(handlerInOut)
+等同于：
+$( selector ).on( "mouseover mouseout", handlerInOut );
+参数	描述
+inFunction	必需。规定 mouseover 事件发生时运行的函数。
+outFunction	可选。规定 mouseout 事件发生时运行的函数。
+		</pre>
+		<div id="d2" class="d">
+			jQuery hover()
+		</div>
+		<pre>
+			//2.hover() 方法规定当鼠标指针悬停在被选元素上时要运行的两个函数。
+			//hover() 方法规定当鼠标指针悬停在被选元素上时要运行的两个函数。
+			//方法触发 mouseenter 和 mouseleave 事件。
+			//注意: 如果只指定一个函数，则 mouseenter 和 mouseleave 都执行它。
+			
+			$("#d2").hover(function(){
+				$(this).css("background-color","red");
+			},function(){
+				$(this).css("background-color","");
+			})
+		</pre>
+		<script src="js/jquery-1.12.4.js"></script>
+		<script>	
+			//2.hover() 方法规定当鼠标指针悬停在被选元素上时要运行的两个函数。
+			//hover() 方法规定当鼠标指针悬停在被选元素上时要运行的两个函数。
+			//方法触发 mouseenter 和 mouseleave 事件。
+			//注意: 如果只指定一个函数，则 mouseenter 和 mouseleave 都执行它。
+			
+			$("#d2").hover(function(){
+				$(this).css("background-color","red");
+			},function(){
+				$(this).css("background-color","");
+			});
+			function fgx(str){
+				str==undefined?str="":str;
+				console.log(str+"------------------------");
+			}
+		</script>
+	</body>
+</html>

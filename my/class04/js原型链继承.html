@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js继承</title>
+</head>
+<body>
+    <script>
+        function Father(car) {
+            this.car = car;
+            this.say=function(){
+                console.log("我有一辆车",this.car);
+            }
+        }
+        var f1= new Father("大卡车");
+
+        function Son(phone){
+            this.phone = phone;
+        }
+        console.log("Son.prototype:",Son.prototype);
+        Son.prototype  = new Father("奔驰");
+
+        
+    </script>
+</body>
+</html>

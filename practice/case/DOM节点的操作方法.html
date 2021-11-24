@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DOM节点的操作方法</title>
+    <style>
+        .fontColor {
+            color: red;
+        }
+
+        .fontGreen {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        <em>转自：https://www.cnblogs.com/dalaoban/p/9498218.html</em>
+
+        js中DOM节点的一些操作方法
+        <b>什么是DOM</b>
+        DOM：
+            文档对象模型，DOM为文档提供了结构化表示，并定义了如何通过脚本来访问文档结构，目的其实就是为了能让
+            js操作的html元素而指定的一个规范
+
+        DOM就是由节点组成的
+
+        <b>解析过程</b>
+        HTML加载完毕，渲染引擎会在内存中把HTML文档，生成一个DOM树，getElementById是获取中DOM上的元素节点
+        然后操作的时候修改的是该元素的<i>属性</i>
+
+        <b>DOM树（一切都是节点）</b>
+        在HTML当中，一切都是节点：（<b class="fontColor">非常重要</b>）
+        <ul>
+            <li>元素节点：HTML标签</li>
+            <li>文本节点：标签中的文字，（比如标签之间的空格、换行）</li>
+            <li>属性节点：标签的属性</li>
+        </ul>
+
+        整个HTMl文档就是一个文档节点。所有的节点都是Object
+
+        <b>DOM可以做什么</b>
+        <ul>
+            <li>找对象（元素节点）</li>
+            <li>设置元素的属性值</li>
+            <li>设置元素的样式</li>
+            <li>动态创建和删除元素</li>
+            <li>事件的触发响应：事件源、事件、事件的驱动程序</li>
+        </ul>
+
+        <b>BOM节点的获取</b>
+        DOM节点的获取方式其实就是<b class="fontColor">获取事件源的的方式</b>
+        <b>操作元素节点，必须首先找到该节点，有三种方式可以获取ODM节点</b>
+        var div1 = document.getElementById("box1");//方式一：通过id获取单个标签
+        var arr1 = document.getElementsByTagName("div1");     //方式二：通过 标签名 获得 标签数组，所以有s
+        var arr2 = document.getElementsByClassName("hehe");  //方式三：通过 类名 获得 标签数组，所以有s
+
+        方式二、方式三获取的是标签数组，那么习惯的是<b class="fontColor">先遍历之后再使用</b>
+        特殊情况：数组中的值只有1个，即便如此，这一个值也是包再数组里的，这个值的获取方式如下：
+        document.getElementsByTagName("div1")[0];    //取数组中的第一个元素
+        document.getElementsByClassName("hehe")[0];  //取数组中的第一个元素
+
+        <b>DOM访问关系的获取</b>
+        DOM的节点并不是孤立的，因此可以通过DOM节点之间的相对的关系对他们进行访问。
+        节点的访问关系，是以<b class="fontColor">属性</b>的方式存在的。
+
+        <b class="fontColor">父节点：</b>parentNode
+        <b class="fontColor">兄弟节点：</b>nextSibling  nextElementSibling  previousSibling previousElementSibling
+        <b class="fontColor">子节点：</b>firstChild firstElementChild   lastChild   lastElementChild
+        <b class="fontColor">所有子节点：</b>childNodes children
+
+        这里我们要重点知道<b class="fontColor">parentNode</b>和<b class="fontColor">children</b>这两个属性的用法。
+
+        <b>获取父节点</b>
+        调用者就是节点。一个节点只有一个父节点，调用方式就是：
+        <b class="fontColor">节点.parentNode</b>
+        （1）nextSibling:
+            指的是下一个节点（包含标签，空文档和换行节点）
+                火狐、谷歌、IE9+版本：都指的是下一个节点（包括标签、空文档和换行节点）
+                IE678版本：指下一个元素节点（标签）
+
+        （2）nextElementSibling:
+                火狐、谷歌、IE9+版本：都指的是下一个元素节点（标签）
+        
+        <b>总结：</b>为了获取下一个<b class="fontColor">元素节点</b>我们可以这样做:在IE678中用nextSibling,在火狐谷歌IE9+以后用
+        nextElementSibling,于是，综合这两个属性，可以这样写：
+
+            <b class="fontGreen">下一个兄弟节点 = 节点.nextElementSibling || 节点.nextSibling</b>
+
+        previous的中文是：前一个
+
+        （1）previousSibling:
+            火狐、谷歌、IE9+版本：都指的是前一个节点（包含标签、空文档和换行节点）
+            IE678版本：指前一个元素节点（标签)
+
+        （2）previousElementSibling:
+            火狐、谷歌、IE9+版本：都指的是前一个元素节点（标签）
+
+        <b>总结：</b>为了获取前一个<b class="fontColor">元素节点</b>我们可以这样写：
+            在IE678中用previousSibling，在火狐、谷歌IE9+以后用previousElementSibling，于是，综合这两个属性，可以这样写：
+
+            <b class="fontGreen">前一个兄弟节点 = 节点.previousElementSibling || 节点.previousSibling</b>
+
+
+        <b>3,补充：</b>获取单个兄弟节点：
+
+            <b class="fontGreen">节点自己.parentNode.children[index];  //随意得到兄弟节点</b>
+
+        <b>获取单个的子节点</b>
+        <b>1，第一个子节点|第一个子元素节点：</b>
+
+            （1）firstChild:
+                火狐、谷歌、IE9+版本：都指的是第一个子节点（包括标签、空文档和换行节点）
+                IE678版本：指第一个子元素节点（标签）
+
+            （2）firstElementChild:
+                火狐、谷歌、IE9+版本：都指的是第一个子元素节点（标签）
+
+            
+        <b>总结：</b>为了获取第一个<b class="fontColor">子元素节点</b>，我们可以这样做：在IE678中用firstChild，在火狐谷歌IE9+
+        以后用firstElementChild，于是，综合这样两个属性，可以这样写：
+
+            <b class="fontGreen">第一个子元素节点 = 节点.firstElementChild || 节点.firstChild</b>
+
+        <b>2、最后一个子节点|最后一个子元素节点：</b>
+
+            （1）lastChild:
+                火狐、谷歌、IE9+版本：都指的是最后一个子节点（包括标签、空文档和换行节点）
+                IE678版本：指最后一个子元素节点（标签）
+
+            （2）lastElementChild:
+                火狐、谷歌、IE9+版本：都指的是最后一个子元素节点（标签）
+
+        <b>总结：</b>为了获取最后一个<b class="fontColor">子元素节点</b>，我们可以可以这样做：在IE678中用lastChild,在火狐谷歌IE9+以后用
+        lastElementChild,于是，综合这两个属性，可以这样写：
+    
+            <b class="fontGreen">最后一个子元素节点 = 节点.lastElementChild || 节点.lastChild</b>
+
+        <b>获取所有的子节点</b>
+
+            （1）<b>childNodes:</b>标准属性。返回的是指定元素的<b>子节点</b>的集合（包括元素节点、所有属性、文本节点）
+            是W3C的亲儿子
+
+            火狐 谷歌等高版本会把换行也看作是子节点。（了解）
+
+            用法：
+
+                <b class="fontGreen">子节点数组 = 父节点.childNodes;   //获取所有节点。</b>
+
+            <b>（2）children：</b>非标准属性。返回的是指定元素的<b>子元素节点的集合。</b><b class="fontColor">重要</b>
+
+                它只返回HTML节点，甚至不返回文本节点
+
+                在IE6/7/8中包含注释节点（在IE678中，注释节点不要写在里面）
+
+            虽然不是标准的ODM属性，但它和innerHtml方法一样，得到了几乎所有浏览器的支持
+
+
+            用法: <b class="fontColor">用的最多</b>
+
+                <b class="fontGreen">子节点数组 = 父节点.children;   //获取所有节点。用的最多。</b>
+
+            <b>node Type</b>
+
+            <b>node Type == 1表示的是元素节点</b>（标签）。<b class="fontColor">元素就是标签</b>
+
+            node Type == 2 表示属性节点 
+            node Type == 3 是文本节点
+
+
+        <b class="fontColor">DOM节点操作</b>  
+
+            上一段的内容：节点的<b>访问关系</b>都是<b>属性</b>
+
+            节点的<b>操作</b>都是<b>函数</b>（方法）
+
+        <b>创建节点</b>
+
+        格式如下：
+
+            <b class="fontGreen">新的标签(元素节点) = document.createElement("标签名");</b>
+
+        比如，如果我们想创建一个li标签，或者是创建一个不存在的adbc标签，可以这样做：
+
+
+            <!-- 
+
+                <script type="text/javascript">
+                    var a1 = document.createElement("li");   //创建一个li标签
+                    var a2 = document.createElement("adbc");   //创建一个不存在的标签
+
+                    console.log(a1);
+                    console.log(a2);
+
+                    console.log(typeof a1);
+                    console.log(typeof a2);
+                </script>
+            -->
+
+        <b>插入节点</b>
+
+            插入节点有两种方式，它们的含义是不同的。
+            
+            方式1：
+
+                <b class="fontGreen">父节点.appendChild(新的子节点);</b>
+
+            解释：父节点的最后插入一个新的子节点。
+
+            方式2：
+
+                <b class="fontGreen">父节点.insertBefore(新的子节点,作为参考的子节点);</b>
+
+            解释：在参考节点前插入一个新的节点。
+                如果参考节点为null，那么它将在父节点最后插入一个子节点。
+
+        <b>删除节点</b>
+            
+            格式如下：
+            
+                <b class="fontGreen">父节点.removeChild(子节点);</b>
+
+            解释：<b>用父节点删除子节点</b>。必须要指定是删除哪个子节点.
+
+            如果我想删除自己这个节点,可以这么做:
+
+                <b class="fontGreen">node1.parentNode.removeChild(node1);</b>
+
+        <b>复制节点(克隆节点)</b>
+
+            格式如下;
+
+                <b class="fontGreen">要复制的节点.cloneNode();       //括号里不带参数和带参数false，效果是一样的。</b>
+
+                <b class="fontGreen">要复制的节点.cloneNode(true);</b>
+
+            括号里不带参数,效果是不同的.解释如下:
+
+                不带参数/带参数false:只复制节点本身,不复制节点.
+                带参数true:既复制节点本事,也复制其他所有的节点.
+
+            
+        <b>设置节点的属性</b>
+
+            我们可以获取节点的属性值,设置节点的属性值,删除节点的属性.
+
+            举例:
+          
+             <!-- <img src="images/1.jpg" class="image-box" title="美女图片" alt="地铁一瞥" id="a1"> -->
+
+             <b>1,获取节点属性值</b>
+
+             方式1:
+
+             <b class="fontGreen">元素节点.属性;</b>
+             <b class="fontGreen">元素节点[属性];</b>
+
+                举例:(获取节点的属性值)
+
+                    <!-- 
+
+                        <body>
+
+                            <img src="images/1.jpg" class="image-box" title="美女图片" alt="地铁一瞥" id="a1">
+
+                            <script type="text/javascript">
+                                var myNode = document.getElementsByTagName("img")[0];
+
+                                console.log(myNode.src);
+                                console.log(myNode.className);    //注意，是className，不是class
+                                console.log(myNode.title);
+
+                                console.log("------------");
+
+                                console.log(myNode["src"]);
+                                console.log(myNode["className"]); //注意，是className，不是class
+                                console.log(myNode["title"]);
+                            </script>
+                        </body>
+                    -->
+            
+            方式2:(推荐)
+                
+                <b class="fontGreen">元素节点.getAttribute("属性名称");</b>
+
+                例子:
+
+                    <!-- 
+                        console.log(myNode.getAttribute("src"));
+                        console.log(myNode.getAttribute("class"));   //注意是class，不是className
+                        console.log(myNode.getAttribute("title"));
+
+                     -->
+
+                    方式1和方式2的区别在于:前者是直接操作标签,后者是把标签作为DOM节点.推荐方式2
+
+         
+        <b>2,设置节点的属性值</b>
+
+        方式1举例:(设置节点的属性值)
+
+            <b class="fontGreen">myNode.src = "images/2.jpg"   //修改src的属性值</b>
+            <b class="fontGreen">myNode.className = "image2-box";  //修改class的name</b>
+
+        方式2举例:(设置节点的属性值)
+            
+            <b class="fontGreen">myNode.setAttribute("src","images/3.jpg");</b>
+            <b class="fontGreen">myNode.setAttribute("class","image3-box");</b>
+            <b class="fontGreen">myNode.setAttribute("id","你好");</b>
+
+        <b>3,删除节点的属性</b>
+
+            格式:
+                
+                <b class="fontGreen">元素节点.removeAttribute("属性名")</b>
+
+            举例:(删除节点的属性)
+                
+                <b class="fontGreen">myNode.removeAttribute("class");</b>
+                <b class="fontGreen">myNode.removeAttribute("id");</b>
+    </pre>
+</body>
+
+</html>
