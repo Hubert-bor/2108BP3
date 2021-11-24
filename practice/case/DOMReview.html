@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body>
+    <div class="box1">
+        <b>GGGGGGGGGGGGGG</b>
+        <div class="box2">
+            <p>123456789</p>
+        </div>
+        <p id="p">张三</p>
+    </div>
+
+    <script>
+        var elements = document.querySelectorAll(".box1 *");
+        console.log(elements);
+
+        //获取父节点
+        var box2 = document.getElementsByClassName("box2");
+        console.log(box2[0].parentNode);
+        //获取兄弟节点
+        console.log(box2[0].nextSibling);//#text
+
+        console.log(box2[0].nextElementSibling);//p#p
+
+        //前一个节点
+
+        console.log(box2[0].previousSibling);//#text
+
+        console.log(box2[0].previousElementSibling)//b
+
+        //获取单个的兄弟节点
+        console.log(box2[0].parentNode.children[2]);//p#p
+
+        //获取第一个子节点
+        console.log(box2[0].firstElementChild);//p
+
+        //获取所有的子节点
+        console.log(box2[0].childNodes);
+
+        console.log(box2[0].children);//返回子节点集合
+
+        //创建节点
+        var a1=  document.createElement("li");
+        var a2 = document.createElement("a");
+        a1.innerText = "王五";
+        console.log(a1,typeof a1);
+
+        //插入节点
+        console.log(box2[0].appendChild(a1));
+
+        console.log(box2[0].insertBefore(a2,a1));//a2新的节点,a1参照节点
+
+
+
+        //删除节点
+        console.log(box2[0].parentNode.removeChild(elements[0]));//用父节点删除子节点
+
+        //删除自己这个节点
+        // console.log(box2[0].parentNode.removeChild(box2[0]));
+
+        //克隆节点
+        console.log(box2[0].cloneNode(true));
+
+        //设置节点的属性
+        // console.log(box2[0].className="box2 a");
+
+        //获取节点属性
+        console.log(box2[0].getAttribute("class"));
+
+        //设置节点属性
+        console.log(box2[0].setAttribute("class","box2 b c"));
+
+        //删除节点属性
+        console.log(box2[0].removeAttribute("class"));
+    </script>
+
+</body>
+</html>
