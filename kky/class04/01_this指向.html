@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				<button type="button" onclick="fn2()" id="btn2">按钮2</button>
+				<button type="button" onclick="fn3(this)">按钮3</button>
+			</div>
+			<div id="d2">
+				
+			</div>
+			<div>
+				<button type="button" id="btn6">按钮6</button>
+				<button type="button" id="btn7">按钮7</button>
+			</div>
+		</div>
+		<script>
+		/* 
+			this指向
+			1.全局this和全局函数中this指向window
+			2.在html中this指向dom本身
+			3.先在js中找到一个dom,
+				在dom上绑定一个事件,
+				这个事件对应的函数中的this指向这个dom
+			4.对象的函数,这个函数中的this指向这个对象
+		 */
+		fgx();
+		console.log("0this:",this);
+		fgx();
+		fn1();
+		function fn1(){
+			console.log("1this:",this);
+		}
+		function fn2(){
+			console.log("2this:",this);
+		}
+		function fn3(t){
+			console.log("3this:",this,"\nt",t);
+		}
+		fgx();
+		var d1=document.getElementById("d1");
+		var d2=document.getElementById("d2");
+		var d2=document.getElementById("d2");
+		var btn2=document.getElementById("btn2");
+		console.log("btn2:",btn2);
+		
+		var btn=document.createElement("button");//创建一个button元素
+		console.log("btn:",btn);
+		var text=document.createTextNode("按钮5");//创建一个文本(节点)
+		// console.log("typeof text:",typeof text);
+		btn.appendChild(text);
+		btn.setAttribute("type","button");
+		btn.setAttribute("onclick","fn3(this)");
+		d1.appendChild(btn);
+		
+		d2.innerHTML=`<button type="button" onclick="fn3(this)">按钮4</button>`;
+		fgx();
+		var btn6=document.getElementById("btn6");
+		var btn7=document.getElementById("btn7");
+		btn6.onclick=function(){
+			console.log("4this:",this);
+		}
+		btn7.addEventListener("click",function(){
+			console.log("5this:",this);
+		})
+		
+		fgx();
+		var sex="小哥哥";
+		var obj={
+			name:"kky",
+			age:18,
+			sex:this.sex,//指向window
+			say:function(){
+				console.log("6this:",this);
+			},
+			say2(){
+				console.log("7this:",this);
+				fn8();
+				function fn8(){
+					console.log("8this:",this);
+				}
+			},
+			say3(){
+				console.log("9this:",this);
+				var that=this;//为了改变this指向
+				var self=this;//为了改变this指向
+				setTimeout(function(){
+					console.log("10this:",this,"\nthat:",that,"\nself:",self);
+				},0);
+			}
+		}
+		console.log("888888888888obj:",obj.sex);
+		obj.say();
+		fgx();
+		obj.say2();
+		fgx();
+		obj.say3();
+		
+		
+		
+		function fgx(str){
+			/* 
+			if(str==undefined){
+				str=""
+			} */
+			if(!str){
+				str="";
+			}
+			console.log(str+"-=-=-=-=-=-=-=-=-=-");
+		}
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+		/* 
+		 1加载模式
+		 	等待所有的DOM元素加载后，延迟DOM操作，方法如下：
+			
+		 window.onload=function(){
+			 
+		 };
+		 //JavaScript等待加载,
+		 1.需要等待所有内容都加载完毕才执行,图片需要显示出来才执行
+		 2.一个页面只能有一个
+		 
+		 $(document).ready(function(){
+			 
+		 });
+		 //jQuery等待加载
+		 1.只需要等待网页中的dom   结构  加载完毕,就能执行,比如图片,只需要加载出标签img,不用等图片显示出来即可执行
+		 2.一个页面可以由多个
+		 3.可以简写
+		 4.可以避免污染全局变量
+		$(function(){
+			
+		})
+		
+		3.函数自运行
+		;(function(){
+			
+		}());
+		 
+		;(function(){
+			
+		})();
+		1.可以有多个,不会等待dom加载完毕
+		 
+		 
+		 
+		 */
+		$(document).ready(function(){
+		
+		});
+		
+		$(function(){
+			
+		});
+		</script>
+	</body>
+</html>

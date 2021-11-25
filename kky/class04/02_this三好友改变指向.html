@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		/* 
+		call,apply,bind 所有的函数中都存在
+		第一个参数都是this要指向的新对象,
+		还可以利用后续参数传参,
+		参数传递格式不一样.
+		 　　call:以逗号分割传入的参数
+		 　　apply:以数组形式传入参数
+		 　　bind:同call方法,以逗号分割传入的参数,
+			但bind返回的是一个函数,需要手动执行(即添加小括号执行函数
+		 
+		  
+		 
+		 */
+			var user="赵万财",age=18;
+			var obj={
+				user:"吴泽民",
+				age:this.age,//此时this指向window
+				myFun:function(from,to){
+					console.log(this.user+",年龄: "+this.age,"来自 "+from+" 去往 "+to);
+				}
+			}
+			
+			var chao={
+				user:"超哥",
+				age:23
+			}
+			
+			obj.myFun("湖北","北京");//此时this指向obj
+			obj.myFun.call(chao,"新乡","首都");//此时指向chao
+			obj.myFun.apply(chao,["新乡","首都"]);//此时指向chao
+			obj.myFun.bind(chao,"新乡","首都")();//此时指向chao
+			fgx();
+			var fn=obj.myFun.bind(chao,"新乡","首都");
+			console.log("fn:",fn);
+			fn();
+			
+			function fgx(str){
+				/* 
+				if(str==undefined){
+					str=""
+				} */
+				
+				/* if(!str){
+					str="";
+				} */
+				str?str:(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-");
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#d1{
+				height: 50px;
+				line-height: 50px;
+				background-color: pink;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/css08.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1" style="width: 800px;"></div>
+			<div id="d2">
+				<button type="button" id="btn1">css(name)获取某个样式属性 </button>
+				<button type="button" id="btn2">css([name1,name2])获取多个样式属性 </button>
+				<br>
+				<br>
+				<button type="button" id="btn3">css(key,value)设置某个样式属性 </button>
+				<button type="button" id="btn4">css({key1:value1,key2:value2})设置多个样式属性 </button>
+			</div>
+			<div id="d3">
+				这是d3,我还没有样式
+			</div>
+			<div id="d4"></div>
+			<div id="d5"></div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+		/* 
+			css(name) 							获取某个元素CSS样式属性
+			css([name,name2,name3]) 			获取某个元素多个CSS样式
+			
+			css(name,value) 					设置某个元素的CSS样式
+			css({name1:value1,name2:value2}) 	设置某个元素多个样式 
+		 
+		 */
+		
+			$(function(){
+				$("#btn1").click(function(){
+					var r1=$("#d1").css("width");
+					console.log("r1:",r1);
+					var r2=$("#d1").css("height");
+					console.log("r2:",r2);
+					var r3=$("#d1").css("color");
+					console.log("r3:",r3);
+					var r4=$("#d1").css("background-color");
+					console.log("r4:",r4);
+				});
+				
+				
+				$("#btn2").click(function(){
+					var r1=$("#d1").css(["width","height","color"]);
+					console.log("r1:",r1);
+				});
+				
+				$("#btn3").click(function(){
+					$("#d3").css("color","rgb(255,0,0)");
+				});
+				$("#btn4").click(function(){
+					var objStyle={
+						width: '800px',
+						height: '50px', 
+						backgroundColor: 'rgb(0, 255, 0)'
+					}
+					$("#d3").css(objStyle);
+				});
+			});
+			
+			function fgx(str){
+				str?str:(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=");
+			}
+			
+			
+			
+		</script>
+	</body>
+</html>

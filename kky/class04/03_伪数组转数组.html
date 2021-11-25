@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#app>div{
+				display: inline-block;
+				height: 100px;
+				width: 100px;
+				background-color: red;
+				border-radius: 100px;
+				line-height: 100px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">1</div>
+			<div id="d2">2</div>
+			<div id="d3">3</div>
+			<div id="d4">4</div>
+			<div id="d5">5</div>
+		</div>
+		<script>
+		/* 
+			伪数组转数组
+			1.
+				数组.slice.call(伪数组);
+				[].slice.apply(伪数组);
+				Array.prototype.slice.bind(伪数组)();
+			2.Array.from();
+			
+		 */
+			var arr1=["a","b","c","d","e"];
+			console.log("arr1:",arr1);
+			var divs=document.querySelectorAll("div#app>div");
+			fgx();
+			console.log("divs",divs);
+			fgx();
+			var arr2=Array.prototype.slice.call(divs);
+			console.log("arr2:",arr2);
+			fgx();
+			var arr3=Array.prototype.slice.apply(divs);
+			console.log("arr3:",arr3);
+			fgx();
+			var arr4=Array.prototype.slice.bind(divs)();
+			console.log("arr4:",arr4);
+			fgx();
+			var arr5=[].slice.call(divs);
+			console.log("arr5:",arr5);
+			fgx();
+			var arr6=[].slice.apply(divs);
+			console.log("arr6:",arr6);
+			fgx();
+			var arr7=["1"].slice.bind(divs)();
+			console.log("arr7:",arr7);
+			fgx("Array.from() 这是Array的静态方法");
+			var arr8=Array.from(divs);
+			console.log("arr8:",arr8);
+			
+			
+			
+			function fgx(str){
+				/* 
+				if(str==undefined){
+					str=""
+				} */
+				
+				/* if(!str){
+					str="";
+				} */
+				// str?str:(str="");
+				str||(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-");
+			}
+		</script>
+	</body>
+</html>

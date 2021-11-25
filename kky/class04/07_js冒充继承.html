@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		/* 
+		 冒充继承
+		 */
+			function Father(money,car){
+				this.money=money;
+				this.car=car;
+				this.say=function(){
+					console.log("我有",this.money,"还有车",this.car);
+				}
+			}
+			
+			Father.prototype.jiNeng="开车";//无法s1继承被继承
+			
+			function Son(money,car){
+				Father.call(this,money,car);//冒充继承
+			}
+			
+			var s1=new Son(100,"五菱宏光");
+			console.log("s1:",s1);
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

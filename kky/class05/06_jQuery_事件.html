@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#app{
+				display: flex;
+			}
+			#app>div{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1"></div>
+			<div id="d2"></div>
+			<div id="d3"></div>
+			<div id="d4"></div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			$("#d1").click(function(){
+				console.log("1这是jquery中添加的click事件");
+			});
+			$("#d1").click(function(){
+				console.log("2这是jquery中添加的click事件");
+			});
+			//js 事件对象 和 jq 事件对象
+			
+			$("#app>div").click(function(jQevent){
+				console.log("3this:",this,$(this),jQevent);
+			});
+			
+			$("#d3").mouseenter(function(){
+				console.log("鼠标移入了");
+			})
+		</script>
+	</body>
+</html>

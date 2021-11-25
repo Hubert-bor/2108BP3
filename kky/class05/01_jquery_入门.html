@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>
+			
+		</div>
+	<!-- 	<script src="../jQuery/jquery-1.12.4.js"></script>
+		<script src="../jQuery/jquery-2.2.4.js"></script>
+		
+		
+		<script src="../jQuery/jquery-1.12.4.min.js"></script>
+		<script src="../jQuery/jquery-3.6.0.min.js"></script>
+		<script src="../jQuery/jquery-2.2.4.min.js"></script> -->
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			/* 
+			1.jq 引入
+			 
+			 */
+			// console.dir($);
+			console.log("$:",$);
+			
+			var v1=$.fn.jquery;
+			var v1=$.fn['jquery'];
+			var attr="jquery";
+			var v1=$.fn[attr];
+			console.log("v1:",v1);
+			console.log("$===jQuery:",$===jQuery);
+			var v2=jQuery.fn.jquery;
+			console.log("v2:",v2);
+			
+			var v3=$().jquery;
+			console.log("v3:",v3);
+			
+			var v4=jQuery().jquery;
+			console.log("v4:",v4);
+			console.log("/////////////////////////////////////////");
+			console.log("kky:",kky,"\n$:",$,"\njQuery:",jQuery);
+			
+			var kky=jQuery.noConflict();//
+			
+			console.log("/////////////////////////////////////////");
+			console.log("kky:",kky,"\n$:",$,"\njQuery:",jQuery);
+			console.log("/////////////////////////////////////////");
+			
+			var v5=kky.fn.jquery;
+			console.log("v5:",v5);
+			
+		</script>
+		
+		
+		
+	</body>
+</html>

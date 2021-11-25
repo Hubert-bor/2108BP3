@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>遍历</title>
+    <style>
+        .fontRed{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        <b>jQuery遍历</b>
+        jQuery遍历，意为“移动”用于根据其相对于其他元素的关系来“查找”（或获取）HTML元素。以某项选择开始，
+        并沿着这个选择移动，直到抵达您期望的元素为止。
+
+        <b>向上遍历DOM树</b>
+        <ul>
+            <li>parent()</li>
+            <li>parents()</li>
+            <li>parentsUntil()</li>
+        </ul>
+
+       <ul>
+           <li>
+                <h5>祖先</h5>
+                <b>jQuery parent()方法</b>
+                parent()方法返回被选元素的直接父元素。
+                该方法只能向上一级对DOM树进行遍历。
+        
+                <b>jQuery parents()方法</b>
+                parents()方法返回被选中元素的所有祖先元素，它一路向上直到文档的根元素(html).
+        
+                也可以使用可选参数来过滤祖先元素的搜索
+        
+                <b>jQuery parentsUntil()方法</b>
+                parentsUntil()方法返回介于两个给定元素之间的所有祖先元素。
+           </li>
+           <li>
+                <h5>后代</h5>
+                <p>后代是子、孙、曾孙等等</p>
+                <p>通过jQuery，可以向下遍历DOM树，以查找元素的后代</p>
+
+                <ul>
+                    <li><b>向下遍历DOM树</b></li>
+                    <li>children()</li>
+                    <li>find()</li>
+                </ul>
+
+                <b>jQuery children()方法</b>
+                <p>
+                    children()方法返回被选元素的所有<b class="fontRed">直接</b>子元素。<br>
+                    该方法只会向下一级DOM树进行遍历。<br>
+                    可以使用可选参数来过滤对子元素的搜索。
+                </p>
+
+                <b>jQuery find()方法</b>
+                <p>
+                    find()方法返回被选中元素的后代元素，一路向下知道最后一个后代。
+                </p>
+           </li>
+
+           <li>
+               <h5>同胞</h5>
+               <b>同胞拥有相同的父元素。</b>
+
+               <ul>
+                   <li>siblings()</li>
+                   <li>next()</li>
+                   <li>nextAll()</li>
+                   <li>nextUntil()</li>
+                   <li>prev()</li>
+                   <li>prevAll()</li>
+                   <li>prevUntil()</li>
+               </ul>
+
+               <b>jQuery siblings()方法</b>
+               <P>
+                   siblings()方法返回被选元素的所有同胞元素。<br>
+                   可以使用参数来过滤对同胞元素的搜索。
+               </P>
+
+               <b>jQuery next()方法</b>
+               <p>
+                    next()方法返回被选元素的下一个同胞元素。<br>
+                    该方法返只返回一个元素。
+               </p>
+
+               <b>jQuery nextAll()方法</b>
+               <p>
+                   nextAll()方法返回被选元素的所有跟随的同胞元素。
+               </p>
+
+               <b>jQuery nextUntil()方法</b>
+               <p>
+                   nextUntil()方法返回介于两个给参数之间的所有跟随的同胞元素。
+               </p>
+
+               <b>jQuery prev(),prevAll() & prevUntil()方法</b>
+               <p>
+                   prev(),prevAll()以及prevUntil()方法的工作方式与上面的方法类似，只不过方向相反而已；<br>
+                   它们返回的是前面的同胞元素（在DOM树中沿着同胞元素向后遍历，而不是向前）。
+               </p>
+           </li>
+
+           <li>
+               <h5>过滤</h5>
+               <b>缩写搜索元素的范围</b>
+               <p>
+                   三个最基本的过滤方式是：
+                        first(),last()和eq()<br>
+                        它们允许基于其在一组元素中的位置来选择一个特定的元素。
+                        其他过滤方法，比如：
+                            filter()和not()允许选取匹配或不匹配某项执行标准的元素。
+               </p>
+
+               <b>jQuery first()方法</b>
+               <p>
+                   first()方法返回被选元素的首个元素。
+               </p>
+
+               <b>jQuery last()方法</b>
+               <p>
+                   last()方法返回被选元素的最后一个元素。
+               </p>
+
+               <b>jQuery eq()方法</b>
+               <p>
+                   eq()方法返回被选元素中带有指定索引号的元素。
+                   索引号从0开始，因此首个元素的索引号是0而不是1。
+               </p>
+
+               <b>jQuery filter()方法</b>
+               <p>
+                   filter()方法允许规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。
+               </p>
+
+               <b>jQuery not()方法</b>
+               <p>
+                    not()方法返回不匹配标准的所有元素。
+               </p>
+               
+           </li>
+       </ul>
+
+    </pre>
+</body>
+
+</html>

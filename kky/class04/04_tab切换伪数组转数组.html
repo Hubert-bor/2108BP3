@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			button.active{
+				background-color: blue;
+				color: #fff;
+			}
+			div#show>div{
+				display: none;
+				background-color: pink;
+				height: 50px;
+				line-height: 50px;
+			}
+			div#show>div.show{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="topBtn">
+				<button type="button" class="active">周一</button>
+				<button type="button">周二</button>
+				<button type="button">周三</button>
+				<button type="button">周四</button>
+				<button type="button">周五</button>
+			</div>
+			<div id="show">
+				<div class="show">吃火锅</div>
+				<div>吃逍遥镇胡辣汤</div>
+				<div>吃潼关肉夹馍</div>
+				<div>吃兰州拉面</div>
+				<div>吃石家庄正宗安徽板面</div>
+			</div>
+		</div>
+		<script>
+			;(function(){
+				var btns=document.querySelectorAll("div#topBtn>button");
+				console.log("btns:",btns);
+				var divs=document.querySelectorAll("div#show>div");
+				console.log("divs:",divs);
+				// tabFun1(btns,divs);
+				tabFun2(btns,divs);
+			}());
+			
+			function tabFun1(doms1,doms2){
+				for(var i=0;i<doms1.length;i++){
+					var n=0;
+					doms1[i].onclick=function(){
+						// console.log("0this:",this);
+						/* 
+						for(var j=0;j<doms1.length;j++){
+							if(this===doms1[j]){
+								console.log("j:",j);
+								break;
+							}
+						}
+						 */
+						for(var j=0;j<doms1.length;j++){
+							doms1[j].classList.remove("active");
+							doms2[j].classList.remove("show");
+						}
+						
+						var arr = [].slice.call(doms1);//伪数组转数组
+						// console.log("arr:",arr);
+						n=arr.indexOf(this);
+						console.log("n:",n);
+						
+						this.classList.add("active");
+						doms2[n].classList.add("show")
+						
+					}
+				}
+			}
+			
+			function tabFun2(doms1,doms2){
+				for(var i=0;i<doms1.length;i++){
+					var n=0;
+					doms1[i].onclick=function(){
+						// console.log("0this:",this);
+						for(var j=0;j<doms1.length;j++){
+							doms1[j].classList.remove("active");
+							doms2[j].classList.remove("show");
+							if(this===doms1[j]){
+								n=j;
+								// break; //此时一定不能加break;
+							}
+						}
+						
+						this.classList.add("active");
+						doms2[n].classList.add("show")
+						
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

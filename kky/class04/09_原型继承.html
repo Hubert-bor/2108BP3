@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		/* 
+		 原型继承
+		 */
+			function Father(money,car){
+				this.money=money;
+				this.car=car;
+			}
+			
+			function son(obj){
+				function Child(){};
+				Child.prototype=obj;
+				return new Child();
+			}
+		
+			var f1=new Father(999,"三轮车");
+			var s1=son(f1);
+			console.log("s1:",s1);
+			console.log("s1.car:",s1.car);
+			
+			
+			
+		</script>
+	</body>
+</html>

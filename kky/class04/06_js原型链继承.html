@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		/* 
+		 原型链继承
+		 
+		 */
+			Object.prototype.nengli="学习";
+		
+			function Father(car){
+				this.car=car;
+				this.say=function(){
+					console.log("我有一辆车",this.car);
+				}
+			}
+			var f1=new Father("大卡车");
+			
+			
+			function Son(phone){
+				this.phone=phone;
+			}
+			
+			console.log("Son.prototype:",Son.prototype);
+			
+			// Son.prototype=f1;//继承
+			
+			Son.prototype=new Father("奔驰");//继承
+		
+			
+			var s1=new Son("大哥大");
+			var s2=new Son("大菠萝");
+			
+			console.log("f1:",f1);
+			console.log("s1:",s1);
+			console.log("s2:",s2);
+			fgx();
+			console.log("s1.car:",s1.car);
+			console.log("s2.car:",s2.car);
+			fgx();
+			s1.say();
+			s2.say();
+			
+			function fgx(str=""){
+				/* 
+				if(str==undefined){
+					str=""
+				} */
+				
+				/* if(!str){
+					str="";
+				} */
+				// str?str:(str="");
+				
+				// str||(str="");
+				
+				console.log(str+"-=-=-=-=-=-=-=-=-=-");
+			}
+		</script>
+	</body>
+</html>

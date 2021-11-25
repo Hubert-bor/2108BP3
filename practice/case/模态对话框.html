@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模态对话框</title>
+    <style>
+        #box {
+            background-color: seagreen;
+            height: 500px;
+
+        }
+
+        /* 灰色背景 */
+        .show {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+            background-color: rgba(0, 0, 0, .6);
+        }
+
+        /* 白色提示框 */
+        .modal {
+            width: 300px;
+            height: 200px;
+            background-color: #fff;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-left: -150px;
+            margin-top: -100px;
+            z-index: 999;
+        }
+
+        /* 让灰色背景和白色框隐藏 */
+        .hide {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="box">
+        <button onclick="showModal()">发送</button>
+    </div>
+    <!-- 模态框 -->
+    <div id="view" class="show hide"></div>
+    <!-- 显示窗口 -->
+    <div id="show" class="modal hide">
+        <a href="javascript:void(0);" onclick="hideModal()">取消</a>
+    </div>
+ 
+    <script src="../jQuery3.6.0/jQuery3.6.0.js"></script>
+    <script>
+
+        /* 
+            通过让灰色背景和白色展示区域隐藏和显示实现模态框
+            添加和删除类名的方式
+                removeClass("类名")
+                addClass("类名")
+
+        */
+        function showModal(){
+            $("#view").removeClass("hide");
+            $("#show").removeClass("hide");
+        }
+        function hideModal(){
+            $("#view").addClass("hide");
+            $("#show").addClass("hide");
+        }
+    </script>
+</body>
+
+</html>

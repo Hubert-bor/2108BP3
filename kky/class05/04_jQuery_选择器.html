@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1" class="d1">d1
+				<p class="p1">p1_1</p>
+				<b>b1_2</b>
+			</div>
+			<div id="d2">
+				d2
+				<span>性别:</span>
+				<label>
+					小哥哥<input type="radio" name="sex" value="0" />
+				</label>
+				<label>
+					小姐姐<input type="radio" name="sex" value="1" />
+				</label>
+				<button type="button" id="btn1">获取性别</button>
+			</div>
+			<div id="d3" class="d3d4">d3</div>
+			<div id="d4" class="d3d4">d4</div>
+			<div id="d5">d5</div>
+			<div id="d6"></div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			/* 
+			 1.通配符选择器(*)
+			 2.标签选择器
+			 3.class 
+			 4.id
+			 */
+			
+			$(document).ready(function(){
+				// console.groupCollapsed("1.通配符选择器(*)");
+				// console.groupEnd();
+				var r1=$("#d1>*");//通配符
+				console.log("r1:",r1);
+				fgx();
+				var r2=$("b");//标签
+				console.log("r2:",r2);
+				fgx();
+				var r3=$(".p1");//class
+				console.log("r3:",r3);
+				fgx();
+				var r4=$("#d2");//id
+				console.log("r4:",r4);
+				fgx();
+				var r5=$("#d1 *");//后代
+				console.log("r5:",r5);
+				fgx();
+				var r6=$("#app>div");//子
+				console.log("r6:",r6);
+				fgx("相邻选择器");
+				var r7=$("#d3+#d4");//
+				console.log("r7:",r7);
+				fgx("兄弟选择器");
+				var r8=$("#d1~");//
+				console.log("r8:",r8);
+				fgx("兄弟选择器");
+				var r9=$("#d1~#d4");//
+				console.log("r9:",r9);
+				fgx();
+				var r10=$("div#d1.d1");//组合
+				console.log("r10:",r10);
+				fgx();
+				var r11=$("#d1,#d2,#d3");//群组
+				console.log("r11:",r11);
+			});
+			
+			fgx();
+			$("#btn1").click(function(){
+				var r2=$("#d2>label>input:checked");
+				console.log("r2:",r2);
+				var sex=$("#d2>label>input:checked").val();
+				console.log("sex:",sex);
+			})
+			fgx();
+			fgx();
+			$(function(){
+				var r12=$("input[type='radio']");
+				console.log("r12:",r12);
+				fgx();
+				var r13=$("#app>div:first");
+				console.log("r13:",r13);
+				fgx();
+				var r18=$("#app>div:last");
+				console.log("r18:",r18);
+				fgx();
+				var r14=$("div#d2>label>input:radio");
+				console.log("r14:",r14);
+				fgx();
+				var r15=$("#app>div:even");
+				console.log("r15:",r15);
+				fgx();
+				var r16=$("#app>div:odd");
+				console.log("r16:",r16);
+				fgx(":parent非空元素");
+				var r17=$("div:parent");//查询div但不能是空的div(是个父亲(即有子元素))
+				console.log("r17:",r17);
+				fgx(":not反 条件 元素");
+				var r19=$("div:not(:parent)");
+				console.log("r19:",r19);
+				fgx(":empty");
+				var r23=$("div:empty");
+				console.log("r23:",r23);
+				
+				fgx(":eq(数字)");//下标,可以为负,从后边开始找
+				var r20=$("#app>div:eq(3)");//等于3
+				console.log("r20:",r20);
+				fgx(":gt()");
+				var r21=$("#app>div:gt(3)");//大于3
+				console.log("r21:",r21);
+				fgx(":lt()");
+				var r22=$("#app>div:lt(3)");//小于3
+				console.log("r22:",r22);
+			});
+			
+			
+			
+			
+			function fgx(str){
+				str||(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+			}
+		</script>
+	</body>
+</html>

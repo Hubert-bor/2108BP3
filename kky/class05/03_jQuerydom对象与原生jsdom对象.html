@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#app{
+				display: flex;
+			}
+			#d1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				color: #fff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			#d2{
+				width: 100px;
+				height: 100px;
+				background-color: blue;
+				color: #fff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1" class="d1">
+				d1
+			</div>
+			<div id="d2">
+				d2
+			</div>
+			<p name="p">P3</p>
+			<div id="d4">
+				<button type="button">按钮1</button>
+				<button type="button">按钮2</button>
+				<button type="button">按钮3</button>
+				<button type="button">按钮4</button>
+				<button type="button">按钮5</button>
+			</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			fgx("原生js dom");
+			var d11=document.getElementById("d1");
+			console.log("d11:",d11);
+			var d12=document.getElementsByClassName("d1");
+			console.log("d12:",d12);
+			var d13=document.querySelector("#d1");
+			console.log("d13:",d13);
+			var d14=document.querySelectorAll("#d1");
+			console.log("d14:",d14);
+			var p1=document.getElementsByTagName("p");
+			console.log("p1:",p1);
+			var p2=document.getElementsByName("p");
+			console.log("p2:",p2);
+			
+			fgx("jq dom");
+			var d21=$("#d1");
+			console.log("d21:",d21);
+			var d22=$(".d1");
+			console.log("d22:",d22);
+			
+			fgx("原生dom与jq dom之间的转换");
+			fgx("原生dom与jq dom之间的转换");
+			fgx("原生dom与jq dom之间的转换");
+			var div21=document.getElementById("d2");
+			var div22=document.querySelector("#d2");
+			var div23=document.querySelectorAll("#d2");
+			fgx();
+			var div24=$("#d2");
+			console.log("div24:",div24);
+			
+			fgx("从原生dom==>jq dom ==>$(原生dom)");
+			
+			console.log("div21:",div21);
+			var jqdom1=$(div21);
+			console.log("jqdom1:",jqdom1);
+			console.log("div22:",div22);
+			var jqdom2=$(div22);
+			console.log("jqdom2:",jqdom2);
+			var jqdom3=$(div23);
+			console.log("div23:",div23);
+			console.log("jqdom3:",jqdom3);
+			
+			fgx("从jq dom==>原生 dom ==> 下标或者get(下标) ");
+			var jsdom1=jqdom1[0];
+			console.log("jsdom1:",jsdom1);
+			var jsdom2=jqdom2.get(0);
+			console.log("jsdom2:",jsdom2);
+			fgx();
+			fgx();
+			fgx();
+			var jqdivs=$("#app>div");
+			console.log("jqdivs:",jqdivs);
+			for(var i=0;i<jqdivs.length;i++){
+				console.log("1jqdivs["+i+"]:",jqdivs[i]);
+				fgx();
+				console.log("2jqdivs["+i+"]:",jqdivs.get(i));
+				fgx();
+			}
+			
+			fgx("案例");
+			fgx("案例");
+			fgx("案例");
+			fgx("案例");
+			$("div#d4>button").click(function(){
+				console.log("this:",this,$(this));
+			})
+			
+			
+			function fgx(str){
+				str||(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+			}
+		</script>
+	</body>
+</html>

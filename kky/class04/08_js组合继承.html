@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function Father(money,car){
+				this.money=money;
+				this.car=car;
+			}
+			
+			Father.prototype.jiNeng="开车";
+			
+			
+			function Son(money,car){
+				// Father.call(this,money,car);
+				Father.apply(this,[money,car]);//冒充继承
+			}
+			
+			Son.prototype=new Father(9999999999,"红旗");//原型链继承
+			
+			var s1=new Son(100,"五菱宏光mini");
+			
+			console.log("s1:",s1);
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1" class="d1">
+				d1
+				<div id="d1_1">
+					d1_1
+					<div id="d1_1_1">
+						d1_1_1
+					</div>
+				</div>
+				<p id="p1_2">
+					p1_2
+				</p>
+			</div>
+			<div id="d2">d2</div>
+			<div id="d3">d3</div>
+			<div id="d4">d4</div>
+			<div id="d5">d5</div>
+			<p id="p6"></p>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			/* 
+			jq 遍历方法
+			 
+			 
+			 */
+			// var r0=$("#app>div:eq(3)");
+			// console.log("r0:",r0);
+			var r1=$("#app>div").eq(3);
+			console.log("r1:",r1);
+			fgx();
+			var r2=$("#app>div").slice(1,4);
+			console.log("r2:",r2);
+			fgx();
+			var r3=$("#app").find("p");
+			console.log("r3:",r3);
+			fgx();
+			var r4=$("#app").children();
+			console.log("r4:",r4);
+			fgx();
+			var r5=$("#app").children("p");
+			console.log("r5:",r5);
+			fgx("parent() 直接父元素");
+			var r6=$("#d1_1_1").parent();
+			console.log("r6:",r6);
+			fgx();
+			var r7=$("#d1_1_1").parents();
+			console.log("r7:",r7);
+			fgx();
+			var r8=$("#d1_1_1").parentsUntil("#app");
+			console.log("r8:",r8);
+			fgx("重要");
+			fgx("重要");
+			fgx("重要");
+			var r9=$("#d3").siblings();
+			console.log("r9:",r9);
+			fgx();
+			var r10=$("#d3").siblings("p");
+			console.log("r10:",r10);
+			fgx();
+			var r11=$("#d3").next();
+			console.log("r11:",r11);
+			fgx();
+			var r12=$("#d5").next("p");
+			console.log("r12:",r12);
+			fgx();
+			var r13=$("#d3").nextAll();
+			console.log("r13:",r13);
+			fgx();
+			var r14=$("#d3").nextAll("p");
+			console.log("r14:",r14);
+			fgx();
+			var r15=$("#d3").nextUntil("#d5");
+			console.log("r15:",r15);
+			fgx();
+			var r16=$("#d3").prev();
+			console.log("r16:",r16);
+			fgx();
+			var r17=$("#d5").prev("div");
+			console.log("r17:",r17);
+			fgx();
+			var r18=$("#d3").prevAll();
+			console.log("r18:",r18);
+			fgx();
+			var r19=$("#d3").prevAll("#d1");
+			console.log("r19:",r19);
+			fgx();
+			var r20=$("#d3").prevUntil("#d1");
+			console.log("r20:",r20);
+			
+			
+			function fgx(str){
+				// str||(str="");
+				str?str:(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=-=-=");
+			}
+			
+		</script>
+	</body>
+</html>
