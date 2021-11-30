@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	Node.js 文件系统
+Node.js 提供一组标准的文件操作API。
+Node 导入文件系统模块(fs)语法如下所示：
+var fs = require("fs");
+
+	异步和同步
+Node.js 文件系统（fs 模块）模块中的方法均有异步和同步版本，
+例如读取文件内容的函数有异步的 fs.readFile() 和同步的 fs.readFileSync()。
+异步的方法函数最后一个参数为回调函数，回调函数的第一个参数包含了错误信息(error)。
+建议大家是用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。
+	
+/*
+引入fs模块:
+    使用require指令来载入fs模块,并将实例化的fs赋值给变量fs
+*/
+var fs=require("fs");
+
+var file1="data/txt.txt";
+//异步读取
+fs.readFile(file1,function(err,data){
+    if(err){
+        return console.log(err);
+    }
+    console.log("异步读取:",data.toString());
+    console.log("我是在异步完成后才能被执行!");
+});
+
+//同步读取
+var data=fs.readFileSync(file1);
+console.log("同步读取",data.toString());
+console.log("我必须要在读取结束后才能被执行!");
+
+console.log("程序执行完毕");
+
+请查看node/01sync.js
+var fs=require("fs");
+var fileTxt="data/test.txt";
+var str="哈哈";
+
+fs.writeFile(fileTxt,str,function(err){
+	if(err){
+		
+	}else{
+		
+	}
+})
+
+
+//删除文件
+fs.unlink(fileTxt,function(err){
+	if(err){
+		console.log("删除失败",err);
+	}else{
+		console.log("删除成功");
+	}
+})
+
+//复制文件
+fs.copyFile(fileTxt,fileTxt2,function(err){
+	if(err){
+		console.log("err:",err);
+	}else{
+		console.log("文件复制成功");
+	}
+})
+		</pre>
+		<script>
+		</script>
+	</body>
+</html>

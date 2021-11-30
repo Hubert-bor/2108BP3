@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		
+			#app>div,
+			#app>div>div
+			{
+				margin: 10px;
+				min-height: 50px;
+				border: 1px solid red;
+			}
+			.active{
+				background-color: green;
+			}
+			ol>li>div{
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">d1</div>
+			<div id="d2">
+				d2
+				<div id="d2_1"> d2_1</div>
+				<p id="d2_2"> d2_2</p>
+				<div id="d2_3"> d2_3</div>
+			</div>
+			<div id="d3">d3</div>
+			<div id="d4">d4</div>
+			<div id="d5">
+				<div id="d5_1">
+					<ol>
+						<li>自我介绍</li>
+						<li>话题1</li>
+					</ol>
+				</div>
+				<div id="d5_2">
+					<button type="button" id="btn1">添加话题</button>
+				</div>
+			</div>
+			<div id="d6">
+				d6
+			</div>
+			<div id="d7">
+				<button type="button" id="btn2">我是按钮,我有click事件</button>
+				<br>
+				<button type="button" id="btn3">给#d8添加一个click事件</button>
+				<button type="button" id="btn4">给#d8移除一个click事件</button>
+			</div>
+			<div id="d8">
+				d8
+			</div>
+			<div id="d9">
+				d9
+			</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			/* 
+				on 
+				1.可以给自身添加一个事件 $(选择器).on("click",function(){})
+				2.可以给 子元素(可以是) 添加一个事件 $(选择器).on("click","选择器(子元素)",function(){})
+				5.给未来元素添加事件,替换 原生js中的 事件委托,jq 事件委托
+				3.可以给自身添加多个事件,对应一个函数 $(选择器).on("mouseover mouseout",function(){})
+				4.可以给自身添加多个事件,对应多个函数 $(选择器).on({click:function(){},mouseover:function(){}})
+				6.添加自定义事件
+					on用来 添加/注  自定义事件,并添加相应的函数,并接受参数
+					$(选择器kky).on(自定义事件,function(event,参数){
+						console.log(arguments);/
+						....
+					})
+					
+					trigger用来 触发 自定义事件,并传值
+					$(选择器kky).trigger(自定义事件,[参数1]);
+					
+					
+				7. off 移除事件
+				
+				
+				8.one 添加一个事件,但仅仅执行一次
+					
+			 */
+		
+			$(function(){
+				/* 
+				$("#d1").click(function(){
+					console.log("通过click添加");
+				}); */
+				
+				$("#d1").on("click",function(){
+					console.log("通过on添加");
+				});
+				
+				$("#d2").on("click","p",fn2);
+				
+				function fn2(){
+					console.log("通过on给d2的子元素p添加");
+				}
+				
+				/* 
+				$("#d2>div").click(function(){
+					console.log("通过click给d2的子元素div添加");
+				}); */
+				
+				$("#d2").on("click","div",function(){
+					console.log("通过on给d2的子元素div添加");
+				});
+				
+				$("#d3").on("mouseover mouseout",function(){
+					$(this).toggleClass("active");
+				});
+				
+				$("#d4").on({
+					click:function(){
+						console.log("这是click事件");
+						var fs=parseInt($(this).css("font-size"));
+						console.log("fs:",fs);
+						$(this).css("font-size",fs+=5);
+					},
+					mouseover:function(){
+						console.log("这是mouseover事件");
+						$(this).css("backgroundColor","green");
+					},
+					mouseout:function(){
+						console.log("这是mouseout事件");
+						$(this).css("backgroundColor","blue");
+					}
+				})
+				var n=2;
+				$("#btn1").click(function(){
+					var li=`<li><div>话题${n++}</div></li>`;
+					$("#d5_1>ol").append(li);
+					// fnnotBug();
+				});
+				
+				$("#d5_1>ol").on("click","li",function(){
+					console.log("this:",this);
+					$(this).css("color","red");
+				});
+				
+				
+				//自定义事件,myEvent,相当于click
+				// $("#d6").on("myEvent",function(event,xingcan1,xingcan2){
+				$("#d6").on("myEvent",function(event){
+					console.log("event:",event,"xingcan1:",arguments);
+					$(this).css("backgroundColor","red");
+				});
+				
+				$("#btn2").click(function(){
+					console.log("我是btn2的点击事件,通过我触发#d6的自定义事件");
+					//触发 自定义事件
+					$("#d6").trigger("myEvent",["实参1","实参2"]);
+				});
+				
+				// $("#d6").trigger("myEvent",["实参1"]);
+				
+				
+				$("#btn3").click(function(){
+					$("#d8").on("click",function(){
+						console.log("给#d8添加click事件成功");
+					})
+				})
+				
+				$("#btn4").click(function(){
+					$("#d8").off("click")
+				});
+				
+				
+				//给#d2添加一个点击事件,这个事件对应的函数是fn2
+				//$("#d2").on("click",fn2);
+				//$("#d2").on("click",fn3);
+				//$("#d2").on("click",fn4);
+				//$("#d2").on("click",fn5);
+				
+				//1.命名空间
+				$("#d9").on("click.a",function(){
+					console.log("该click事件命名为a");
+				});
+				$("#d9").on("click.b",function(){
+					console.log("该click事件命名为b");
+				});
+				$("#d9").on("click.c",function(){
+					console.log("该click事件命名为c");
+				});
+				$("#d9").on("click.d",function(){
+					console.log("该click事件命名为d");
+				});
+				$("#d9").off("click.d");
+				
+				
+				
+			});
+			
+			//bug 版
+			;(function(){
+					var lis=document.querySelectorAll("#d5_1>ol>li");
+					// console.log("lis:",lis);
+					for(var i=0;i<lis.length;i++){
+						lis[i].onclick=function(){
+							// console.log("this:",this);
+							this.style.color="red";
+						}
+					}
+			});
+			//}());
+			
+			function fnnotBug(){
+				var lis=document.querySelectorAll("#d5_1>ol>li");
+				// console.log("lis:",lis);
+				for(var i=0;i<lis.length;i++){
+					lis[i].onclick=function(){
+						// console.log("this:",this);
+						this.style.color="red";
+					}
+				}
+			}
+			
+			//原生js 事件委托  委托事件  给父元素添加事件 原理:事件冒泡
+			;(function(){
+				var ol=document.querySelector("#d5_1>ol");
+				// console.log("ol:",ol);
+				ol.onclick=function(event){
+					// console.log("event:",event);
+					var dom=event.target||event.srcElement;//核心1
+					// console.log("dom:",dom,dom.nodeName);
+					// console.dir(dom);
+					if(dom.nodeName=="LI"){//核心2
+						dom.style.backgroundColor="red";
+					}else{//dom.nodeName=="DIV"
+						dom.style.backgroundColor="blue";
+						dom.parentElement.style.background="red";
+					}
+					
+				}
+			});
+			
+			
+			sum();//=>0
+			sum(1);//=>1;
+			sum(1,2);//=>3
+			
+			function sum(){
+				
+			}
+			
+			function add(a,b){
+				
+			}
+			
+			
+			
+		</script>
+	</body>
+</html>

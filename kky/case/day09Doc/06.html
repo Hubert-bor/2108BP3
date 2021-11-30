@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+1.将文件内容读取到页面
+var http=require("http");
+var fs=require("fs");
+var file="data/yuZui.txt";
+http.createServer(function(req,res){
+    res.writeHead(200,{"content-type":"text/html;charset=utf-8"});
+    //res.writeHead(200,{"content-type":"text/plain;charset=utf-8"});
+    fs.readFile(file,function(err,data){
+        if(err){
+            return console.error(err);
+        }
+        //console.log(data.toString());
+        res.write(data);
+        res.end();
+    });
+}).listen(81,function(){
+    console.log("开启服务!");
+});
+		</pre>
+		<script>
+		</script>
+	</body>
+</html>

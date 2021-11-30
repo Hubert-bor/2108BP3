@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#d1{
+				width: 200px;
+				height: 200px;
+				padding: 5px;
+				background-color: red;
+				border: 2px solid blue;
+				margin: 3px;
+			}
+			#d2{
+				width: 200px;
+				height: 200px;
+				background-color: #008000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				<button type="button" id="btn1">获取宽高</button>
+				<button type="button" id="btn2">设置宽高</button>
+			</div>
+			<div id="d2">
+				<button type="button" id="btn3">offset</button>
+				<button type="button" id="btn4">offset({left:"100px",top:"20px"})</button>
+				<button type="button" id="btn5">position</button>
+			</div>
+			<div id="d3" style="width: 400px;height: 200px;
+						border: 1px solid #FF0000;margin: 20px;overflow: scroll;white-space:pre-line;">
+							冰心诀
+						心若冰清,天塌不惊;
+						万变犹定,神怡气静;
+						忘我守一,六根大定;
+						戒点养气,无私无为;
+						上下相顾,神色相依;
+						蓄意玄关,降伏思虑;
+						内外无物,若浊冰清;
+						尘垢不沾,俗相不染;
+						虚空甯宓,浑然无物;
+						无有相生,难易相成;
+						份与物忘,同乎浑涅;
+						天地无涯,万物齐一;
+						飞花落叶,虚怀若谷;
+						千般烦忧,才下心头;
+						即展眉头,灵台清幽;
+						心无罣碍,意无所执;
+						解心释神,莫然无魂;
+						灵净归一,气协魄消;
+						水流心不惊,云在意俱迟 ;
+						一心不赘物,古今自逍遥 !
+			</div>
+			<button type="button" id="btn6">获取滚动高度</button>
+			<button type="button" id="btn7">设置滚动高度</button>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+		/*
+			width() 						方法设置或返回元素的宽度（不包括内边距、边框或外边距）							
+		  	height()
+			
+		  	width(value)
+		  	height(value)
+			
+		  	innerWidth() 			获取元素宽度,包含内边距padding
+		  	innerHeight() 			获取元素高度,包含内边距padding
+			
+		  	outerWidth() 			获取元素宽度,包含边框border和内边距padding
+		  	outerHeight() 			获取元素高度,包含边框border和内边距padding
+			
+		  	outerWidth(true) 		获取元素高度,包含边框border和内边距padding,外边框margin
+		  	outerHeight(true) 		获取元素高度,包含边框border和内边距padding,外边框margin
+			
+			
+			offset() 					//获取 left,top
+			offset({left:数字,top:数字}) //设置 left,top
+			
+			position() 					//获取 left,top
+			
+			scrollTop();
+			scrollTop(value);
+			
+			scrollLeft();
+			scrollLeft(value);
+			
+				
+		  */
+		
+			$(function(){
+				$("#btn1").click(function(){
+					var width=$("#d1").width();
+					var height=$("#d1").height();
+					
+					var innerWidth=$("#d1").innerWidth();
+					var innerHeight=$("#d1").innerHeight();
+					
+					var outerWidth=$("#d1").outerWidth();
+					var outerHeight=$("#d1").outerHeight();
+					
+					var outerWidthTrue=$("#d1").outerWidth(true);
+					var outerHeightTrue=$("#d1").outerHeight(true);
+					
+					console.log("width:",width,"height:",height);
+					console.log("innerWidth:",innerWidth,"innerHeight:",innerHeight);
+					console.log("outerWidth:",outerWidth,"outerHeight:",outerHeight);
+					console.log("outerWidthTrue:",outerWidthTrue,"outerHeightTrue:",outerHeightTrue);
+					
+				});
+				
+				
+				$("#btn3").click(function(){
+					var r=$("#d2").offset();
+					console.log("r:",r);
+				});
+				$("#btn4").click(function(){
+					$("#d1").hide();
+					$("#d2").offset({
+						top:100,
+						left:100
+					})
+				});
+				
+				$("#btn5").click(function(){
+					var r=$("#d2").position();
+					console.log("11r:",r);
+				})
+				
+				
+				$("#btn6").click(function(){
+					var scrollTop=$("#d3").scrollTop();
+					console.log("scrollTop:",scrollTop)
+				})
+				
+				$("#btn7").click(function(){
+					$("#d3").scrollTop(250);
+				})
+				
+			})
+		</script>
+	</body>
+</html>

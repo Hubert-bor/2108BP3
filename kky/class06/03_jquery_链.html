@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			app
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			$("#app").mouseenter(function(){
+				$(this).css({
+					width:"100px",
+					height:"100px",
+					backgroundColor:"red"
+				}).click(function(){
+					$(this).css({
+						"font-size":"20px"
+					})
+				}).dblclick(function(){
+					$(this).css({
+						color:"#fff",
+						"line-height":"100px"
+					})
+				}).mouseleave(function(){
+					$(this).css({
+						"border-radius":"100%",
+						"text-align":"center"
+					})
+				})
+			})
+		</script>
+	</body>
+</html>

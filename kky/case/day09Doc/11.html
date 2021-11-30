@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+var http=require("http");
+var fs=require("fs");
+var url=require("url");
+var querystring=require("querystring");
+
+
+var filePage="view/08.html";
+var fileJson="data/d8.json";
+
+function fsRF(res,file,type){
+	fs.readFile(file,function(err,data){
+		if(err){
+			console.log("err",err);
+		}else{
+			res.writeHead(200,{
+				"content-type":type+";charset=utf-8"
+			})
+			res.end(data);
+		}
+	})
+}
+
+function fsRW(fileJson,req,res,obj){
+	fs.readFile(fileJson,function(err,data){
+		if(err){
+			console.log("err",err);
+		}else{
+			var str=data.toString();
+			var arr=JSON.parse(str);
+			arr.push(obj);
+			var str2=JSON.stringify(arr);
+			fs.writeFile(fileJson,str2,function(err){
+				if(err){
+					console.log("err:",err);
+				}else{
+					//var aTag="添加成功br/>前往a href='/'>首页/a>看看"
+					//res.end(aTag);
+					res.end(str2);
+				}
+			})
+		}
+	})
+}
+
+function rwHead(res){
+	return res.writeHead(200,{
+		"content-type":"text/html;charset=utf-8"
+	});
+}
+
+http.createServer(function(req,res){
+	//默认
+	var pathname=url.parse(req.url).pathname;
+	console.log("pathname:",pathname);
+	if(pathname=="/favicon.ico"){
+		return;
+	}else if(pathname=="/"){
+		fsRF(res,filePage,"text/html");
+	/*		fs.readFile(filePage,function(err,data){
+				if(err){
+					console.log("err",err);
+				}else{
+					res.writeHead(200,{
+						"content-type":"text/html;charset=utf-8"
+					})
+					res.end(data);
+				}
+			})*/
+	}else if(pathname=="/addGet"){
+			/*res.writeHead(200,{
+				"content-type":"text/html;charset=utf-8"
+			});*/
+		rwHead(res);
+		var obj=url.parse(req.url,true).query;
+		fsRW(fileJson,req,res,obj);
+		/*		fs.readFile(fileJson,function(err,data){
+					if(err){
+						console.log("err",err);
+					}else{
+						var obj=url.parse(req.url,true).query;
+						var str=data.toString();
+						var arr=JSON.parse(str);
+						arr.push(obj);
+						var str2=JSON.stringify(arr);
+						fs.writeFile(fileJson,str2,function(err){
+							if(err){
+								console.log("err:",err);
+							}else{
+								//var aTag="添加成功br/>前往a href='/'>首页/a>看看"
+								//res.end(aTag);
+								res.end(str2);
+							}
+						})
+					}
+				})*/
+	}else if(pathname=="/addPost"){
+		console.log("post开始接收数据");
+		var str="";//1.设置空字符串
+		/*res.writeHead(200,{
+			"content-type":"text/html;charset=utf-8"
+		})*/
+		rwHead(res);
+		//2.开始接收
+		req.on("data",function(data2){
+			console.log("data2:",data2);
+			console.log("data2:",data2.toString());
+			str+=data2;
+		});
+		//3.接收完毕
+		req.on("end",function(){
+			var obj=querystring.parse(str);
+			console.log("obj",obj);
+			fsRW(fileJson,req,res,obj);
+/*			fs.readFile(fileJson,function(err,data){
+				if(err){
+					console.log("err:",err);
+				}else{
+					var str=data.toString();
+					var arr=JSON.parse(str);
+					arr.push(obj);
+					var str2=JSON.stringify(arr);
+					fs.writeFile(fileJson,str2,function(err){
+						if(err){
+							console.log("err:",err);
+						}else{
+							//var aTag="添加成功br/>前往a href='/'>首页/a>看看"
+							//res.end(aTag);
+							res.end(str2);
+						}
+					})
+				}
+			})*/
+		})
+		
+	}else{
+		res.writeHead(404,{
+			"content-type":"text/html;charset=utf-8"
+		});
+		res.end("该页面不存在!br/>前往a href='/'>首页/a>看看");
+	}
+	
+	
+}).listen(80,function(){
+	console.log("ok 80");
+});
+
+
+
+		
+		</pre>
+		<script>
+			;(function(){
+				
+			}());
+			
+			function fgx(str){
+				str?str:str=""
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=");
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阻止冒泡和阻止默认事件</title>
+    <style>
+        div{
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            display: flex;
+        }
+        #children{
+            width: 200px;
+            height: 100px;
+            border: 1px solid red;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="parent">
+        parent
+        <div id="children">
+            children
+            <a href="javascript:#">点我不会跳转</a>
+        </div>
+    </div>
+
+    <script src="../../practice/jQuery3.6.0/jQuery3.6.0.js"></script>
+    <script>
+        $("#children").click(function(event){
+            event.stopPropagation();//阻止冒泡事件
+            console.log("children go!");
+        })
+        $("#parent").click(function(){
+            console.log("parent go!");
+        })
+
+        //阻止默认事件
+        $("a").click(function(event){
+            event.preventDefault();
+            console.log("preventDefault OK!");
+            event.stopPropagation();
+        })
+
+    </script>
+</body>
+</html>

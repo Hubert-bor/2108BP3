@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				<label>
+					全选/全不选
+					<input type="checkbox" id="allCheck" />
+				</label>
+			</div>
+			<div id="d2">
+				<button type="button" id="btn1">attr和prop获取状态</button>
+			</div>
+			<div id="d3">
+				<button type="button" id="btn2">attr选中</button>
+				<button type="button" id="btn3">prop选中</button>
+				<button type="button" id="btn4">attr取消</button>
+				<button type="button" id="btn5">prop取消</button>
+				<button type="button" id="btn6">prop 反选</button>
+			</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script type="text/javascript" charset="UTF-8">
+			/* 
+			attr
+			 $(selector).attr(属性名) 		//获取一个属性值
+			 $(selector).attr(属性名,属性值) //添加/设置/修改一个属性
+			  $(selector).attr({
+					属性名1:属性值1,
+					属性名2:属性值2
+			  })						//添加/设置/修改 多个属性
+			
+			removeAttr(属性名)
+			
+			
+			 prop
+			  $(selector).prop(属性名) 		//获取一个属性值
+			$(selector).prop(属性名,属性值) //添加/设置/修改一个属性
+			 $(selector).prop({
+			 					属性名1:属性值1,
+			 					属性名2:属性值2
+			 })						//添加/设置/修改 多个属性
+			 
+			 
+			 	removeProp(属性名)
+				
+				重点
+				
+				prop() 和 attr() 之间的不同
+				attr获取checked(disabled,readonly,selected)不能判断是否被选中
+				
+				prop获取checked(disabled,readonly,selected)可以判断是否被选中,返回true/false
+				
+				
+			 */
+			
+			
+			$(function(){
+				
+				$("#btn1").click(function(){
+					var r1=$("#allCheck").attr("checked");
+					console.log("r1:",r1);
+					var r2=$("#allCheck").prop("checked");
+					console.log("r2:",r2);
+				});
+				$("#btn2").click(function(){
+					$("#allCheck").attr("checked","checked");
+				});
+				
+				$("#btn3").click(function(){
+					$("#allCheck").prop("checked",true);
+				});
+				$("#btn4").click(function(){
+					// $("#allCheck").attr("checked","");
+					$("#allCheck").removeAttr("checked");
+				});
+				
+				$("#btn5").click(function(){
+					$("#allCheck").prop("checked",false);
+				});
+				
+				$("#btn6").click(function(){
+					var f=$("#allCheck").prop("checked");
+					$("#allCheck").prop("checked",!f);
+				});
+				
+				
+			})
+		</script>
+	</body>
+</html>

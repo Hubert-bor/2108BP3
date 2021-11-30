@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+			post提交
+var http = require("http");
+var fs = require("fs");
+var url = require("url");
+var querystring = require("querystring");
+
+http.createServer(function(req, res) {
+	res.writeHead(200,{
+		"content-type":"text/html;charset=utf-8",
+		"Access-Control-Allow-Origin":"*"
+		});
+	var arr=""
+	req.on("data",function(data){
+		console.log("1",data.toString());
+		arr+=data;
+	});
+	
+	req.on("end",function(){
+		var obj=querystring.parse(arr);
+		console.log("obj:",obj);
+		res.end(JSON.stringify(obj));
+	})
+	
+}).listen(81, function(){
+	console.log("开启服务!");
+});
+
+	获取GET请求内容
+由于GET请求直接被嵌入在路径中，URL是完整的请求路径，包括了?后面的部分，
+因此你可以手动解析后面的内容作为GET请求的参数。
+url.parse(req.url, true).query
+
+获取 POST 请求内容
+POST 请求的内容全部的都在请求体中，
+http.ServerRequest 并没有一个属性内容为请求体，
+原因是等待请求体传输可能是一件耗时的工作。
+比如上传文件，而很多时候我们可能并不需要理会请求体的内容，
+恶意的POST请求会大大消耗服务器的资源，
+所以 node.js 默认是不会解析请求体的，当你需要的时候，需要手动来做。
+
+
+	data - 当有数据可读时触发。
+	end - 没有更多的数据可读时触发。
+
+
+	querystring
+querystring 模块提供了一些实用函数，用于解析与格式化 URL 查询字符串。 使用以下方法引入：
+var  querystring = require('querystring');
+
+
+querystring.parse(str)
+
+该方法会把一个 URL 查询字符串 str 解析成一个键值对的集合。
+
+例子，查询字符串 'foo=bar&abc=xyz&abc=123' 被解析成：
+
+{
+  foo: 'bar',
+  abc: ['xyz', '123']
+}
+该方法返回的对象不继承自 JavaScript 的 Object 类。 
+这意味着 Object 类的方法如 obj.toString()、obj.hasOwnProperty() 等没有被定义且无法使用。
+
+                  
+querystring.stringify(obj)
+
+obj &lt;Object> 要序列化成 URL 查询字符串的对象。
+
+
+
+
+		</pre>
+	</body>
+</html>

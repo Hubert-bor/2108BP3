@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)http://169.254.119.156:8020/HBuilderProject/1812A3/day06/05.html?__hbt=1638156799455 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+			.d{
+				border: 1px solid red;
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<input disabled="" readonly="">
+		<pre>0.插件是jQuery原型对象上扩展出来的一种新的方法（method）。插件一旦生效，所有的jQuery对象都将拥有该方法。
+   插件是对集合中所有元素的一次处理操作.
+
+1.jQuery.extend扩展&lt;strong&gt;对象&lt;/strong&gt;方法
+jQuery.extend方法
+静态方法，通常用来制作工具方法
+用于扩展jQuery类本身，将对象合并到jQuery的全局对象中。
+为类添加新的方法
+			//jQuery.extend({})
+			$.extend({
+				"minValue":function(a,b){
+					return a&lt;b?a:b;//比较两个值,返回较小的值
+				},
+				maxValue:function(){
+					return a&gt;b?a:b;//比较两个值,返回较大的值
+				}
+			});
+			var a=2,b=5;
+			var maxV=$.maxValue(a,b);
+			var minV=$.minValue(a,b);
+			console.log("maxV:",maxV,"minv:",minV);
+2.	jQuery.fn.extends扩展&lt;strong&gt;元素&lt;/strong&gt;方法	
+基本语法：$.fn.extend()
+将src合并到元素实例的方法中。扩展 jQuery 元素集来提供新的方法（通常用来制作插件）
+			//jQuery.fn.extend()
+			$.fn.extend({
+				myBold:function(){
+					console.log("this:",this);
+					return this.css({fontWeight:"bold"});
+				}
+			})
+			$("#d1").myBold();
+			
+			$.fn.myColor=function(){
+				console.log("this:",this);
+				return this.css({color:"red"});
+			}
+			$("#d1").myColor();
+二.封装插件
+jQuery(function(){　});用于存放操作DOM对象的代码，
+不可用于存放开发插件的代码，因为jQuery对象没有得到传递，
+外部通过jQuery.method也调用不了其中的方法（函数）。
+
+(function(){　})(jQuery)；用于存放开发插件的代码
+插件设计规则：
+	插件文件的命名方法：jquery.[插件名].js 
+	所有的元素扩展方法附加到JQuery.fn对象上面，而所有的全局函数附加到JQuery全局对象本身上。 
+	在插件内部，this指向的是当前通过选择器获取的JQuery对象（单个或多个元素集合），
+而不再指向的是目标DOM元素。 
+	可以通过this.each 来遍历所有的元素 
+	所有方法或函数插件，都应当以分号结尾，否则压缩的时候可能会出现问题。
+	插件应该返回一个JQuery对象，以便保证插件的可链式操作。 
+
+
+JQuery插件开发步骤
+	使用闭包
+	;(function($)){ }(jQuery); 
+		a)、避免全局依赖
+		b)、避免第三方破坏 
+		c)、兼容jquery操作符'$'和'jQuery' 
+2、扩展 
+	JQuery提供了2个供用户扩展的“基类”--$.extend和$.fn.extend
+	$.extend用于自身方法 
+	$.fn.extentd用户扩展jquery类 
+3、选择器 
+	a)、尽量使用Id选择器 
+	b)、样式选择器应该尽量明确指定的tagName，
+	例如className为jq的div，要写成$('div.jq')而不是$('.jq')
+
+		</pre>
+		<div id="d1" style="padding: 10px; margin: 10px; border: 1px solid rgb(255, 153, 0); font-weight: bold; color: red;">
+			我是粗体吗1?
+		</div>
+		<div class="d" style="padding: 10px; margin: 10px; border: 1px solid rgb(255, 153, 0);">
+			我是粗体吗2?
+		</div>
+		<div class="d" style="padding: 10px; margin: 10px; border: 1px solid rgb(255, 153, 0);">
+			我是粗体吗3?
+		</div>
+		<script src="./05_files/jquery-1.12.4.js.下载"></script>
+		<script src="./05_files/jquery.min.js.下载"></script>
+		<script src="./05_files/jQuery.myD.js.下载"></script>
+		<script>
+			//3.
+			var r4=$(".d").myD();
+			console.log("r4:",r4);
+			
+			
+			var r3=$("#d1").myD();
+			console.log("r3:",r3);
+			//2.jQuery.fn.extends()
+			$.fn.extend({
+				myBold:function(){
+					console.log("this:",this);
+					return this.css({fontWeight:"bold"});
+				}
+			});
+			var r2=$("#d1").myBold();
+			console.log("r2:",r2);
+			
+			$.fn.myColor=function(){
+				console.log("this:",this);
+				return this.css({color:"red"});
+			}
+			var r1=$("#d1").myColor();
+			console.log("r1:",r1);
+			
+			//1.jQuery.extend({})
+			$.extend({
+				"minValue":function(a,b){
+					return a<b?a:b;//比较两个值,返回较小的值
+				},
+				maxValue:function(){
+					return a>b?a:b;//比较两个值,返回较大的值
+				}
+			});
+			var a=2,b=5;
+			var maxV=$.maxValue(a,b);
+			var minV=$.minValue(a,b);
+			console.log("maxV:",maxV,"minv:",minV);
+		</script>
+	
+
+</body></html>

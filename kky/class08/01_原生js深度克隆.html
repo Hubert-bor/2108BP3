@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/* 
+			浅度克隆
+			 
+			 深度克隆
+			 */
+			//浅度克隆
+			;(function(){
+					var obj1={user:"kky",age:18,sex:0};
+					var obj10={user:"kky",age:18,sex:0};
+					
+					var arr1=["kky","anJianQi","zhaoWanCai"];
+					
+					var obj2=obj1;//同一个地址,同一个数据,当obj1或obj2,改变,两者都会改变
+					obj1.user="wuZeMin";
+					obj2.age=20;
+					
+					console.log("obj1:",obj1);
+					console.log("obj2:",obj2);
+					fgx();
+					
+					console.log("obj1===obj2:",obj1===obj2);
+					
+					fgx();
+					
+					var arr2=arr1;//同一个地址,同一个数据,当arr1或arr2,改变,两者都会改变
+					arr2[0]="zhagnHaiMeng";
+					arr1[2]="wangDi";
+					console.log("arr1:",arr1);
+					console.log("arr2:",arr2);
+					console.log("arr1===arr2:",arr1===arr2);
+					fgx();
+					console.log("obj1==obj10:",obj1==obj10,obj1===obj10);
+					console.log("{}==={}:",{}==={});
+					console.log("[]===[]:",[]===[]);
+					fgx();
+					var obj9={...obj1};
+					console.log("obj9:",obj9,obj9==obj1);
+					
+			}());
+			fgx();
+			
+			;(function(){
+				//推导出什么是深度克隆
+					var obj1={
+						oName:"kky",
+						oAge:18,
+						oAddress:{
+							province:"BeiJing",
+							area:"haiDian"
+						},
+						oFavorite:[
+							"swimming",
+							{
+								reading:"IT book"
+							}
+						],
+						skill:function(){
+							console.log("我会写代码");
+						}
+					};
+					/* var obj2={
+						oName:"kky",
+						oAge:18,
+						oAddress:{
+							province:"BeiJing",
+							area:"haiDian"
+						},
+						oFavorite:[
+							"swimming",
+							{
+								reading:"IT book"
+							}
+						],
+						skill:function(){
+							console.log("我会写代码");
+						 }
+					};
+					*/
+					// console.log("obj1==obj2:",obj1==obj2);
+					
+					
+					var arr1=[1,[2,3],{user:"kky"}];
+					// var arr2=[1,[2,3],{user:"kky"}];
+					
+					var obj3={...obj1};
+					
+					obj1.oName="wuZeMin";
+					obj1.oAddress={
+							province:"huBei",
+							area:"xiangYang"
+					}
+					// obj1.oAddress.province="huBei";
+					// obj1.oAddress.area="xiangYang";
+					
+					
+					console.log("obj3:",obj3,"\nobj1:",obj1,"\nobj3==obj1:",obj3==obj1);
+					
+					fgx();
+			}());
+/* 			
+			var obj5={};
+			for(var o in obj1){
+				console.log("o:",o,"obj1["+o+"]:",obj1[o],typeof obj1[o]);
+				if(typeof obj1[o]!="object"){
+					obj5[o]=obj1[o];
+					for(var ob in obj1[o]){
+						
+					}
+				}
+			}
+			console.log("obj5:",obj5); */
+			
+			/* var obj1={};
+			var arr1=[];
+			console.log("obj1 instanceof Array:",obj1 instanceof Array);
+			console.log("arr1 instanceof Array:",arr1 instanceof Array); */
+			
+			fgx("原生js深度克隆");
+			fgx("原生js深度克隆");
+			var obj1={
+				user:"kky",
+				age:18,
+				address:{
+					province:"BeiJing",
+					area:"haiDian"
+				},
+				favorite:[
+					"swimming",
+					{
+						reading:"IT book"
+					}
+				],
+				skill:function(){
+					console.log("我会写代码");
+				}
+			};
+			var arr1=[1,[2,3],{user:"kky"}];
+			fgx("原生js深度克隆");
+			//arguments.callee 函数自身
+			//深度克隆 递归实现 深度克隆
+			function deepClone(obj){
+				// var o = obj instanceof Array ? [] : {};	
+				var o = Array.isArray(obj) ?  [] : {};
+				for(var k in obj){
+					console.log("k:",k,"obj["+k+"]:",obj[k],typeof obj[k]);
+					o[k] = typeof obj[k] === "object" ? arguments.callee(obj[k]) : obj[k]
+				}
+				return o;
+			}
+			
+			/* 
+			 面试话术
+			 深度克隆相关?
+			 
+			 原生js深度克隆步骤
+			 步骤1.因为深度克隆只针对对象,也就是数组或对象吧,判断是数组还是对象
+			 步骤2:遍历数据中的值,判断是否是对象,若是对象,则再调用深度克隆这个函数本身,若不是,则直接赋值
+			 步骤3:返回新的数据
+			 
+			 
+			 
+			 */
+			
+		
+			
+			var objNew1=deepClone(obj1);
+			console.log("objNew1:",objNew1);
+			
+			obj1.address.province="huBei";
+			obj1.address.area="xiangYang";
+			console.log("obj1:",obj1);
+			
+			fgx();
+			fgx();
+			fgx();
+			var arrNew1=deepClone(arr1);
+			console.log("arrNew1:",arrNew1);
+			arr1[2].user="wuZeMin";
+			console.log("arr1:",arr1);
+			
+			
+			
+			
+			
+			
+			
+			function fgx(str){
+				str||(str="");
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+			}
+			
+			
+		</script>
+	</body>
+</html>

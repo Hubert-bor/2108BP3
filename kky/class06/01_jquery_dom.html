@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#d1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+			.cla1{
+				color: blue;
+			}
+			.cla2{
+				font-size: 20px;
+			}
+			.cla3{
+				border-radius: 100px;
+			}
+			.cla4{
+				text-align: center;
+			}
+			.cla5{
+				line-height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				d1
+			</div>
+			<div id="d2">
+				<button type="button" id="btn1">addClass(name1)</button>
+				<button type="button" id="btn2">addClass(name2 name3 name4 name5)</button>
+				<button type="button" id="btn3">removeClass(name3)</button>
+				<button type="button" id="btn4">removeClass(name4 name5)</button>
+				<button type="button" id="btn5">toggleClass(name1)</button>
+				<button type="button" id="btn6">toggleClass(name2 name3)</button>
+				<button type="button" id="btn7">toggleClass(name2,switch)</button>
+			</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+		/* 
+			addClass(class) 					给某个元素添加一个CSS类
+		 	addClass(class1 class2 class3) 		给某个元素添加多个CSS类
+			
+		 	removeClass(class) 					删除某个元素的一个CSS类
+		 	removeClass(class1 class2 class3) 	删除某个元素的多个CSS类
+			
+		 	toggleClass(class) 					来回切换默认样式和指定样式
+		 	toggleClass(class1 class2 class3) 	来回切换默认样式和指定样式
+			
+		 	toggleClass(class,switch) 			来回切换样式的时候,switch可选
+												布尔值，规定是否仅仅添加（true）或移除（false）类。
+												
+			注意:属性名之间用的是空格,使用时可以使用变量1+空格字符串+变量2,进行拼接
+			var str1="cla1",str2="cla2";
+			var str3=str1+" "+str2;
+		 
+		 
+		 
+		 */
+		
+			$(function(){
+				
+				$("#btn1").click(function(){
+					$("#d1").addClass("cla1");
+				});
+				
+				$("#btn2").click(function(){
+					var str1="cla2";
+					var str2="cla3";
+					$("#d1").addClass(str1+" "+str2);
+					$("#d1").addClass("cla4 cla5 cla6 cla7 cla8");
+				});
+				
+				$("#btn3").click(function(){
+					$("#d1").removeClass("cla3");
+				});
+				
+				$("#btn4").click(function(){
+					var str1="cla7";
+					var str2="cla8";
+					$("#d1").removeClass(str1+" "+str2);
+					$("#d1").removeClass("cla5 cla6");
+				});
+				
+				
+				$("#btn5").click(function(){
+					$("#d1").toggleClass("cla3");
+				});
+				
+				$("#btn6").click(function(){
+					$("#d1").toggleClass("cla7 cla8");
+				});
+				
+				$("#btn7").click(function(){
+					// var f=Math.random()>0.5;
+					// console.log("f:",f);
+					var f=true;//
+					f=false;//
+					$("#d1").toggleClass("cla3",f);//
+				});
+				
+				
+				
+				
+			})
+		</script>
+	</body>
+</html>

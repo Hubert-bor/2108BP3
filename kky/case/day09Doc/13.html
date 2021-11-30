@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+	<pre>
+exports.say=function(){
+	console.log("呵呵!");
+}
+------------------------
+function People(){
+	var name;
+	this.setName=function(name){
+		this.name=name;
+	}
+	this.sayName=function(){
+		console.log("说出名字:",this.name,"你好啊!");
+	}
+}
+
+module.exports=People;
+-------------------------------
+module.exports=function(){
+	var name;
+	this.setName=function(name){
+		this.name=name;
+	}
+	this.sayName=function(){
+		console.log("说出名字:",this.name,"你好啊!");
+	}
+}
+--------------------------------
+exports.a=function(){
+	console.log("aaa");
+}
+
+module.exports={a:"bbb"};
+
+exports.a="ccc";
+--------------------------------
+module.exports=function(){
+	var t=new Date().getTime()+"";
+	return t;
+}
+--------------------------------
+
+moudel.exports.get=function(){
+	console.log("get");
+}
+moudel.exports.add=function(){
+	console.log("add");
+}
+moudel.exports.del=function(){
+	console.log("del");
+}
+moudel.exports.upd=function(){
+	console.log("upd");
+}
+--------------------------------
+function add(a,b){
+	return a+b;
+}
+
+function minus(a,b){
+	return a-b;
+}
+
+module.exports.add=add;
+module.exports.add2=add;
+module.exports.minus=minus;
+
+module.exports.mul=function(a,b){
+	return a*b;
+}
+
+	</pre>
+	</body>
+</html>

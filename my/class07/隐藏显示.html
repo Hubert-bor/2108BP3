@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隐藏显示</title>
+</head>
+<body>
+
+    <div id="box1" style="display: none;width: 100px;height: 100px;background-color: red;"></div>
+    <button id="show">点击显示</button>
+    <button id="hide">点击隐藏</button>
+
+    <script src="../../practice/jQuery3.6.0/jQuery3.6.0.js"></script>
+    <script>
+        $("#show").click(function(){
+            $("#box1").show();
+        })
+        $("#hide").click(function(){
+            $("#box1").hide();
+        })
+    </script>
+</body>
+</html>

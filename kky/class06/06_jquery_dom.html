@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#app>div{
+				margin: 10px;
+				border: 1px blue solid;
+				min-height: 10px;
+			}
+			#d1{
+				height: 200px;
+				border: 1px solid red;
+			}
+			#d1>div:nth-child(odd){
+				background-color: green;
+			}
+			#d1>div:nth-child(even){
+				background-color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				<div id="d1_1">d1_1</div>
+				<div id="d1_2">d1_2</div>
+			</div>
+			<div id="d2">
+				<button type="button" id="btn1">append</button>
+				<button type="button" id="btn2">prepend</button>
+				<br>
+				<button type="button" id="btn3">appendTo</button>
+				<button type="button" id="btn4">prependTo</button>
+				<br>
+				<button type="button" id="btn5">after</button>
+				<button type="button" id="btn6">before</button>
+				<br>
+				<button type="button" id="btn7">insertAfter</button>
+				<button type="button" id="btn8">insertBefore</button>
+				
+			</div>
+			<div id="d3">
+				d3
+			</div>
+			<div id="d4">
+				d4
+			</div>
+			<div id="d5">
+				d5
+			</div>
+			<div id="d6">
+				d6
+			</div>
+			<div id="d10">
+				d10
+			</div>
+			<div id="d11">
+				d11
+			</div>
+			<div id="d12">
+				d12
+			</div>
+			<div>
+				<button type="button" id="btn10">remove移除divd10</button>
+				<button type="button" id="btn11">detach移除divd11</button>
+				<button type="button" id="btn12">empty移除divd12</button>
+			</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+		/* 
+		append() 方法在被选元素的 结尾 插入指定内容。父子关系
+		 $(selector).append(content);
+		 content必需
+		可能是html元素(文本)/jQuery对象(jq dom 对象)/原生 js DOM对象
+		 
+		 
+		 prepend() 方法在被选元素的 开头 插入指定内容。	父子关系
+		  $(selector).prepend(content);
+		  content必需
+		 可能是html元素(文本)/jQuery对象(jq dom 对象)/原生 js DOM对象
+		 
+		 appendTo() 方法在被选元素的结尾插入 HTML 元素		父子关系
+		 $(content).appendTo(selector);///重点是语法
+		 
+		 
+		 prependTo() 方法在被选元素的开头插入 HTML 元素	父子关系
+		  $(content).prependTo(selector);///重点是语法
+		  
+		  after();方法在被选元素后插入指定的内容 兄弟关系
+		  
+		  
+		  before();方法在被选元素之前插入指定的内容。 兄弟关系
+		  
+		  
+		  insertAfter();//方法在被选元素后插入 HTML 元素 兄弟关系
+		  
+		  
+		  insertBefore();//方法在被选元素前插入 HTML 元素 兄弟关系
+		  
+		  remove 删除自身,不保留原来的事件和数据(了解)
+		  detach 删除自身,保留原来的事件和数据(了解)
+		  empty 删除所有的内容,不会删除自身
+		  
+		  
+		 
+		 */
+		
+			$(function(){
+				$("#btn1").click(function(){
+					var div3=`
+							<div id="d1_3">d1_3</div>
+					`
+					$("#d1").append(div3);
+					var div4=document.createElement("div");
+					div4.id="d1_4";
+					div4.innerHTML="d1_4";
+					console.log("div4:",div4);
+					$("#d1").append(div4);
+					var div5=$("#d5");
+					$("#d1").append(div5);
+				});
+				
+				$("#btn2").click(function(){
+					var div3=`
+							<div id="d1_3">d1_3</div>
+					`
+					$("#d1").prepend(div3);
+					var div4=document.createElement("div");
+					div4.id="d1_4";
+					div4.innerHTML="d1_4";
+					console.log("div4:",div4);
+					$("#d1").prepend(div4);
+					var div5=$("#d5");
+					$("#d1").prepend(div5);
+				});
+				
+				$("#btn3").click(function(){
+					var content1=`<div id="d1_5">d1_5</div>`;
+					var content2=$("#d5");
+					var content3=document.createElement("div");
+					content3.id="d1_6";
+					content3.innerHTML="d1_6";
+					$(content1).appendTo($("#d1"));
+					$(content2).appendTo($("#d1"));
+					$(content3).appendTo($("#d1"));
+				});
+						
+				$("#btn4").click(function(){
+					var content1=`<div id="d1_5">d1_5</div>`;
+					var content2=$("#d5");
+					var content3=document.createElement("div");
+					content3.id="d1_6";
+					content3.innerHTML="d1_6";
+					$(content1).prependTo($("#d1"));
+					$(content2).prependTo($("#d1"));
+					$(content3).prependTo($("#d1"));
+				});
+				
+				$("#btn5").click(function(){
+					var content1="<div id='d8'>d8</div>"
+					var content2=document.createElement("div");
+					content2.id="d9";
+					content2.innerHTML="d9";
+					
+					// var button=document.createElement("button");
+					// button.id="btn100";
+					// console.log("button:",button);
+					// var btnText=document.createTextNode("按钮");
+					// button.appendChild(btnText);
+					
+					var content3=$("#d6");
+					
+					$("#d3").after(content1);
+					$("#d3").after(content2);
+					$("#d3").after(content3);
+				})
+				
+				$("#btn6").click(function(){
+					var content1="<div id='d8'>d8</div>"
+					var content2=document.createElement("div");
+					content2.id="d9";
+					content2.innerHTML="d9";
+					
+					// var button=document.createElement("button");
+					// button.id="btn100";
+					// console.log("button:",button);
+					// var btnText=document.createTextNode("按钮");
+					// button.appendChild(btnText);
+					
+					var content3=$("#d6");
+					
+					$("#d3").before(content1);
+					$("#d3").before(content2);
+					$("#d3").before(content3);
+				});
+				
+				$("#btn7").click(function(){
+					var content1="<div id='d8'>d8</div>";
+					$(content1).insertAfter($("#d3"));
+				});
+				$("#btn8").click(function(){
+					var content1="<div id='d8'>d8</div>";
+					$(content1).insertBefore($("#d3"));
+				});
+				
+				
+				$("#btn10").click(function(){
+					$("#d10").remove();
+				})
+				$("#btn11").click(function(){
+					$("#d11").detach();
+				})
+				$("#btn12").click(function(){
+					$("#d12").empty();
+				})
+				
+				
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div></div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+		var obj1={
+			user:"kky",
+			age:18
+		}
+		var obj2={
+			sex:0,
+			user:"wuZeMin"
+		}
+		
+		var obj3=$.extend({},obj1,obj2);
+		console.log("obj3:",obj3);
+		
+		
+		
+			var obj10={
+				user:"kky",
+				age:18,
+				address:{
+					province:"BeiJing",
+					area:"haiDian"
+				},
+				favorite:[
+					"swimming",
+					{
+						reading:"IT book"
+					}
+				],
+				skill:function(){
+					console.log("我会写代码");
+				}
+			};
+			
+			
+			
+			var arr10=[1,[2,3],{user:"kky"}];
+			
+			var obj11=$.extend(true,{},obj10);//jquery 深度克隆
+			console.log("obj11:",obj11);
+			
+			
+			
+			
+			function jqDeepClone(obj){
+				var o=$.isArray(obj)?[]:{};
+				return $.extend(true,o,obj);
+			}
+			
+			var obj12=jqDeepClone(obj10);
+			console.log("obj12:",obj12);
+			
+			
+			obj10.address.province="huBei";
+			obj10.address.area="xiangYang";
+			console.log("obj10:",obj10);
+			
+			
+			var arr11=jqDeepClone(arr10);
+			console.log("arr11:",arr11);
+			
+			arr10[2].user="wuZeMin";
+			console.log("arr10:",arr10);
+			
+			
+		</script>
+	</body>
+</html>

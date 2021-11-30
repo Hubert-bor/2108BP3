@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)http://169.254.119.156:8020/HBuilderProject/1812A3/day06/06.html?__hbt=1638156853183 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>jQuery.extend() 函数用于将一个或多个对象的内容合并到目标对象。
+注意：1. 如果只为$.extend()指定了一个参数，则意味着参数target被省略。
+此时，target就是jQuery对象本身。通过这种方式，
+我们可以为全局对象jQuery添加新的函数。
+
+2. 如果多个对象具有相同的属性，则后者会覆盖前者的属性值。
+语法
+$.extend( target [, object1 ] [, objectN ] )
+指示是否深度合并
+$.extend( [deep ], target, object1 [, objectN ] )
+警告: 不支持第一个参数传递 false 。
+参数		描述
+deep		可选。 Boolean类型 指示是否深度合并对象，默认为false。
+		如果该值为true，且多个对象的某个同名属性也都是对象，
+		则该"属性对象"的属性也将进行合并。
+
+target		Object类型 目标对象，其他对象的成员属性将被附加到该对象上。
+object1		可选。 Object类型 第一个被合并的对象。
+objectN		可选。 Object类型 第N个被合并的对象。
+/////////////////////////////////
+$(function(){
+	var obj1={name:"kky"}
+	var obj2={age:20}
+	var o1=$.extend(obj1,obj2);
+	console.log("o1:",o1,"obj1:",obj1,"obj2:",obj2);
+	fgx();
+})
+$(function(){
+	var obj1={name:"kky"}
+	var obj2={age:20}
+	var obj3={sex:0}
+	var o2=$.extend(obj1,obj2,obj3);
+	console.log("o2:",o2,"obj1:",obj1,"obj2:",obj2,"obj3:",obj3);
+	fgx();
+})
+$(function(){
+	var obj1={name:"kky"}
+	var obj2={age:20}
+	var obj3={sex:0}
+	var o3=$.extend({},obj1,obj2,obj3);
+	console.log("o3:",o3,"obj1:",obj1,"obj2:",obj2,"obj3:",obj3);
+	fgx();
+})
+$(function(){
+	var obj1={name:"kky",
+		job:{price:999,time:8}
+	}
+	var obj2={
+		job:{price:8888}
+	}
+	var o4=$.extend(obj1,obj2);
+	console.log("o4:",o4,"obj1:",obj1,"obj2:",obj2);
+	fgx();
+})
+$(function(){
+	var obj1={name:"kky",
+		job:{price:999,time:8}
+	}
+	var obj2={
+		job:{price:8888}
+	}
+	var o5=$.extend(true,obj1,obj2);
+	console.log("o5:",o5,"obj1:",obj1,"obj2:",obj2);
+	fgx();
+})
+$(function(){
+	var obj1={name:"kky",
+		job:{price:999,time:8}
+	}
+	var obj2={
+		job:{price:8888}
+	}
+	var o6=$.extend({},obj1,obj2);
+	console.log("o6:",o6,"obj1:",obj1,"obj2:",obj2);
+	fgx();
+})
+$(function(){
+	var obj1={name:"kky",
+		job:{price:999,time:8}
+	}
+	var obj2={
+		job:{price:8888}
+	}
+	var o7=$.extend(true,{},obj1,obj2);
+	console.log("o7:",o7,"obj1:",obj1,"obj2:",obj2);
+	fgx();
+})
+		</pre>
+		<script src="./06_files/jquery-1.11.3.js.下载"></script>
+		<script>
+			$(function(){
+				var obj1={
+					name:"kky"
+				}
+				var obj2={
+					age:20
+				}
+				var obj3={
+					sex:0
+				}
+				var o1=$.extend(obj1,obj2);
+				console.log("o1:",o1,"obj1:",obj1,"obj2:",obj2);
+				fgx();
+			})
+			$(function(){
+				var obj1={
+					name:"kky"
+				}
+				var obj2={
+					age:20
+				}
+				var obj3={
+					sex:0
+				}
+				var o2=$.extend(obj1,obj2,obj3);
+				console.log("o2:",o2,"obj1:",obj1,"obj2:",obj2,"obj3:",obj3);
+				fgx();
+			})
+			$(function(){
+				var obj1={
+					name:"kky"
+				}
+				var obj2={
+					age:20
+				}
+				var obj3={
+					sex:0
+				}
+				var o3=$.extend({},obj1,obj2,obj3);
+				console.log("o3:",o3,"obj1:",obj1,"obj2:",obj2,"obj3:",obj3);
+				fgx();
+			})
+			$(function(){
+				var obj1={
+					name:"kky",
+					job:{
+						price:999,
+						time:8
+					}
+				}
+				var obj2={
+					job:{
+						price:8888,
+					}
+				}
+
+				var o4=$.extend(obj1,obj2);
+				console.log("o4:",o4,"obj1:",obj1,"obj2:",obj2);
+				fgx();
+			})
+			$(function(){
+				var obj1={
+					name:"kky",
+					job:{
+						price:999,
+						time:8
+					}
+				}
+				var obj2={
+					job:{
+						price:8888,
+					}
+				}
+
+				var o5=$.extend(true,obj1,obj2);
+				console.log("o5:",o5,"obj1:",obj1,"obj2:",obj2);
+				fgx();
+			})
+			$(function(){
+				var obj1={
+					name:"kky",
+					job:{
+						price:999,
+						time:8
+					}
+				}
+				var obj2={
+					job:{
+						price:8888,
+					}
+				}
+
+				var o6=$.extend({},obj1,obj2);
+				console.log("o6:",o6,"obj1:",obj1,"obj2:",obj2);
+				fgx();
+			})
+			$(function(){
+				var obj1={
+					name:"kky",
+					job:{
+						price:999,
+						time:8
+					}
+				}
+				var obj2={
+					job:{
+						price:8888,
+					}
+				}
+
+				var o7=$.extend(true,{},obj1,obj2);
+				console.log("o7:",o7,"obj1:",obj1,"obj2:",obj2);
+				fgx();
+			})
+			$.extend({
+				min:function(a,b){
+					return a<b?a:b;
+				},
+				max:function(a,b){
+					return a>b?a:b;
+				}
+			})
+			var a=2,b=5;
+			console.log("$",$);
+			console.dir($);
+			var max=$.max(a,b);
+			var min=$.min(a,b);
+			console.log("max:",max);
+			console.log("min:",min);
+			
+			function fgx(str){
+				str?str:str=""
+				console.log(str+"-=-=-=-=-=-=-=-=-=-=");
+			}
+		</script>
+	
+
+</body></html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+	<pre>
+		res.writeHead(404,{
+			"content-type":"text/html;charset=utf-8"
+		});
+		
+		res.end("页面不存在!");
+		
+	---------------------------------
+	res.writeHead(200,{
+		"content-type":"text/html;charset=utf-8",
+		"Access-Control-Allow-Origin":"*"//解决跨域问题
+	});
+	---------------------------------
+	通过创建的服务运行index.html,index.css,index.js	
+	</pre>
+	</body>
+</html>

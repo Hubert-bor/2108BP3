@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#d1{
+				height: 100px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				
+			</div>
+			<div id="d2">
+				<button type="button" id="btn2">hide</button>
+				<button type="button" id="btn1">show</button>
+			</div>
+			<div id="d3"></div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			/* 
+			show() ;//显示
+			 hide()//隐藏
+			 toggle();//切换 隐藏/显示
+			 show(speed,function(){})
+			 
+			 
+			 slideDown
+			 slideUp()
+			 slideToggle();
+			 
+			 fadeIn()
+			 fadeOUt();
+			 fadeToggle();
+			 
+			 */
+		
+		
+			$(function(){
+				$("#btn1").click(function(){
+					// $("#d1").show();
+					// $("#d1").show("fast");
+					// $("#d1").show("slow");
+					// $("#d1").show(10000,chenggong);
+					$("#d1").show(10000,function(){
+						alert("成功2");
+					});
+					// chenggong();
+				});
+				function chenggong(){
+					alert("成功");
+				}
+				
+				$("#btn2").click(function(){
+					$("#d1").hide();
+				});
+			});
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">看我如何字体加粗1</div>
+			<div id="d2">看我如何字体加粗2</div>
+			<div id="d3">看我如何字体加粗3</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			// console.dir($);
+		/* 
+		插件是jQuery原型对象上扩展出来的一种新的方法（method）。插件一旦生效，所有的jQuery对象都将拥有该方法。
+		   插件是对集合中所有元素的一次处理操作.
+		
+		
+		1.jQuery.extend扩展 对象 方法 jQuery的静态方法
+		
+		jQuery.extend方法==>$.extend({})
+		
+		静态方法，通常用来制作工具方法
+		
+		用于扩展jQuery类本身，将对象合并到jQuery的全局对象中。
+		为类添加新的方法 
+		
+		
+		
+		2.jQuery.fn.extends扩展 元素 方法	jQuery原型上
+		基本语法：$.fn.extend()
+		扩展 jQuery 元素集来提供新的方法（通常用来制作插件）
+		
+		$.fn.extend({
+			函数名hanshuming:函数体
+		})
+		
+		$.fn.hanshuming=函数体
+		 
+		 */
+		//给$/jQuery 添加静态方法
+		
+		$.extend({
+			minValue:function(a,b){
+				return a<b?a:b;//
+			},
+			maxValue:function(a,b){
+				return a<b?b:a
+			},
+			time:function(t){
+				if(t){
+					var d=new Date(t);
+				}else{
+					var d=new Date();
+				}
+				var time=d.toLocaleString();
+				return time;
+			}
+		})
+		
+	
+		
+		var a=parseInt(Math.random()*11);
+		var b=parseInt(Math.random()*11);
+		// console.log("a:",a,"b:",b);
+		var min=$.minValue(a,b);
+		var max=$.maxValue(a,b);
+		console.log("min:",min,"max:",max);
+		////////////////////////////////////////////////////
+		$.fn.extend({
+			myBold1:function(color){
+				console.log("0this:",this);
+				this.css({
+					"fontWeight":"bold",
+					color:color
+				});
+				return this;//此行代码,将支持jquery链式写法
+			},
+			myAddClass:function(attr){
+				console.log("2this:",this);//jq dom
+				this[0].classList.add(attr);
+				return this;//此行代码,将支持jquery链式写法
+			}
+		});
+		$.fn.myBold2=function(color){
+			console.log("1this:",this);
+			this.css({
+				"fontWeight":"bold",
+				color:color
+			});
+			return this;//此行代码,将支持jquery链式写法
+		}
+		
+		console.dir($);
+		
+		$("#d1").myBold1("red");
+		$("#d1").myAddClass("kky");
+		
+		$("#d2").myBold2("blue");
+		$("#d2").addClass("kky");
+		
+		$("#d3").myBold1("red").myAddClass("kky");
+		
+		;(function($){
+			
+		}($));
+		
+		;(function(jq){
+			
+		})(jQuery);
+		
+		//Object.assing(新对象,对象1,对象2)===>新对象(新对象,对象1,对象2,所有属性);
+		//$.extend(新对象,对象1,对象2)===>新对象(新对象,对象1,对象2,所有属性);
+		var obj1={user:"kky"};
+		var obj2={age:18};
+		var obj3=Object.assign({},obj1,obj2);
+		console.log("obj3:",obj3);
+		
+		var obj4=$.extend({},obj1,obj2);
+		console.log("obj4:",obj4);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+	req.url -----可以得到端口号右侧的所有内容
+	
+var http=require("http");
+var server=http.createServer(function(request,response){
+    //console.log("request:",request);
+    console.log("request.url:",request.url);
+    //request请求的信息
+    response.end("Hello Kky");//请求完毕
+});
+server.listen(81,"127.0.0.2",function(){
+	console.log("服务开启!");
+});	
+		</pre>
+		<script>
+		</script>
+	</body>
+</html>

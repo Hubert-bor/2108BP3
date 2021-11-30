@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hover</title>
+</head>
+<body>
+    <div id="app">
+        app
+    </div>
+
+    <script src="../../practice/jQuery3.6.0/jQuery3.6.0.js"></script>
+    <script>
+        $(function(){
+            $("#app").hover(function(){
+                $(this).css("backgroundColor","red");
+            },function(){
+                $(this).css("backgroundColor","");
+            });
+        })
+    </script>
+</body>
+</html>
