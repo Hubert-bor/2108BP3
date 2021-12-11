@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>深克隆</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name:"张三",
+            age:18,
+            hobby:{
+                first:"eat",
+                second:"play"
+            }
+        }
+
+        //使用递归进行深度克隆
+        function deepClone(obj){
+            //防止：超出最大调用堆栈大小（Maximum call stack size exceeded）
+
+            if(obj===null) return obj;
+            if(typeof obj !=='object') return obj;
+
+
+            var newObj = new obj.constructor;
+            for(var key in obj){
+                if(obj.hasOwnProperty(key)){
+                    newObj[key] = deepClone(obj[key]);
+                }
+            }
+            return newObj;
+        }
+
+        var obj2 = deepClone(obj);
+        obj.hobby.first = "drink";
+        console.log(obj2.hobby.first);
+        console.log(obj===obj2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+#show,
+#entry,
+#search
+{
+	margin: 10px;
+}
+#show>table{
+	border: 1px solid red;
+	border-collapse: collapse;
+}
+#show>table th,
+#show>table td
+{
+	border: 1px solid red;
+}

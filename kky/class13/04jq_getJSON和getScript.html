@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<!-- <script src="./data/data05.js"></script> -->
+		<script>
+			$(function(){
+				var url="./data/data05.json";
+				// 加载 对应(路由接口) 的json文件
+				//getJSON() 方法使用 AJAX 的 HTTP GET 请求获取 JSON 数据。
+				$.getJSON(url,function(data){
+					console.log("1data:",data);
+					console.log("//////////////////////");
+				});
+				
+				//getScript() 方法使用 AJAX 的 HTTP GET 请求获取 和 执行 JavaScript。
+				var url2="./data/data05.js";
+				$.getScript(url2,function(){
+					console.log("99999",arr);
+				});
+			});
+		</script>
+	</body>
+</html>

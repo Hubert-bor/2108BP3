@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+
+<pre>
+	Node.js模块系统
+为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。
+模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。
+换言之，一个 Node.js 文件就是一个模块.
+
+代码 require('./he') 引入了当前目录下的 he.js 文件（./ 为当前目录，node.js 默认后缀为 js）。
+Node.js 提供了 exports 和 require 两个对象，
+其中 exports 是模块公开的接口，require 用于从外部获取一个模块的接口，
+即所获取模块的 exports 对象。
+
+he.js 通过 exports 对象把 say作为模块的访问接口，
+在 01node.js 中通过 require('./he') 加载这个模块，
+然后就可以直接访 问 he.js 中 exports 对象的成员函数了.
+
+模块接口的唯一变化是使用 module.exports=People;
+代替了exports.say = function(){}。 
+在外部引用该模块时，其接口对象就是要输出的 People 对象本身，
+而不是原先的 exports。
+
+exports 与 module.exports
+为了方便，Node为每个模块提供一个exports变量，
+指向module.exports。这等同在每个模块头部，有一行这样的命令。
+var exports = module.exports;
+于是我们可以直接在 exports 对象上添加方法，
+表示对外输出的接口，如同在module.exports上添加一样。
+注意，不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系。
+
+------------------------------------------------
+module.exports与exports的区别
+每一个node.js执行文件，都自动创建一个module对象，
+同时，module对象会创建一个叫exports的属性，初始化的值是 {}
+
+ module.exports = {};
+Node.js为了方便地导出功能函数，node.js会自动地实现以下这个语句
+
+foo.js
+----------------------------
+ exports.a = function(){
+ console.log('a')
+ }
+
+ exports.a = 1 
+-----------------------------
+test.js
+----------------------------
+
+ var x = require('./foo');
+
+ console.log(x.a);
+ 
+exports是引用 module.exports的值。
+module.exports 被改变的时候，exports不会被改变，而模块导出的时候，
+真正导出的执行是module.exports，而不是exports
+
+再看看下面例子
+
+foo.js
+------------------------------------
+ exports.a = function(){
+  console.log('a')
+ }
+
+ module.exports = {a: 2};//module.exports 被改变的时候，exports不会被改变，而模块导出的时候，
+ exports.a = 1 
+ 
+ //不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系,就不能导出该模块了
+ exports={
+	 a:2
+ }
+------------------------------------
+test.js
+------------------------------------
+var x = require('./foo');
+
+console.log(x.a)
+result:
+------------------------------------
+ 2
+exports在module.exports 被改变后，失效。
+</pre>
+
+<pre style="color: red;">
+	1.node中一个js就是一个模块,用来处理某个业务
+		如db.js 操作数据(增加,删除,修改,查询)
+	2.模块之间通过导入,导出实现方法或属性的复用
+	
+	exports 和 module.exports 的使用
+	
+	如果要对外暴露属性或方法，就用 exports 就行，
+	要暴露对象(类似class，包含了很多属性和方法)，就用 module.exports。
+	
+	exports===module.exports
+	
+	
+	exports是引用 module.exports的值。
+	module.exports 被改变的时候，exports不会被改变，而模块导出的时候，
+	真正导出的执行是module.exports，而不是exports
+	
+	不可以直接对进行exports赋值：
+	不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系
+	
+	建议如下导出
+	module.exports.max=10;
+	module.exports.fn1=function(){}
+	function fn2(){};
+	module.exports.fn2=fn2;
+	
+</pre>
+	</body>
+</html>

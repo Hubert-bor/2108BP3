@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#show>table{
+				border: 1px solid red;
+				border-collapse: collapse;
+			}
+			#show>table td,
+			#show>table th{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="entry">
+				<div>
+					<label>
+						姓名:<input type="text" id="user" autocomplete="off" />
+					</label>
+					<label>
+						年龄:<input type="text" id="age" autocomplete="off" />
+					</label>
+				</div>
+				<div>
+					<button type="button" id="btn">添加(jsonp)</button>
+				</div>
+			</div>
+			<div id="show">
+				<table>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>ID</th>
+							<th>姓名</th>
+							<th>年龄</th>
+							<th>添加时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+							<td>1</td>
+							<td>1</td>
+							<td>kky</td>
+							<td>18</td>
+							<td>2021-12-07 16:41:02</td>
+							<td>
+								<button type="button">删除</button>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script>
+			;(function(){
+					var user=document.getElementById("user");
+					var age=document.getElementById("age");
+					var btn=document.getElementById("btn");
+					
+					getData();
+					
+					btn.onclick=function(){
+						var userV=user.value;
+						var ageV=age.value;
+						if(userV){
+							var sc=document.createElement("script");
+							var url="http://127.0.0.1:85/addJsonp1?cb=showPage&user="+userV+"&age="+ageV;
+							sc.src=url;
+							document.documentElement.appendChild(sc);
+							setTimeout(function(){
+								document.documentElement.removeChild(sc);
+							},0);
+							
+						}else{
+							
+						}
+					}
+					
+			}());
+			
+			function getData(){
+				var sc=document.createElement("script");
+				var url="http://127.0.0.1:85/addJsonp2?cb=showPage";
+				sc.src=url;
+				document.documentElement.appendChild(sc);
+				setTimeout(function(){
+					document.documentElement.removeChild(sc);
+				},0);
+			}
+			
+			
+			function showPage(arr){
+				// console.log("我通过jsonp 解决了跨域问题,并拿到了数据,之后就可以渲染页面了:arr",arr);
+				
+				var tbody=document.querySelector("#show>table>tbody");
+				var trs="";
+				for(var i=0;i<arr.length;i++){
+					trs+=`
+						<tr>
+							<td>${i+1}</td>
+							<td>${arr[i].id}</td>
+							<td>${arr[i].user}</td>
+							<td>${arr[i].age}</td>
+							<td>${arr[i].id}</td>
+							<td>
+								<button type="button" onclick=del('${arr[i].id}')>删除</button>
+							</td>
+						</tr>
+					`;
+				}
+				tbody.innerHTML=trs;
+			}
+			
+			
+			function del(id){
+				console.log("我也可以通过jsonp跨域删除id:",id);
+			}
+		</script>
+	</body>
+</html>

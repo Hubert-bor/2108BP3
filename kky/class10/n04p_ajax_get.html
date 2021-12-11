@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#app{
+				width: 800px;
+				margin: auto;
+			}
+			#d1,#d3
+			{
+				margin: 10px;
+			}
+			#d3>table{
+				border: 1px solid red;
+				border-collapse: collapse;
+				width: 600px;
+			}
+			#d3>table th,
+			#d3>table td
+			{
+				border: 1px solid red;
+			}
+			#info{
+				border: 1px solid red;
+				height: 50px;
+				line-height: 50px;
+				font-size: 32px;
+				color: red;
+			}
+			#info.hide{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d0">
+				<h1>KKY 前后台交互系统(AJAX)</h1>
+			</div>
+			<div id="d1">
+				<label>
+					姓名:<input type="text" id="user" />
+				</label>
+				<label>
+					年龄:<input type="number" id="age" />
+				</label>
+				<span id="sex">
+					性别:
+					<label>
+						小哥哥 <input type="radio" name="sex" value="0" />
+					</label>
+					<label>
+						小姐姐 <input type="radio" name="sex" value="1" />
+					</label>
+				</span>
+			</div>
+			<div id="d2">
+				<button type="button" id="addGet">addGet添加</button>
+			</div>
+			<div id="d3">
+				<table>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>ID</th>
+							<th>姓名</th>
+							<th>年龄</th>
+							<th>性别</th>
+							<th>添加时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+<!-- 						<tr>
+							<td>1</td>
+							<td>1234567890</td>
+							<td>kky</td>
+							<td>18</td>
+							<td>小哥哥</td>
+							<td>2021-12-02 09:09:09</td>
+							<td>
+								<button type="button">删除</button>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+			<div id="mengBan">
+			</div>
+			<div id="info" class="hide"></div>
+		</div>
+		<script>
+		
+			;(function(){
+					var addGet=document.getElementById("addGet");
+					var user=document.getElementById("user");
+					var age=document.getElementById("age");
+					
+					var sexipts=document.querySelectorAll("#sex>label>input");
+					
+					
+					//通过ajax get方式 添加数据
+					addGet.onclick=function(){
+						var userV=user.value;
+						var ageV=age.value;
+						if(userV&&ageV){
+							if(sexipts[0].checked){
+								var sexV=0;
+							}else{
+								var sexV=1;
+							}
+							
+							
+							//http://127.0.0.1:84/addGet?user=kky&age=1&sex=0
+							
+							//user=kky&age=1&sex=0
+							var data="user="+userV+"&age="+ageV+"&sex="+sexV
+							
+							//http://127.0.0.1:84/addGet?
+							// var url="http://127.0.0.1:84/addGet?"+data;
+							var url="http://169.254.119.156:84/addGet?"+data;
+							
+							//通过ajax get 方式添加数据
+							addgetAjax(url)
+							
+							
+						}else{
+							alert("姓名或年龄不能为空");
+						}
+					}
+					
+			}());
+			
+			
+			function addgetAjax(url){
+				var xhr=new XMLHttpRequest();//
+				xhr.open("get",url);//
+				xhr.send();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var str=xhr.responseText;
+						console.log("str:",str);
+						
+						infoFun(str);//在前台显示出后台给的信息
+						getData();
+						
+					}
+				}
+			}
+			
+			
+			
+			function infoFun(str){
+				var info=document.getElementById("info");
+				info.innerHTML=str;
+				info.classList.remove("hide");
+				setTimeout(function(){
+					info.classList.add("hide");
+				},3000)
+			}
+			
+			getData();
+			function getData(){
+				// var url="http://127.0.0.1:84/getData";
+				var url="http://169.254.119.156:84/getData";
+				var xhr =new XMLHttpRequest();
+				xhr.open("get",url);
+				xhr.send();
+				xhr.onreadystatechange=function(){
+					var str=xhr.responseText;
+					console.log("str:",str,"kkkkkk");
+					if(str.length!=0){
+						var obj=JSON.parse(str);
+						var info=obj.info;
+						if(obj.data){
+							var arr=JSON.parse(obj.data);
+							showPage(arr);
+						}
+					}
+					
+				}
+			}
+			
+			function showPage(arr){
+				// console.log("我是渲染页面,我收到数据了,arr:",arr);
+				var tbody=document.querySelector("#d3>table>tbody");
+				var trs="";
+				for(var i=0;i<arr.length;i++){
+					trs+=`
+						<tr>
+							<td>${i+1}</td>
+							<td>${arr[i].id}</td>
+							<td>${arr[i].user}</td>
+							<td>${arr[i].age}</td>
+							<td>${arr[i].sex=="0"?"小哥哥":"小姐姐"}</td>
+							<td>${arr[i].id}</td>
+							<td>
+								<button type="button" onclick=del(${arr[i].id})>删除</button>
+							</td>
+						</tr>
+					`;
+				}
+				tbody.innerHTML=trs;
+			}
+			
+			
+			function del(id){
+				console.log("我要删除的数据是id:",id);
+			}
+		</script>
+	</body>
+</html>

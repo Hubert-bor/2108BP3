@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- <link rel="stylesheet" type="text/css" href="css/n05p.css"/> -->
+		<link rel="stylesheet" type="text/css" href="n05p.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<div id="entry">
+				<div>
+					<label>
+						姓名:<input type="text" id="user"/>
+					</label>
+					<label>
+						年龄:<input type="number" id="age"/>
+					</label>
+				</div>
+				<div>
+					<button type="button" id="addGet">addGet</button>
+					<button type="button" id="addPost">addPostStr</button>
+					<button type="button" id="addPostObj">addPostObj</button>
+				</div>
+			</div>
+			<div id="search">
+				<label>
+					姓名:<input type="text" autocomplete="off"  id="user2" placeholder="请输入要查询的姓名" />
+				</label>
+				<button type="button" id="getSearch">getSearch</button>
+				<button type="button" id="postSearch">postSearch</button>
+			</div>
+			<div id="show">
+				<table>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>ID</th>
+							<th>姓名</th>
+							<th>年龄</th>
+							<th>添加时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+							<td>1</td>
+							<td>123</td>
+							<td>kky</td>
+							<td>18</td>
+							<td>2021-12-02 10:55:01</td>
+							<td>
+								<button type="button">getDel 删除</button>
+								<button type="button">postDel 删除</button>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script>
+			/* 
+				KKY P3 学员信息系统(kkyP3)
+			
+			根据业务决定
+			
+			 1网站功能:
+			 1. 添加 两种方式GET和POST
+			 2. 获取 get方式 和 POST ,渲染到一个表格中
+			 3. 删除 两种方式 GET 和 POST
+			 
+			 2.字段
+			 姓名 user
+			 年龄 age
+			 
+			 
+			 前后端商量出来的
+			 3.接口文档
+				接口1 添加 addGet GET /addGet 			user,age必填 返回{code:200,msg:"addGet 添加成功"}
+				接口1 添加 addPost POST /addPost 		user,age必填 返回{code:200,msg:"addPost 添加成功"}
+				
+				接口2 获取 getData GET /getData 无 		返回{code:200,msg:"getData 获取成功",data:data} ,data=[{user:"kky",age:18}],user,age
+				接口4 获取 postData POST /postData 无 	返回{code:200,msg:"postData 获取成功",data:data} ,data=[{user:"kky",age:18}],user,age
+				
+				接口5 删除 getDel GET /getDel  id 必填 	返回{code:200,msg:"getDel 删除成功"}
+				接口6 删除 postDel POST /postDel  id 必填 	返回{code:200,msg:"getDel 删除成功"}
+			 
+			 
+			 */
+			//全局
+		</script>
+		<!-- <script src="js/n05p.js"></script> -->
+		<script src="n05p.js"></script>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+#title{
+	font-size: 32px;
+	color: red;
+}
+#entry>div>label>span{
+	width: 100px;
+	display: inline-block;
+	/* background-color: red; */
+	text-align: right;
+}
+#show>ol>li img{
+	width: 30px;
+}
+.page>button{
+	cursor: pointer;
+}
+#page>button{
+	border: 0px;
+	cursor: pointer;
+}
+#page>button.active{
+	background-color: green;
+	color: yellow;
+}

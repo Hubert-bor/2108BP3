@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#app>div{
+				margin: 10px;
+				border: 1px solid red;
+				min-height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1"></div>
+			<div id="d2">
+				<button type="button" id="btn1">通过$(选择器).load()方法加载 文本内容</button>
+			</div>
+			<div id="d3"></div>
+			<div id="d4">
+				<button type="button" id="btn2">通过$(选择器).load()方法加载 网页片段</button>
+			</div>
+			
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			// window.onload=function(){};
+			// $(document).ready(function(){
+				
+			// });
+			$(function(){
+				$("#btn1").click(function(){
+					var url="./html/test.txt";
+					$("#d1").load(url)
+				});
+				
+				$("#btn2").click(function(){
+					var url="html/02p.html";
+					$("#d3").load(url,function(res,status,xhr){
+						console.log("加载成功\nres:",res,"\nstatus:",status,"\n xhr",xhr);
+					});
+				});
+				
+				
+				
+			});
+			
+			var url="./data/data05.json";
+			$.get(url,function(data){
+				console.log("data:",data);
+			});
+			
+		</script>
+	</body>
+</html>

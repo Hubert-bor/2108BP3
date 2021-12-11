@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="normalize.css"/>
+		<link rel="stylesheet" type="text/css" href="indexcss.css"/>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	</head>
+	<body>
+		<div id="app">
+			<div id="title">
+				<strong>KKY 2108BP3 学员信息系统</strong>
+			</div>
+			<div id="entry">
+				<div>
+					<label>
+						姓名:<input type="text" id="user"/>
+					</label>
+					<label>
+						年龄:<input type="number" id="age"/>
+					</label>
+					<span style="display: none;">
+						性别: 
+						<label>
+							小哥哥<input type="radio" name="sex" value="0" />
+						</label>
+						<label>
+							小姐姐<input type="radio" name="sex" value="1" />
+						</label>
+					</span>
+				</div>
+				<div>
+					<button type="button" id="addJqGet">addJqGet</button>
+					<button type="button" id="addJqPost">addJqPost</button>
+					<button type="button" id="addJqAjaxGet">addJqAjaxGet</button>
+					<button type="button" id="addJqAjaxPost">addJqAjaxPost</button>
+				</div>
+			</div>
+			<div id="show">
+				<table>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>姓名</th>
+							<th>年龄</th>
+							<th>添加时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+							<td>1</td>
+							<td>kkky</td>
+							<td>18</td>
+							<td>2021-12-06 19:05:00</td>
+							<td>
+								<button type="button">上移</button>
+								<button type="button">删除</button>
+								<button type="button">下移</button>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+			<div id="mask"></div>
+			<div id="info"></div>
+			<div id="loading" class="hide">
+				<img src="loading2.gif" />
+			</div>
+		</div>
+		<script src="jquery-3.6.0.min.js"></script>
+		<script src="index.js"></script>
+	</body>
+</html>

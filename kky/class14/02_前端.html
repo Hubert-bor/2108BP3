@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				<button type="button" id="btn1">按钮1 ajax 会跨域</button>
+				<!-- <a id="btn2">我不是按钮</a> -->
+				<button type="button" id="btn2">按钮2 jsonp 可以解决跨域</button>
+			</div>
+		</div>
+		<script>
+		/* 
+		 JSONP 原理
+		 script 标签 不受 浏览器 同源策略 限制/影响
+		 
+		 步骤1:在前端页面创建全局函数fn1
+		 步骤2:前端动态的创建一个script元素,
+			并添加src属性,src是get请求,所以可以把步骤1中的函数名发送给后台
+			
+		步骤3:后端把数据转成json字符串,并放入函数名中(不是调用),一块返回给前端
+		
+		步骤4: 浏览器自动行为不需要写也看不到,需要老师手动模拟一下, 
+		前端接收到后端返回的字符串 (函数名(数据));会直接执行
+		 
+		 
+		 
+		 */
+		
+			var btn1=document.getElementById("btn1");
+			var btn2=document.getElementById("btn2");
+			var btn3=document.getElementById("btn3");
+			
+			btn1.onclick=function(){
+				var xhr = new XMLHttpRequest();
+				var url="http://127.0.0.1:85/addGet1?user=btn1&age=18&sex=0";
+				xhr.open("get",url);
+				xhr.send();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var str=xhr.responseText;
+						console.log("str:",str);
+					}
+				}
+			}
+			
+			btn2.onclick=function(){
+				//jsonp 跨域 步骤2 把步骤1中的函数名字传给后台
+				var script=document.createElement("script");//创建一个script元素
+				script.src="http://127.0.0.1:85/addGetJsonp?cb=fn1";
+				//给script添加一个src的属性,所有的src请求都是get请求
+				
+				document.documentElement.appendChild(script);//向后台服务器发送请求,请求接口是addGetJsonp
+				
+				setTimeout(function(){
+					document.documentElement.removeChild(script);
+				},0)
+			}
+			
+			
+			
+			// btn2.href="http://127.0.0.1:85/addGet?cb="+callback;
+			
+			//jsonp 跨域 步骤1 创建一个全局函数
+			function fn1(arr){
+				console.log("使用不跨域的方法从后台拿到数据 arr:",arr);
+			}
+			
+			var arr=["a","b","c"];
+			// ;fn2(arr);
+			function fn2(arr){
+				console.log("前端自己的arr:",arr);
+			}
+			
+			;(function(){
+				
+			}());
+		</script>
+	</body>
+</html>

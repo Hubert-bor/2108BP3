@@ -1,0 +1,91 @@
+#app{
+	margin: 20px;
+}
+.entry>div{
+	margin-bottom: 10px;
+}
+.add{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.add>button{
+	width: 150px;
+}
+.type{
+	width: 700px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+.type>a.active{
+	color: red;
+}
+table#tab{
+	width: 700px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid blue;
+	border-collapse: collapse;
+	text-align: center;
+}
+table#tab th,
+table#tab td{
+	border: 1px solid blue;
+}
+table#tab tr.red{
+	color: red;
+}
+table#tab td.price1{
+	text-decoration: line-through;
+}
+
+.pageAll>button{
+	cursor: pointer;	
+}
+#page>button{
+	border: 0px;
+	cursor: pointer;
+}
+#page>button.active{
+	color: yellow;
+	background-color: #008000;
+}
+
+#mask{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(200,200,200,0.5);
+	z-index: 1;
+	display: none;
+}
+#info{
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background-color: yellow;
+	z-index: 2;
+	font-size: 20px;
+	text-align: center;
+	line-height: 300px;
+	display: none;
+}
+#loading{
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 3;
+	font-size: 20px;
+	text-align: center;
+	line-height: 300px;
+	display: none;
+}

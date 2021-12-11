@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#show>table{
+				border: 1px solid red;
+				border-collapse: collapse;
+			}
+			#show>table td,
+			#show>table th{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="entry">
+				<div>
+					<label>
+						姓名:<input type="text" id="user" autocomplete="off" />
+					</label>
+					<label>
+						年龄:<input type="text" id="age" autocomplete="off" />
+					</label>
+				</div>
+				<div>
+					<button type="button" id="btn1">添加(jq jsonp)</button>
+					<button type="button" id="btn2">添加(jq jsonp)</button>
+				</div>
+			</div>
+			<div id="show">
+				<table>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>ID</th>
+							<th>姓名</th>
+							<th>添加时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr>
+							<td>1</td>
+							<td>1</td>
+							<td>kky</td>
+							<td>2021-12-07 16:41:02</td>
+							<td>
+								<button type="button">删除</button>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script src="../jQuery/jquery-3.6.0.js"></script>
+		<script>
+			$(function(){
+				getData();
+				
+				$("#btn1").click(function(){
+					var url="http://127.0.0.1:85/addJsonp1?user="+$("#user").val()+"&age="+$("#age").val();
+					$.ajax({
+						url:url,
+						type:"get",
+						
+						dataType:"jsonp",//jq jsonp 跨域 此处不能少
+						//jsonp:"callback", //jq 中默认是用属性名 callback
+						success:function(data){
+							console.log("jsonp data:",data);
+							showPage(data);
+						}
+					})
+				});
+				
+				$("#btn2").click(function(){
+					var url="http://127.0.0.1:85/addJsonp1?user="+$("#user").val()+"&age="+$("#age").val();
+					$.ajax({
+						url:url,
+						type:"get",
+						
+						dataType:"jsonp",//jq jsonp 跨域 此处不能少
+						
+						jsonp:"cb2",//可选 告诉后台(步骤1中)前端传给后台全局函数的属性名
+						
+						success:function(data){
+							console.log("jsonp data:",data);
+							showPage(data);
+						}
+					})
+				})
+			});
+			
+			function getData(){
+				var url="http://127.0.0.1:85/addJsonp2";
+				$.ajax({
+					url:url,
+					type:"get",
+					
+					dataType:"jsonp",//jq jsonp 跨域 此处不能少
+					//jsonp:"callback", //jq 中默认是用属性名 callback
+					success:function(data){
+						console.log("jsonp data:",data);
+						showPage(data);
+					}
+				})
+			}
+			
+			
+			function showPage(arr){
+				// console.log("我通过jsonp 解决了跨域问题,并拿到了数据,之后就可以渲染页面了:arr",arr);
+				
+				// var tbody=document.querySelector("#show>table>tbody");
+				
+				var trs="";
+				for(var i=0;i<arr.length;i++){
+					trs+=`
+						<tr>
+							<td>${i+1}</td>
+							<td>${arr[i].id}</td>
+							<td>${arr[i].user}</td>
+							<td>${arr[i].age}</td>
+							<td>${arr[i].id}</td>
+							<td>
+								<button type="button" onclick=del('${arr[i].id}')>删除</button>
+							</td>
+						</tr>
+					`;
+				}
+				// tbody.innerHTML=trs;
+				$("#show>table>tbody").html(trs);
+				
+				
+			}
+		</script>
+	</body>
+</html>

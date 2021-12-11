@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>sendGetAndPostReq</title>
+    <style>
+        #main {
+            width: 90%;
+            margin: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 0 60px;
+        }
+
+        #tab button {
+            background-color: steelblue;
+            border: 0;
+            margin: 5px 0;
+            color: #fff;
+            padding: 0 10px;
+            border-radius: 5px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="header">
+            <h1>Send Get And Post Request</h1>
+        </div>
+        <div id="container">
+            <label>
+                UserName:<input type="text" name="userName">
+            </label>
+            <label>
+                Age:<input type="number" name="age">
+            </label>
+            <span id="sex">
+                <label>
+                    Boy:<input type="radio" name="sex" value="0" checked>
+                </label>
+                <label>
+                    girl:<input type="radio" name="sex" value="1">
+                </label>
+            </span>
+            <button id="GetAdd">GetAdd</button>
+            <button id="PostAdd">PostAdd</button>
+            <span id="search">
+                <label>
+                    Search:<input type="text" name="id">
+                </label>
+            </span>
+            <button id="GetSearch">GetSearch</button>
+            <button id="PostSearch">PostSearch</button>
+        </div>
+        <div id="tab">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>UserName</th>
+                        <th>Age</th>
+                        <th>Time</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>张三</td>
+                        <td>18</td>
+                        <td>2021-11-24 14:50</td>
+                        <td>
+                            <button>GetDelete</button>
+                            <button>PostDelete</button>
+                            <button>update</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        //函数自运行获取数据
+        ; (function () {
+            var userName = document.getElementsByName("userName");
+            var age = document.getElementsByName("age");
+            var sex = document.querySelectorAll("#sex input");
+
+            //提交方式的按钮
+            var GetAdd = document.getElementById("GetAdd");
+            var PostAdd = document.getElementById("PostAdd");
+
+            //给按钮绑定提交事件
+            GetAdd.onclick = function () {
+                //获取输入框的数据
+                var userNameV = userName[0].value;
+                var ageV = age[0].value;
+                if (sex[0].checked) {
+                    var sexV = 0;
+                } else {
+                    var sexV = 1;
+                }
+
+                //拼接发送到 GetAdd 路由的 信息
+                var data = 'user=' + userNameV + '&age=' + ageV + '&sex=' + sexV;
+                var url = 'http://localhost:80/GetAdd?' + data;
+
+                //调用ajax函数发送ajax get请求 请求接口 GetAdd
+                ajaxGetAdd(url);
+            }
+
+            PostAdd.onclick = function () {
+                //获取输入框的数据
+                var userNameV = userName[0].value;
+                var ageV = age[0].value;
+                if (sex[0].checked) {
+                    var sexV = 0;
+                } else {
+                    var sexV = 1;
+                }
+
+                //拼接发送到 PostAdd 路由的 信息
+                var data = 'user=' + userNameV + '&age=' + ageV + '&sex=' + sexV;
+                var url = 'http://localhost:80/PostAdd';
+
+                //调用ajax函数发送ajax get请求 请求接口 GetAdd
+                ajaxPostAdd(url,data);
+            }
+        })();
+
+
+
+
+
+
+
+        //创建Ajax Get 请求 函数 请求接口 GetAdd
+        function ajaxGetAdd(url) {
+            //get请求方式
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", url);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var str = xhr.responseText;
+                    // console.log("ajaxRequest information Get's str:", str);
+                    var arr = JSON.parse(str);
+                    console.log("ajaxRequest information Get's arr:", arr);
+                }
+            }
+        }
+
+        //创建Ajax Post 请求 函数
+        function ajaxPostAdd(url, data) {
+            //post请求方式
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", url);
+
+            xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")
+            xhr.send(data);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var str = xhr.responseText;
+                    console.log("ajaxRequest information Post's str:", str);
+                    var arr = JSON.parse(str);
+                    console.log("ajaxRequest information Post's arr:", arr);
+                }
+            }
+        }
+
+
+        // 封装 AJAX 函数
+        function ajax(options){
+            
+        }
+    </script>
+</body>
+
+</html>

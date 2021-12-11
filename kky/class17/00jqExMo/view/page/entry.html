@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>2108BP3  录入</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="entry.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<div id="title">
+				<strong>2108BP3 学员信息管理系统</strong>
+			</div>
+			<div id="entry">
+				<div>
+					<label>
+						<span>姓名:</span>
+						<input type="text" id="user" autocomplete="off" />
+					</label>
+				</div>
+				<div>
+					<label>
+						<span>你的家庭住址:</span>
+						<input type="text" id="address" />
+					</label>
+				</div>
+				<div>
+					<label>
+						<span>你喜欢的食物:</span>
+						<input type="text" id="food" list="foodList" />
+						<datalist id="foodList">
+							<option value="f1">优选水果</option>
+							<option value="f2">卤味熟食</option>
+							<option value="f3">饮料酒水</option>
+							<option value="f4">休闲零食</option>
+						</datalist>
+					</label>
+				</div>
+				<div>
+					<button type="button" id="addPost">$.ajax post 添加</button>
+				</div>
+			</div>
+			<div id="show">
+				<ol>
+					<!-- <li>
+						<div>
+							姓名:<span>赵万财</span>
+						</div>
+						<div>
+							家庭地址:<span>赵万财</span>
+						</div>
+						<div>
+							食物:<span>
+								<img src="f2.png" />
+							</span>
+						</div>
+						<div>
+							时间:<span>2021-12-10 15:05:00</span>
+						</div>
+						<div>
+							<button type="button">删除</button>
+						</div>
+					</li> -->
+				</ol>
+				<div>
+					<div id="maxNum">共计<span></span>条</div>
+					<div>每页最多显示<span>3</span>条</div>
+					<div id="currentPageNum">当前<span>1</span>页</div>
+					<div class="page">
+						<button type="button" id="prev"><</button>
+						<span id="page">
+							 <button type="button" class="active">1</button>
+						</span>
+						<button type="button" id="next">></button>
+					</div>
+				</div>
+			</div>
+			<div id="mask"></div>
+			<div id="info"></div>
+			<div id="loading"></div>
+		</div>
+		<script src="jquery-3.6.0.min.js"></script>
+		<script src="entry.js"></script>
+	</body>
+</html>

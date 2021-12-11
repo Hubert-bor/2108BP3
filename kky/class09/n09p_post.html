@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- 
+		 /* 
+		 功能:
+		     前端 通过 表单和post方式,传递给后台,后台把存储到data09.json中
+		 步骤/思路
+		     一.前端
+		         知识点 form action后台接口地址 method=提交方式 submit 提交
+				 端口号:82
+		         action="addPost1"
+		         method="post"
+		         完成表单
+		         步骤1:form
+		         步骤2:label+input
+		         步骤3: input+name(告诉后台传过去的是什么数据)
+		         步骤4: 性别中注意添加value
+		         步骤5: 提交按钮
+		 
+		     二.后端
+		         知识点 http,url,fs
+		         http创建服务
+		         设置请求头,避免乱码
+		         url 处理req.url,
+		         为了得到pathname接口名称
+		         和
+		         url.parse(req.url,true).query 
+		         前台通过get方式传递过来的数据(是个对象)
+		         fs.readFile读取文件
+		         将得到的结果转为数组
+		         fs.WriteFile写入文件
+		         将信息发送给前台
+		     步骤1:引入http,url,fs模块
+		     步骤2:声明文件地址和端口号
+		     步骤3:创建服务
+		     步骤4:设置请求头
+		     步骤5:获取接口名称
+		     步骤6:不是favicon,接收数据(对象)
+		     
+		     步骤7:读取数据
+		         失败
+		         成功 步骤8:添加数据arr.push(obj)
+		         步骤9: 写入数据
+		 
+		 
+		 
+		 */
+		 
+		 -->
+		<div id="app">
+			<div id="d1">
+				<form action="http://169.254.119.156:82/addPost1" method="post">
+					<label>
+						姓名:<input type="text" name="user" />
+					</label>
+					<label>
+						年龄:<input type="number" name="age" />
+					</label>
+					<span>
+						性别:
+						<label>
+							小哥哥 <input type="radio" name="sex" value="0" />
+						</label>
+						<label>
+							小姐姐 <input type="radio" name="sex" value="1" />
+						</label>
+					</span>
+					<div>
+						<button type="submit">添加1</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

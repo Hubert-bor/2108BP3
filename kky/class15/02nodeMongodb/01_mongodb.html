@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<pre>
+			常见的关系型数据库:Mysql,SqlServer,Oracle
+			常见非关系型数据库NoSQL:MongoDB,Redis,Memcache
+			
+			常见数据库功能:查询，新增，更新，删除，排序,
+			
+			CRUD操作可创建create，读取read，更新update和删除delete 文档。
+			
+			
+			数据库
+			一般一个项目 只会有数据库 2108BP3,但有多张表collections,mongoDB中称为集合
+			每一个collections表/集合,数据,文档
+			
+			
+			mongoDB 常用命令
+			
+			1.show dbs 														显示所有数据库
+			2.db 															显示当前数据库
+			3.use 数据库名 													切换数据库,若不存则直接创建
+			4.show tables/collections 										显示当前数据库下所有的表/集合
+			
+
+			5.db.表/集合.insertOne ({...})									在表/集合插入一条数据
+			6.db.表/集合.insertMany ([{...},{...}])							在表/集合插入一条数据,插入的是个数组
+			
+			7.db.表/集合.updateOne({...},{$set:{...}})						在表/集合,将符合条件一条数据,进行指定更改
+			8.db.表/集合.updateMany({...},{$set:{...}})						在表/集合,将所有符合条件的数据,进行指定更改
+			9.db.表/集合.updateOne({_id:ObjectId("id")},{$set:{...}})		在表/集合,将指定_id的数据,进行指定更改
+			
+			10.db.表/集合.deleteOne({})										在表/集合,将符合条件的第一条数据,进行删除
+			11.db.表/集合.deleteMany({})										在表/集合,将符合条件的所有数据,进行删除
+			
+			
+			
+			
+			12.db.表/集合.find()												在表/集合查询所有数据
+			13.db.表/集合.find().pretty();									在表/集合查询所有数据,并格式化输出
+			
+			14.条件查询
+				14.01 db.userC.find({_id:ObjectId("id")}).pretty();					在userC查询, 指定_id的数据	
+				14.02 db.表/集合.find({age:18})										在userC查询, age=18的所有数据										
+				14.03 db.userC.find({age:{$lt:30}}).pretty();						在userC查询, age小于30的所有数据	
+				14.04 db.userC.find({age:{$lte:30}}).pretty();						在userC查询, age小于等于30的所有数据	
+				14.05 db.userC.find({age:{$gt:30}}).pretty();						在userC查询, age大于30的所有数据	
+				14.06 db.userC.find({age:{$gte:30}}).pretty();						在userC查询, age大于等于30的所有数据	
+				14.07 db.userC.find({age:{$ne:30}}).pretty();						在userC查询, age不等于30的所有数据
+				14.08 db.userC.find({age:30,sex:1}).pretty();						在userC查询, age等于30,且sex=1的所有数据
+				14.09 db.userC.find({$or:[{age:29},{age:30}]}).pretty();			在userC查询, age等于29或30,的所有数据
+				14.10 db.userC.find({sex:0,$or:[{age:29},{age:30}]}).pretty();		在userC查询, sex:0 且 age等于29或30,的所有数据
+				14.11  db.userC.find({age:{$lt:30,$gt:20}}).pretty();				在userC查询,age大于20且小于30的所有数据
+				
+				14.12  db.userC.find({}).limit(0).pretty();							在userC查询,所有符合条件的数据
+				14.13  db.userC.find({}).limit(3).pretty();							在userC查询,符合条件的最多3条数据
+				14.14  db.userC.find({}).skip(3).pretty();							在userC查询,符合条件的数据中跳过前3条
+				14.15  db.userC.find({}).skip(2*3).limit(3).pretty();				在userC查询,符合条件的数据中跳过前6条,且最多显示3条
+				14.16  db.userC.find({}).sort({age:1}).pretty();					在userC查询,符合条件的数据中按照age升序排列
+				14.17  db.userC.find({}).sort({age:-1}).pretty();					在userC查询,符合条件的数据中按照age降序排列
+				
+				14.18  db.userC.find({}).count();									在userC查询,返回符合条件的数据的条数
+				14.18  db.userC.count();											在userC查询,所有的数据的条数
+			
+				
+			
+			
+			
+		
+			
+			
+			
+		</pre>
+	</body>
+</html>

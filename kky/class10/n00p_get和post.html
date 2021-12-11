@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>get和post</title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="d1">
+				<form action="http://127.0.0.1:84/addGet" method="get">
+					<label>
+						姓名:<input type="text" name="user" />
+					</label>
+					<label>
+						年龄:<input type="number" name="age" />
+					</label>
+					<span>
+						性别:
+						<label>
+							小哥哥<input type="radio" name="sex"  value="0" />
+						</label>
+						<label>
+							小姐姐<input type="radio" name="sex"  value="1" />
+						</label>
+					</span>
+					<div>
+						<button type="submit">addGet添加</button>
+					</div>
+				</form>
+			</div>
+			<div id="d2">
+				<form action="http://127.0.0.1:84/addPost" method="post">
+					<label>
+						姓名:<input type="text" name="user" />
+					</label>
+					<label>
+						年龄:<input type="number" name="age" />
+					</label>
+					<span>
+						性别:
+						<label>
+							小哥哥<input type="radio" name="sex"  value="0" />
+						</label>
+						<label>
+							小姐姐<input type="radio" name="sex"  value="1" />
+						</label>
+					</span>
+					<div>
+						<button type="submit">addPost添加</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

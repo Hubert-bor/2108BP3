@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			pre{
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+	<pre>
+		接口1
+			作用:前台通过get方式 添加数据
+			接口名称:/addGet	接口地址:/addGet
+			请求方式:get/GET
+			请求头:token
+		
+			请求体参数/数据体
+			参数名	 	必选		类型			说明
+			user		是		字符串		用户姓名
+			age 		是		数字/字符串	年龄
+			sex			非		数字/字符串	性别
+		
+			返回数据/返回参数
+			返回示例
+			{
+				code:200,
+				info:"addGet 添加成功"
+			}
+		
+			参数名		参数说明
+			code 		状态码 		200表示成功
+			info		提示信息
+		
+		
+		接口2
+		接口名称:addPost
+		
+		
+		接口3
+		作用:前台通过get方式 获取数据
+			接口名称:/getData	接口地址:/getData
+			请求方式:get/GET
+			请求头:token
+		
+			请求体参数/数据体
+			无
+		
+		
+			返回数据/返回参数
+			返回示例
+			{
+				code:200,
+				data:data,
+				info:"getData 获取数据成功"
+			}
+		
+			参数名		参数说明
+			code 		状态码 		200表示成功
+			info		提示信息
+			data 		数据
+		
+			可选部分
+			data 说明
+			data是个数组,数组包含多个对象obj
+			{
+				user,
+				age,
+				sex,
+				id
+			}
+		
+			参数名	 	必选		类型			说明
+			user		是		字符串		用户姓名
+			age 		是		数字/字符串	年龄
+			sex			非		数字/字符串	性别
+			id			是   	数字/字符串  id且可以表示时间戳
+
+	</pre>
+	</body>
+</html>

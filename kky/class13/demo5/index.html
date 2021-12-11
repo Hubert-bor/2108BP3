@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<button type="button" id="btn1">btn1 原生ajax get</button>
+			<button type="button" id="btn2">btn2 jq ajax get</button>
+		</div>
+		<script src="./jquery-3.6.0.min.js"></script>
+		<script>
+			var btn1=document.getElementById("btn1");
+			btn1.onclick=function(){
+				var url="/addGet?user=aa&age=16";
+				var xhr=new XMLHttpRequest();
+				xhr.open("get",url);
+				xhr.send();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var str=xhr.responseText;
+						console.log("1str:",str);
+					}
+				}
+			}
+		
+			$("#btn2").click(function(){
+				var url="/addGet?user=kky&age=18";
+				$.get(url,function(data){
+					console.log("2data:",data);
+				})
+			});
+			
+		</script>
+	</body>
+</html>

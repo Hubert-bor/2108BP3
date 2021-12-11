@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var url="http://127.0.0.1:84/addPost";
+			// var url="http://169.254.119.156:84/addPost";
+	
+			addPostFun(url);
+			
+			function addPostFun(url){
+				
+				// 步骤1:创建请求对象 XMLHttpRequest对象
+				var xhr =new XMLHttpRequest();
+				 
+				 // 步骤2:设置 提交方式和接口名称/地址
+				xhr.open("post",url);
+				
+				var data="user=kky99&age=18&sex=0";
+				
+				// 步骤3: post  必须设置 请求头 
+				xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				
+				// 步骤4:发送请求  (可以是空数据),若要发送数据比如是 序列化 的字符串
+				xhr.send(data);
+				
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var str=xhr.responseText;
+						console.log("str:",str);
+					}
+				}
+			}
+		
+		</script>
+	</body>
+</html>
