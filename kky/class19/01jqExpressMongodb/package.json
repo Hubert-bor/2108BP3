@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.0.15"
+  },
+  "name": "2108bp3",
+  "version": "2.2.2",
+  "description": "2108BP3资料",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "kky"
+  ],
+  "author": "1948318768@qq.com",
+  "license": "ISC"
+}
