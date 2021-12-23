@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>button</title>
+    <style>
+        .red {
+            background-color: red;
+            color: #fff;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="prev">&lt;</button>
+    <span id="paging">
+        <button class="red">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+    </span>
+    <button id="next">&gt;</button>
+
+    <script src="../jQuery3.6.0.js"></script>
+
+    <script>
+
+        // 当前页
+        var currentIndex = 0;
+        // 总页数
+        var totalPages = 6;
+        $('#prev').on('click', function () {
+            if (currentIndex > 0) {
+                currentIndex--;
+                $('#paging>button').eq(currentIndex).addClass('red').siblings().removeClass('red');
+                console.log(currentIndex);
+            }
+        })
+        $('#next').on('click', function () {
+            if (currentIndex < totalPages - 1) {
+                currentIndex++;
+                $('#paging>button').eq(currentIndex).addClass('red').siblings().removeClass('red');
+                console.log(currentIndex);
+            }
+        })
+
+        $('#paging>button').on('click', function () {
+            currentIndex = $(this).index();
+            $('#paging>button').eq(currentIndex).addClass('red').siblings().removeClass('red');
+            console.log(currentIndex);
+        })
+
+        
+    </script>
+</body>
+
+</html>

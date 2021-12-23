@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        img {
+            width: 40px;
+            vertical-align: middle;
+        }
+
+        #imgInput {
+            vertical-align: middle;
+            margin-bottom: 20px;
+        }
+
+        #imgInput img {
+            opacity: 0.4;
+        }
+
+        #imgInput img:nth-of-type(1) {
+            opacity: 1;
+        }
+
+        input {
+            height: 40px;
+            outline: none;
+            border-radius: 10px;
+            border-color: rgb(197, 197, 191);
+        }
+
+        #comInput {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: right;
+        }
+
+        button {
+            padding: 5px 20px;
+            background-color: rgb(118, 183, 44);
+            border: 0px;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            display: flex;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        li img {
+            width: 40px;
+        }
+
+        li>div {
+            margin-left: 10px;
+        }
+
+        p.times {
+            float: left;
+            font-size: 12px;
+            color: #746e6e;
+        }
+
+        .names {
+            color: rgb(240, 12, 50);
+            display: inline-block;
+            text-align: center
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <h5>来,说说你在做什么,想什么</h5>
+        <div id="imgInput">
+            <input type="text">
+            <img src="../public/img/1.png">
+            <img src="../public/img/2.png">
+            <img src="../public/img/3.png">
+            <img src="../public/img/4.png">
+            <img src="../public/img/5.png">
+            <img src="../public/img/6.png">
+            <img src="../public/img/7.png">
+        </div>
+        <div>
+            <input type="text" id="comInput">
+        </div>
+        <p>
+            <!-- 还能输入 <span>100</span>个字 -->
+            <button id="add">广播</button>
+        </p>
+
+        <div>
+            <!-- <p>大家在说</p> -->
+            <ul id="ulList">
+                <!-- <li>
+                    <img src="../public/img/7.png">
+                    <div>
+                        <p><span class="names">张三:</span> 新增删除广播功能</p>
+                        <p class="times">07月05日 17:14</p>
+                    </div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="../public/js/jQuery3.6.0.js"></script>
+    <script src="../public/js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <style>
+        body {
+            background-color: rgb(246, 246, 246);
+        }
+
+        #main {
+            width: 60%;
+            margin: auto;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 5px 10px rgb(213, 211, 211);
+        }
+
+        #main>div {
+            margin-bottom: 20px;
+        }
+
+        input {
+            outline: none;
+            padding: 5px;
+        }
+
+        button {
+            border-radius: 4px;
+            color: #fff;
+            background-color: rgb(80, 188, 220);
+            border: 0;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: rgb(255, 115, 0);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
+        tr,
+        th,
+        td {
+            text-align: center;
+            border: 1px solid black;
+            padding: 3px 20px;
+        }
+
+        #tbody>tr.yrbs:hover {
+            background-color: orange;
+        }
+
+        #tbody .red {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div>
+            添加: <input type="text" id="userName" placeholder="姓名">
+            <input type="text" id="userAge" placeholder="年龄">
+            <button id="add">添加</button>
+            变色: <button id="yrbsBtn">开启移入变色</button>
+        </div>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <!-- <tr>
+                        <td>1</td>
+                        <td>张三</td>
+                        <td>33</td>
+                        <td>
+                            <button>删除</button>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            搜索: <input type="text" placeholder="根据姓名搜索" id="searchInput">
+            <button id="searchBtn" >搜索</button>
+            <button id="resetBtn">重置</button>
+            排序: <button id="ageSortBtn">年龄从小排序</button>
+            <button id="idSortBtn">ID从小排序</button>
+        </div>
+    </div>
+
+    <script src="../public/js/jQuery3.6.0.js"></script>
+    <script src="../public/js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新闻</title>
+    <style>
+        #main {
+            width: 800px;
+            margin: auto;
+        }
+
+        #ulList li:nth-child(odd) {
+            background-color: red;
+        }
+
+        #ulList li:nth-child(even) {
+            background-color: green;
+        }
+
+        #loading {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            display: none;
+        }
+
+        .red {
+            background-color: red;
+            color: #fff;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <label>
+            新闻标题: <input type="text" id="newsTitle">
+        </label>
+        <br>
+        <label>
+            新闻地址: <input type="text" id="newsAddress">
+        </label>
+        <br>
+        <label>
+            新闻类别:
+            <select id="selList">
+                <option value="n1">科技</option>
+                <option value="n2">娱乐</option>
+                <option value="n3">财经</option>
+            </select>
+        </label>
+        <br>
+        是否标红:
+        <div id="isRed">
+            <label>
+                是: <input type="radio" name="isRed" value="1">
+            </label>
+            <label>
+                否: <input type="radio" name="isRed" value="0" checked>
+            </label>
+        </div>
+        <br>
+        <button id="add">提交</button>
+
+        <div id="btns">
+            <button onclick="getData({selList:'n1'})">科技</button>
+            <button onclick="getData({selList:'n2'})">娱乐</button>
+            <button onclick="getData({selList:'n3'})">财经</button>
+        </div>
+        <div>
+            <ul id="ulList">
+
+            </ul>
+        </div>
+        <!-- 分页 -->
+        <div id="paging">
+            <button id="prev">&lt;</button>
+            <span id="pagings">
+                <!-- 
+                    <button></button>
+                 -->
+            </span>
+            <button id="next">&gt;</button>
+        </div>
+        <div id="loading">
+            <img src="../public/img/loading2.gif" alt="">
+        </div>
+    </div>
+
+    <script src="../public/js/jQuery3.6.0.js"></script>
+    <script src="../public/js/index.js"></script>
+
+</body>
+
+</html>

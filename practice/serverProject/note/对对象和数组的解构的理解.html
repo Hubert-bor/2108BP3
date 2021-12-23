@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>对对象和数组的解构的理解</title>
+</head>
+
+<body>
+    <script>
+        // 解构是 ES6 提供的一种新的提取数据的模式，这种模式能够从对象或数组里有针对性地拿到想要的数值
+
+        // 数组的解构 :在解构数组时，以元素的位置为匹配条件来提取想要的数据的
+        const [a, b, c] = [1, 2, 3];
+        console.log('a:', a);
+        console.log('b:', b);
+        console.log('c:', c);
+
+        // 也可以设置空占位的方式来获取
+        const [d, , f] = [1, 2, 3];
+        console.log('d:', d);
+        console.log('f:', f);
+
+
+        // 对象的解构
+        // 注意，对象解构严格以属性名作为定位依据，所以就算调换了 name 和 age 的位置，结果也是一样的
+        const obj = {
+            name: '李四',
+            age: 18
+        }
+
+        const { name, age } = obj;
+        console.log('name:', name);
+        console.log('age:', age);
+
+
+        // 对于多层嵌套的对象拿到指定的值
+        // 可以在解构出来的变量名右侧，通过冒号+{目标属性名}这种形式，进一步解构它，一直解构到拿到目标数据为止。
+        const school = {
+            class: {
+                stu: {
+                    name1: '王五'
+                }
+            }
+        }
+
+        const { class: { stu: { name1 } } } = school;
+        console.log(name1);
+
+    </script>
+</body>
+
+</html>

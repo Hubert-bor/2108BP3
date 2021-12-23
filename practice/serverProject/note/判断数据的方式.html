@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>判断数据的方式</title>
+</head>
+
+<body>
+    <script>
+        // 判断数组的方式
+        // 通过Object.prototype.toString.call()做判断
+        var obj = {};
+        Object.prototype.toString.call(obj).slice(8, -1) === 'Array';
+
+        // 通过原型链做判断
+        obj.__proto__ === Array.prototype;
+
+        // 通过ES6的Array.isArray()做判断
+        Array.isArray(obj);
+
+        // 通过insttanceof 做判断
+        console.log(obj instanceof Array);//false
+
+        // 通过Array.prototype.isPrototypeOf 做判断
+        console.log(Array.prototype.isPrototypeOf(obj));//false
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>vote</title>
+    <style>
+        #main {
+            /* border: 1px solid red; */
+            width: 800px;
+            margin: 100px auto;
+            display: flex;
+            padding: 20px;
+            justify-content: space-around;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .father {
+            width: 70px;
+            height: 300px;
+            border: 1px solid blue;
+            position: relative;
+            cursor: pointer;
+        }
+        .father:hover{
+            box-shadow: 2px 2px 6px rgb(7, 167, 241);
+        }
+
+        .child {
+            position: absolute;
+            background-color: rgb(7, 107, 110);
+            width: 100%;
+            /* height:100px; */
+            left: 0px;
+            bottom: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div>
+            <p>0.00%</p>
+            <div class="father">
+                <div class="child"></div>
+            </div>
+            <p>A(<span>0</span>/<span>0</span>)</p>
+        </div>
+        <div>
+            <p>0.00%</p>
+            <div class="father">
+                <div class="child"></div>
+            </div>
+            <p>B(<span>0</span>/<span>0</span>)</p>
+        </div>
+        <div>
+            <p>0.00%</p>
+            <div class="father">
+                <div class="child"></div>
+            </div>
+            <p>C(<span>0</span>/<span>0</span>)</p>
+        </div>
+        <div>
+            <p>0.00%</p>
+            <div class="father">
+                <div class="child"></div>
+            </div>
+            <p>D(<span>0</span>/<span>0</span>)</p>
+        </div>
+        <div>
+            <p>0.00%</p>
+            <div class="father">
+                <div class="child"></div>
+            </div>
+            <p>E(<span>0</span>/<span>0</span>)</p>
+        </div>
+    </div>
+    <script src="../../jQuery3.6.0.js"></script>
+    <script>
+
+        var total = 0;
+        var currentTotal0 = 0;
+        var currentTotal1 = 0;
+        var currentTotal2 = 0;
+        var currentTotal3 = 0;
+        var currentTotal4 = 0;
+
+
+        var height0 = 0;
+        var height1 = 0;
+        var height2 = 0;
+        var height3 = 0;
+        var height4 = 0;
+        $('[class=father]').click(function () {
+            total++;
+            // $(this).next('p').children('span').eq(0).text(this);
+            $('.father').each(function (index, item) {
+                $(item).next('p').children('span').eq(1).text(total);
+            })
+        });
+
+        $('[class=father]').eq(0).click(function () {
+            currentTotal0 += 1;
+            $(this).prev('p').text(((currentTotal0 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(0).next('p').children('span').eq(0).text(currentTotal0);
+
+            $('[class=father]').eq(1).prev('p').text(((currentTotal1 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(2).prev('p').text(((currentTotal2 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(3).prev('p').text(((currentTotal3 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(4).prev('p').text(((currentTotal4 / total) * 100).toFixed(2) + '%');
+
+            height0 = ((currentTotal0 / total) * 100).toFixed(2) + '%';
+            $(this).children().css({
+                height: height0
+            });
+
+
+            height1 = ((currentTotal1 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(1).children().css({
+                height: height1
+            });
+            height2 = ((currentTotal2 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(2).children().css({
+                height: height2
+            });
+            height3 = ((currentTotal3 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(3).children().css({
+                height: height3
+            });
+            height4 = ((currentTotal4 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(4).children().css({
+                height: height4
+            });
+
+
+        });
+        $('[class=father]').eq(1).click(function () {
+            currentTotal1 += 1;
+            $(this).prev('p').text(((currentTotal1 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(1).next('p').children('span').eq(0).text(currentTotal1);
+
+            $('[class=father]').eq(0).prev('p').text(((currentTotal0 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(2).prev('p').text(((currentTotal2 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(3).prev('p').text(((currentTotal3 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(4).prev('p').text(((currentTotal4 / total) * 100).toFixed(2) + '%');
+
+            height1 = ((currentTotal1 / total) * 100).toFixed(2) + '%';
+            $(this).children().css({
+                height: height1
+            });
+
+            height0 = ((currentTotal0 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(0).children().css({
+                height: height0
+            });
+            height2 = ((currentTotal2 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(2).children().css({
+                height: height2
+            });
+            height3 = ((currentTotal3 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(3).children().css({
+                height: height3
+            });
+            height4 = ((currentTotal4 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(4).children().css({
+                height: height4
+            });
+
+
+        })
+        $('[class=father]').eq(2).click(function () {
+            currentTotal2 += 1;
+            $(this).prev('p').text(((currentTotal2 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(2).next('p').children('span').eq(0).text(currentTotal2);
+
+            $('[class=father]').eq(0).prev('p').text(((currentTotal0 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(1).prev('p').text(((currentTotal1 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(3).prev('p').text(((currentTotal3 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(4).prev('p').text(((currentTotal4 / total) * 100).toFixed(2) + '%');
+
+            let height2 = ((currentTotal2 / total) * 100).toFixed(2) + '%';
+            $(this).children().css({
+                height: height2
+            });
+
+            height0 = ((currentTotal0 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(0).children().css({
+                height: height0
+            });
+            height1 = ((currentTotal1 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(1).children().css({
+                height: height1
+            });
+            height3 = ((currentTotal3 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(3).children().css({
+                height: height3
+            });
+            height4 = ((currentTotal4 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(4).children().css({
+                height: height4
+            });
+        })
+        $('[class=father]').eq(3).click(function () {
+            currentTotal3 += 1;
+            $(this).prev('p').text(((currentTotal3 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(3).next('p').children('span').eq(0).text(currentTotal3);
+
+            $('[class=father]').eq(0).prev('p').text(((currentTotal0 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(1).prev('p').text(((currentTotal1 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(2).prev('p').text(((currentTotal2 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(4).prev('p').text(((currentTotal4 / total) * 100).toFixed(2) + '%');
+
+            let height3 = ((currentTotal3 / total) * 100).toFixed(2) + '%';
+            $(this).children().css({
+                height: height3
+            });
+
+            height0 = ((currentTotal0 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(0).children().css({
+                height: height0
+            });
+            height1 = ((currentTotal1 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(1).children().css({
+                height: height1
+            });
+            height2 = ((currentTotal2 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(2).children().css({
+                height: height2
+            });
+            height4 = ((currentTotal4 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(4).children().css({
+                height: height4
+            });
+        })
+        $('[class=father]').eq(4).click(function () {
+            currentTotal4 += 1;
+            $(this).prev('p').text(((currentTotal4 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(4).next('p').children('span').eq(0).text(currentTotal4);
+
+            $('[class=father]').eq(0).prev('p').text(((currentTotal0 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(1).prev('p').text(((currentTotal1 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(2).prev('p').text(((currentTotal2 / total) * 100).toFixed(2) + '%');
+            $('[class=father]').eq(3).prev('p').text(((currentTotal3 / total) * 100).toFixed(2) + '%');
+
+            let height4 = ((currentTotal4 / total) * 100).toFixed(2) + '%';
+            $(this).children().css({
+                height: height4
+            });
+
+            height0 = ((currentTotal0 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(0).children().css({
+                height: height0
+            });
+            height1 = ((currentTotal1 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(1).children().css({
+                height: height1
+            });
+            height2 = ((currentTotal2 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(2).children().css({
+                height: height2
+            });
+            height3 = ((currentTotal3 / total) * 100).toFixed(2) + '%';
+            $('[class=father]').eq(3).children().css({
+                height: height3
+            });
+
+        })
+    </script>
+</body>
+
+</html>
